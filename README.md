@@ -6,9 +6,15 @@
 
 ##Nazwa projektu: Rozbitek
 
-- Skład grupy: Sergiusz Jańczura, Karol Kaczmarek, Kamil Legierski, Adrian Małolepszy
+**Skład grupy:**
+* Sergiusz Jańczura
+* Karol Kaczmarek
+* Kamil Legierski
+* Adrian Małolepszy
 
-- Krótki opis projektu: Sterujemy rozbitkiem po mapie za pomocą komend, zbieramy surowce,budujemy.
+
+**Krótki opis projektu:**
+> Sterujemy rozbitkiem po mapie za pomocą komend, zbieramy surowce, budujemy.
 
 
 **Przykład działania/komend:**
@@ -30,21 +36,25 @@
 
 
 **Technologia:**
-```
-C++
-SDL
-OpenGL
-DevIL
-FreeType
-```
+
+> C++
+
+> SDL
+
+> OpenGL
+
+> DevIL
+
+> FreeType
+
 
 
 **LINKI:**
 
-[SDL](https://www.libsdl.org/)
+> [SDL](https://www.libsdl.org/)
 
-[OpenGL](https://www.opengl.org/)
+> [OpenGL](https://www.opengl.org/)
 
-[DevIL](http://openil.sourceforge.net/)
+> [DevIL](http://www.openil.sourceforge.net/)
 
-[FreeType](http://www.freetype.org/freetype2/)
+> [FreeType](http://www.freetype.org/freetype2/)
