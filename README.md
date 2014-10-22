@@ -13,9 +13,13 @@
 
 **Przykład działania/komend:**
 
-> Idź blisko na północ 
+> Idź blisko
 
-> Idź daleko na północ
+> Idź daleko
+
+> Obróć się w prawo
+
+> Obróć się w lewo
 
 > Zbuduj ognisko
 
@@ -31,4 +35,16 @@ C++
 SDL
 OpenGL
 DevIL
+FreeType
 ```
+
+
+**LINKI:**
+
+[SDL](https://www.libsdl.org/)
+
+[OpenGL](https://www.opengl.org/)
+
+[DevIL](http://openil.sourceforge.net/)
+
+[FreeType](http://www.freetype.org/freetype2/)
