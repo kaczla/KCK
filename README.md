@@ -22,9 +22,9 @@
 
 **Przykład działania/komend:**
 
-> "Idź ???" -
+> "Pokonaj krótki odcinek na pólnoc" - rozbitek pokona ??(kilka)?? kroków na polnoc
 
-> Idź ???" - 
+> "Pokonaj długi odcinek na polnoc" - rozbitek pokona odcinek do konca planszy na polnoc ??? 
 
 > "Obróć się w prawo" - rozbitek obróci się w prawo
 
