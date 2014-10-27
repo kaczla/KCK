@@ -1,4 +1,4 @@
-#KOMUNIKACJA CZŁOWIEK-KOMPUTER
+﻿#KOMUNIKACJA CZŁOWIEK-KOMPUTER
 
 ######Uniwersytet im. Adama Mickiewicza w Poznaniu
 
@@ -22,15 +22,15 @@
 
 **Przykład działania/komend:**
 
-> "Pokonaj krótki odcinek na pólnoc" - rozbitek pokona ??(kilka)?? kroków na polnoc
+> "Pokonaj krótki odcinek na pólnoc" - rozbitek pokona ??(kilka)?? kroków na północ
 
-> "Pokonaj długi odcinek na polnoc" - rozbitek pokona odcinek do konca planszy na polnoc ??? 
+> "Pokonaj długi odcinek na północ" - rozbitek pokona odcinek do napotkania przeszkody lub do końca planszy na północ 
 
 > "Obróć się w prawo" - rozbitek obróci się w prawo
 
 > "Obróć się w lewo" - rozbitek obróci się w lewo
 
-> "Zbuduj ognisko" - rozbitek wybuduje na bierzącym polu ognisko, jeżeli posiada potrzebne materiały
+> "Zbuduj ognisko" - rozbitek wybuduje na bieżącym polu ognisko, jeżeli posiada potrzebne materiały
 
 > "Co słychać" - rozbitek odpowie jak wygląda otoczenie i jak się czuje
 
