@@ -17,7 +17,7 @@
 
 
 **Krótki opis projektu:**
-> Sterujemy rozbitkiem po mapie dwuwymiarowej za pomocą komend wprowadzanych z klawiatury. Odpowiedzi zwrotne otrzymujemy na ekranie jak i za pomocą dźwięku. Naszym głównym zadaniem jest przeżycie. Zbieramy pożywienie i surowce niezbędne do przetrwania.
+> Sterujemy rozbitkiem po mapie dwuwymiarowej za pomocą komend wprowadzanych z klawiatury. Odpowiedzi zwrotne usłyszymy oraz zobaczymy na ekranie . Naszym głównym zadaniem jest przeżycie. Zbieramy pożywienie i surowce niezbędne do przetrwania.
 
 
 **Przykład działania/komend:**
