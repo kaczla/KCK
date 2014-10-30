@@ -13,7 +13,7 @@
 * Adrian Małolepszy
 
 **Lider:**
-* 
+* Karol Kaczmarek
 
 
 **Krótki opis projektu:**
