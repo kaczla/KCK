@@ -17,14 +17,14 @@
 
 
 **Krótki opis projektu:**
-> Sterujemy rozbitkiem po mapie za pomocą komend, zbieramy surowce, budujemy.
+> Sterujemy rozbitkiem po mapie dwuwymiarowej za pomocą komend wprowadzanych za pomocą klawiatury. Odpowiedzi zwrotne otrzymujemy na ekranie jak i za pomocą dźwięku. Naszym głównym zadaniem jest przeżycie. Zbieramy pożywienie i surowce niezbędne do przetrwania.
 
 
 **Przykład działania/komend:**
 
-> "Pokonaj krótki odcinek na pólnoc" - rozbitek pokona ??(kilka)?? kroków na północ
+> "Pokonaj krótki odcinek na pólnoc" - rozbitek pokona niewielki odcinek drogi na północ
 
-> "Pokonaj długi odcinek na północ" - rozbitek pokona odcinek do napotkania przeszkody lub do końca planszy na północ 
+> "Pokonaj długi odcinek na północ" - rozbitek będzie szedł na połnoc tak długo, aż napotka jakąś przeszkodę
 
 > "Obróć się w prawo" - rozbitek obróci się w prawo
 
@@ -36,7 +36,7 @@
 
 > "Zetnij najbliższe drzewko" - rozbitek wyszuka najbliższe drzewo, po czym je zetnie
 
-
+> "Stop" - rozbitek przerywa aktualnie wykonywane zadanie
 
 **Technologia:**
 
