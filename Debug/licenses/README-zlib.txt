@@ -1,7 +1,10 @@
-/* zlib.h -- interface of the 'zlib' general purpose compression library
-  version 1.2.5, April 19th, 2010
+The source code to this library used with SDL_ttf can be found here:
+http://www.libsdl.org/projects/SDL_ttf/libs/
+---
 
-  Copyright (C) 1995-2010 Jean-loup Gailly and Mark Adler
+Copyright notice:
+
+ (C) 1995-2010 Jean-loup Gailly and Mark Adler
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -19,7 +22,10 @@
      misrepresented as being the original software.
   3. This notice may not be removed or altered from any source distribution.
 
-  Jean-loup Gailly
-  Mark Adler
+  Jean-loup Gailly        Mark Adler
+  jloup@gzip.org          madler@alumni.caltech.edu
 
-*/
+If you use the zlib library in a product, we would appreciate *not* receiving
+lengthy legal documents to sign.  The sources are provided for free but without
+warranty of any kind.  The library has been entirely written by Jean-loup
+Gailly and Mark Adler; it does not include third-party code.

@@ -13,6 +13,7 @@ public:
 	ILuint ReturnWidth();
 	ILuint ReturnHeight();
 	ILuint ReturnImageID();
+	std::string ReturnName();
 	void Status();
 	bool ReturnSuccess();
 protected:

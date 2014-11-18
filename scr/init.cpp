@@ -19,7 +19,7 @@ bool Init::init_SDL(){
 		return false;
 	}
 	SDL_EnableUNICODE( SDL_TRUE );
-	SDL_WM_SetCaption( "KCK", NULL );
+	SDL_WM_SetCaption( "Komunikacja Człowiek-Komputer", NULL );
 	std::cout<<SDL_GetTicks()<<": SDL - Inicjalizacja przebiegła pomyślnie\n";
 	if( ! init_GL() ){
 		return false;
@@ -76,11 +76,6 @@ void Init::set_Screen(int Width, int Height, int BPP){
 	this->SCREEN_WIDTH = Width;
 	this->SCREEN_HEIGHT = Height;
 	this->SCREEN_BPP = BPP;
-}
-
-bool Init::init_Img(){
-
-	return true;
 }
 
 void Init::clean_up(){

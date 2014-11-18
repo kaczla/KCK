@@ -146,3 +146,7 @@ ILuint Img::ReturnHeight(){
 	return this->Height;
 }
 
+std::string Img::ReturnName(){
+	return this->Name;
+}
+

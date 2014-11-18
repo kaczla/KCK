@@ -1,13 +1,29 @@
 #include "game.hpp"
 
 Game::Game(){
+	this->game_start = true;
+	//SETTINGS
 	this->settings.init_Settings();
+	//INIT SDL, OPENGL, DevIL
 	this->init.set_Screen( this->settings.ReturnWidth(), this->settings.ReturnHeight(), this->settings.ReturnBpp() );
 	if( ! this->init.init() ){
 		this->game_start = false;
 	}
-	std::cout<<SDL_GetTicks()<<": Inicjalizowanie gry\n";
+	//FREE TYPE
+	if( ! text.InitText() ){
+		this->game_start = false;
+	}
 
+	/*
+	if( ! Text::InitFreeType() ){
+		this->game_start = false;
+	}
+	if( this->text.Load() ){
+		this->game_start = false;
+	}*/
+	//GAME
+	std::cout<<SDL_GetTicks()<<": Inicjalizowanie gry\n";
+	//VAR TO LOAD
 	int tmp_ile, tmp1_id, tmp_wczytano=0;
 	std::string tmp_name, tmp_file_name;
 	std::fstream file;
@@ -88,44 +104,70 @@ Game::Game(){
 //ERROR IMAGE
 	this->error_img.resize( 1 );
 	this->error_img.clear();
-	this->error_img.push_back( Img( 99, "error", "bin/img/error.png" ) );
+	this->error_img.push_back( Img( 0, "error", "bin/img/error.png" ) );
 	if( ! this->error_img[0].ReturnSuccess() ){
 		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/error.png !\n";
 		this->game_start = false;
 	}
-//MAPA
-	this->map2D.SetValue( 50, 50 );
-	if( ! this->map2D.ReturnSuccess() ){
-		std::cerr<<SDL_GetTicks()<<": Nie utworzono mapy gry!\n";
+//BACKGROUND
+	this->backgroud.resize( 2 );
+	this->backgroud.clear();
+	this->backgroud.push_back( Img( 100, "background_bottom", "bin/img/background_bottom.png" ) );
+	if( ! this->backgroud[0].ReturnSuccess() ){
+		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/background_bottom.png !\n";
 		this->game_start = false;
 	}
-//
-	this->Square_length = 2;
-	this->Square_size = (this->init.SCREEN_HEIGHT*0.8) / (2*this->Square_length+1);
-	std::cout<<"this->Square_length = "<<this->Square_length<<"\tthis->Square_size = "<<this->Square_size<<"\n";
+	this->backgroud.push_back( Img( 101, "background_right", "bin/img/background_right.png" ) );
+	if( ! this->backgroud[1].ReturnSuccess() ){
+		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/background_right.png !\n";
+		this->game_start = false;
+	}
+//MAPA
+	this->map2D.SetVarMap( this->images, this->anim );
+	this->map2D.SetValue( 50, 50 );
+	if( ! this->map2D.ReturnSuccess() ){
+		std::cerr<<SDL_GetTicks()<<": Nie utworzono mapy gry! Błąd: "<<this->map2D.ReturnError()<<" !\n";
+		this->game_start = false;
+	}
+//Wielkosc obiektow
+	this->Percent = 0.8;
+	this->Height_percent = this->init.SCREEN_HEIGHT * this->Percent;
+	this->Width_percent = this->init.SCREEN_WIDTH - this->Height_percent;
+	this->Square_length = 4;
+/*
+	Ilość kwadratów:				 2, 3, 4, 5,  6
+	Liczba wyświetlanych kwadratów:  5, 7, 9, 11, 13
+	^ Ilość kwadratów x2 + 1 środkowy
+*/
+	this->Square_size = this->Height_percent / (2*this->Square_length+1);
+	//std::cout<<"this->Square_length = "<<this->Square_length<<"\tthis->Square_size = "<<this->Square_size<<"\n";
+	this->Background_bottom_length_x = this->Height_percent;
+	this->Background_bottom_length_y = this->init.SCREEN_HEIGHT - this->Height_percent;
 	///
 	playerx=25;
 	playery=25;
-	Zmiana_img_na_anim = 0;
-	tmp_update = 0;
-	tmp_update2 = 0;
+	this->StartImages = this->images[0].ReturnImageID();
+	this->EndImages = this->images[this->images.size()-1].ReturnImageID();
+	this->StartAnim = this->anim[0].ReturnImageID();
+	this->EndAnim = this->anim[this->anim.size()-1].ReturnImageID();
+	//std::cout<<"this->EndImages="<<this->EndImages<<" this->EndAnim="<<this->EndAnim<<"\n";
+	this->CurrentMap = 0;
+	this->CurrentMapObj = 0;
 	this->fps = 0;
 	this->StartTime = 0;
 	this->StopEnd = 0;
-	this->game_start = true;
 }
 
 Game::~Game(){
 	this->settings.SaveSettings();
+	Text::Clear();
 	std::cout<<SDL_GetTicks()<<": Niszczenie obiektów\n";
 }
 
 void Game::Start(){
 	std::cout<<SDL_GetTicks()<<": Uruchamianie gry\n";
-	//this->map2D.SaveToFile();
 	//std::cout<<"player x="<<playerx<<" y="<<playery<<" \n";//<<this->map2D.ReturnValueMap( playerx, playery )<<"\n";
-	Zmiana_img_na_anim=anim[0].ReturnImageID();
-	//std::cout<<"od ilu animacje: "<<Zmiana_img_na_anim<<"\n";
+	//this->map2D.SaveToFile();
 	if( this->game_start ){
 		while( this->game_start ){
 			//CLOCK////////////////
@@ -146,8 +188,8 @@ void Game::Start(){
 					switch(event.key.keysym.sym){
 					case SDLK_q:
 						//SDL_GL_SwapBuffers();
-							playerx=rand()%40+5;
-							playery=rand()%40+5;
+							playerx = rand()%40+5;
+							playery = rand()%40+5;
 							//std::cout<<"x="<<playerx<<" y="<<playery<<" :"<<this->map2D.ReturnValueMap( playerx, playery )<<"\n";
 						break;
 					case SDLK_w:
@@ -156,13 +198,38 @@ void Game::Start(){
 					case SDLK_ESCAPE:
 						this->game_start = false;
 						break;
-					case SDLK_KP_MINUS:
-						this->Square_length+=2;
-						this->Square_size = (this->init.SCREEN_HEIGHT*0.8) / (2*this->Square_length+1);
+					case SDLK_LEFTBRACKET: // [
+					case SDLK_KP_MINUS: // NUM -
+						if( this->Square_length < 6 ){
+							this->Square_length += 1;
+							this->Square_size = this->Height_percent / (2*this->Square_length+1);
+						}
+						else if( this->Square_length > 6 ){
+							this->Square_length = 4;
+							this->Square_size = this->Height_percent / (2*this->Square_length+1);
+						}
 						break;
-					case SDLK_KP_PLUS:
-						this->Square_length-=2;
-						this->Square_size = (this->init.SCREEN_HEIGHT*0.8) / (2*this->Square_length+1);
+					case SDLK_RIGHTBRACKET: // ]
+					case SDLK_KP_PLUS: // NUM +
+						if( this->Square_length > 2 ){
+							this->Square_length -= 1;
+							this->Square_size = this->Height_percent / (2*this->Square_length+1);
+						}
+						else if( this->Square_length < 2 ){
+							this->Square_length = 4;
+							this->Square_size = this->Height_percent / (2*this->Square_length+1);
+						}
+						break;
+
+					case SDLK_BACKQUOTE: // `
+						//ALL MAP
+						if( this->map2D.ReturnWidth() > this->map2D.ReturnHeight() ){
+							this->Square_length = (float)this->map2D.ReturnWidth() / 2.0;
+						}
+						else{
+							this->Square_length = (float)this->map2D.ReturnHeight() / 2.0;
+						}
+						this->Square_size = this->Height_percent / (2*this->Square_length+1);
 						break;
 					default:
 						break;
@@ -196,35 +263,51 @@ void Game::Update(){
 	glLoadIdentity();
 	for( int i=playery-this->Square_length; i<=playery+this->Square_length; i++ ){
 		for( int j=playerx-this->Square_length; j<=playerx+this->Square_length; j++ ){
-			this->tmp_update = this->map2D.ReturnValueMap( i, j );
-			//this->tmp_update2 = this->map2D.ReturnValueMapObj( i, j );
-			if( this->tmp_update == -1 or this->tmp_update == 0 ){
+			this->CurrentMap = this->map2D.ReturnValueMap( i, j );
+			this->CurrentMapObj = this->map2D.ReturnValueMapObj( i, j );
+			if( this->CurrentMap == 0 or this->CurrentMap == -1 ){
 				glBindTexture( GL_TEXTURE_2D, this->error_img[0].ReturnImageID() );
 				this->Draw_Square();
 			}
-			else if( this->tmp_update >= Zmiana_img_na_anim ){
-				//std::cout<<" tmp_update >= Zmiana_img_na_anim\n";
-				glBindTexture( GL_TEXTURE_2D, this->anim[this->tmp_update-Zmiana_img_na_anim].ReturnImageID() );
+			else if( this->CurrentMap > this->EndImages ){
+				glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMap-this->EndImages-1].ReturnImageID() );
 				this->Draw_Square();
-				if( this->tmp_update2 != 0){
-					glBindTexture( GL_TEXTURE_2D, this->anim[this->tmp_update2-Zmiana_img_na_anim].ReturnImageID() );
+				if( this->CurrentMapObj != 0){
+					glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
 					this->Draw_Square();
 				}
 			}
 			else{
-				//std::cout<<"tmp_update="<<this->tmp_update<<" Zmiana_img_na_anim="<<Zmiana_img_na_anim<<" images[this->tmp_update-1].ReturnImageID()="<<images[this->tmp_update-1].ReturnImageID()<<"\n";
-				glBindTexture( GL_TEXTURE_2D, this->images[this->tmp_update-1].ReturnImageID() );
+				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMap-1].ReturnImageID() );
 				this->Draw_Square();
-				if( this->tmp_update2 != 0){
-					glBindTexture( GL_TEXTURE_2D, this->anim[this->tmp_update2-Zmiana_img_na_anim].ReturnImageID() );
+				if( this->CurrentMapObj != 0){
+					glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
 					this->Draw_Square();
 				}
 			}
 			glTranslatef( this->Square_size, 0.0, 0.0 );
 		}
-		glTranslatef( -2*(this->Square_size*this->Square_length)-this->Square_size, this->Square_size, 0.0 );
+		glTranslatef( -this->Height_percent, this->Square_size, 0.0 );	//glTranslatef( -2*(this->Square_size*this->Square_length)-this->Square_size, this->Square_size, 0.0 );
 	}
-	//END
+	//END MAP
+//BOTTOM BACKGROUND
+	glBindTexture( GL_TEXTURE_2D, this->backgroud[0].ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( this->Background_bottom_length_x, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Background_bottom_length_x, this->Background_bottom_length_y );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->Background_bottom_length_y );
+	glEnd();
+	glTranslatef( this->Height_percent, -this->Height_percent, 0.0 );
+//RIGHT BACKGROUD
+	glBindTexture( GL_TEXTURE_2D, this->backgroud[1].ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( this->Width_percent, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Width_percent, this->init.SCREEN_HEIGHT );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->init.SCREEN_HEIGHT );
+	glEnd();
+	this->text.RenderText( "Ala ma kota, ą ę ć ł ó ź ż ń" );
 }
 
 void Game::Load(){
@@ -234,4 +317,6 @@ void Game::Load(){
 void Game::Save(){
 
 }
+
+
 

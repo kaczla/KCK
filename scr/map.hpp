@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 #include <SDL\SDL.h>
+#include "img.hpp"
+#include "anim.hpp"
 //using std::vector;
 
 class Map{
@@ -11,17 +13,48 @@ public:
 	Map(int height, int width);
 	~Map();
 	void SetValue(int height, int width);
+	void SetVarMap( std::vector <Img> img, std::vector <Anim> anim);
 	int ReturnValueMap(int x, int y);
 	int ReturnValueMapObj(int x, int y);
+	std::string ReturnError();
 	void SaveToFile();
 	bool ReturnSuccess();
+	int ReturnWidth();
+	int ReturnHeight();
 private:
+	class Podloze{
+	public:
+		Podloze(){
+			this->LocalName = "NULL";
+			this->ImageID = 0;
+		}
+		unsigned int ReturnImageID(){
+			return this->ImageID;
+		}
+		std::string ReturnLocalName(){
+			return this->LocalName;
+		}
+		void SetLocalName( std::string value ){
+			this->LocalName = value;
+		}
+		void SetImageID( unsigned int value ){
+			this->ImageID = value;
+		}
+	private:
+		std::string LocalName;
+		unsigned int ImageID;
+	};
 	inline void SetVector();
 	int PlayerX, PlayerY;
 	std::vector < std::vector <int> > Map2D;
 	std::vector < std::vector <int> > Map2D_obj;
 	int Width, Height;
-	bool Success;
+	std::vector <Podloze> Pelne;
+	std::vector <Podloze> TrawaPiach;
+	std::vector <Podloze> WodaPiach;
+	std::vector <Podloze> WodaTrawa;
+	std::string Error_Map;
+	bool Success, SuccessVarMap;
 };
 
 

@@ -5,8 +5,6 @@
 #include <SDL\SDL_main.h>
 #include <IL\il.h>
 #include <iostream>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 
 /*
@@ -38,7 +36,6 @@ private:
 	bool init_SDL();
 	bool init_GL();
 	bool init_IL();
-	bool init_Img();
 	void clean_up();
 };
 

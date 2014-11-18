@@ -44,9 +44,13 @@
 
 > [SDL](https://www.libsdl.org/)
 
+> [SDL_ttf](https://www.libsdl.org/projects/SDL_ttf/)
+
 > [OpenGL](https://www.opengl.org/)
 
 > [DevIL](http://www.openil.sourceforge.net/)
 
 > [FreeType](http://www.freetype.org/freetype2/)
+
+> [zlib](http://www.zlib.net/)
 
