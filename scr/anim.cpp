@@ -34,7 +34,7 @@ Anim::Anim( int tmp_id, int tmp_size, Uint32 tmp_time, std::vector <std::string>
 		tmp_size = (int)tmp_name_file.size();
 	}
 	this->Size = tmp_size;
-	this->CurrentImg = tmp_size -1;
+	this->CurrentImg = tmp_size - 1;
 
 	this->Name.resize( tmp_size );
 	this->Name.clear();
@@ -180,9 +180,6 @@ void Anim::Update(){
 		this->CurrentImg++;
 		if( this->CurrentImg > this->Size-1 or this->CurrentImg < 0 ){
 			this->CurrentImg = 0;
-		}
-		else{
-			this->CurrentImg++;
 		}
 	}
 }

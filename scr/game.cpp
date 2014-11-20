@@ -13,14 +13,6 @@ Game::Game(){
 	if( ! text.InitText() ){
 		this->game_start = false;
 	}
-
-	/*
-	if( ! Text::InitFreeType() ){
-		this->game_start = false;
-	}
-	if( this->text.Load() ){
-		this->game_start = false;
-	}*/
 	//GAME
 	std::cout<<SDL_GetTicks()<<": Inicjalizowanie gry\n";
 	//VAR TO LOAD
@@ -94,7 +86,6 @@ Game::Game(){
 		else{
 			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" animacji z "<<tmp_ile<<"!\n";
 		}
-
 		file.close();
 	}
 	else{
@@ -122,6 +113,8 @@ Game::Game(){
 		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/background_right.png !\n";
 		this->game_start = false;
 	}
+//TEXT LOAD TO BIT MAP
+
 //MAPA
 	this->map2D.SetVarMap( this->images, this->anim );
 	this->map2D.SetValue( 50, 50 );
@@ -156,12 +149,47 @@ Game::Game(){
 	this->fps = 0;
 	this->StartTime = 0;
 	this->StopEnd = 0;
+	//TEXT
+	this->Input = "";
+	this->InputPositionX = this->init.SCREEN_WIDTH * 0.10;
+	this->InputPositionY = this->init.SCREEN_HEIGHT * 0.11;
+	this->BotMessage = "";
+	this->BotMessagePositionX = this->init.SCREEN_WIDTH * 0.11;
+	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.11;
+
+	this->KeyEvent = SDLK_UNKNOWN;
 }
 
 Game::~Game(){
 	this->settings.SaveSettings();
 	Text::Clear();
 	std::cout<<SDL_GetTicks()<<": Niszczenie obiektów\n";
+}
+
+void Game::ZoomIN(){
+	if( this->Square_length > 6 ){
+		this->Square_length = 4;
+		this->Square_size = this->Height_percent / (2*this->Square_length+1);
+	}
+	else if( this->Square_length > 2 ){
+		this->Square_length -= 1;
+		this->Square_size = this->Height_percent / (2*this->Square_length+1);
+	}
+	else if( this->Square_length < 2 ){
+		this->Square_length = 4;
+		this->Square_size = this->Height_percent / (2*this->Square_length+1);
+	}
+}
+
+void Game::ZoomOut(){
+	if( this->Square_length < 6 ){
+		this->Square_length += 1;
+		this->Square_size = this->Height_percent / (2*this->Square_length+1);
+	}
+	else if( this->Square_length > 6 ){
+		this->Square_length = 4;
+		this->Square_size = this->Height_percent / (2*this->Square_length+1);
+	}
 }
 
 void Game::Start(){
@@ -180,47 +208,31 @@ void Game::Start(){
 			}
 			*/
 			/////////////////////
-			while( SDL_PollEvent( &this->event )  ){
+			while( SDL_PollEvent( &this->event ) ){
 				if( this->event.type == SDL_QUIT ){
 					this->game_start = false;
 				}
 				else if( this->event.type == SDL_KEYDOWN ){
-					switch(event.key.keysym.sym){
-					case SDLK_q:
+					this->KeyEvent = event.key.keysym.sym;
+					switch( this->KeyEvent ){
+					case SDLK_COMMA:
 						//SDL_GL_SwapBuffers();
 							playerx = rand()%40+5;
 							playery = rand()%40+5;
 							//std::cout<<"x="<<playerx<<" y="<<playery<<" :"<<this->map2D.ReturnValueMap( playerx, playery )<<"\n";
 						break;
-					case SDLK_w:
 						//this->map2D.SaveToFile();
-						break;
-					case SDLK_ESCAPE:
+					case SDLK_ESCAPE: //ESC
 						this->game_start = false;
 						break;
 					case SDLK_LEFTBRACKET: // [
 					case SDLK_KP_MINUS: // NUM -
-						if( this->Square_length < 6 ){
-							this->Square_length += 1;
-							this->Square_size = this->Height_percent / (2*this->Square_length+1);
-						}
-						else if( this->Square_length > 6 ){
-							this->Square_length = 4;
-							this->Square_size = this->Height_percent / (2*this->Square_length+1);
-						}
+						this->ZoomOut();
 						break;
 					case SDLK_RIGHTBRACKET: // ]
 					case SDLK_KP_PLUS: // NUM +
-						if( this->Square_length > 2 ){
-							this->Square_length -= 1;
-							this->Square_size = this->Height_percent / (2*this->Square_length+1);
-						}
-						else if( this->Square_length < 2 ){
-							this->Square_length = 4;
-							this->Square_size = this->Height_percent / (2*this->Square_length+1);
-						}
+						this->ZoomIN();
 						break;
-
 					case SDLK_BACKQUOTE: // `
 						//ALL MAP
 						if( this->map2D.ReturnWidth() > this->map2D.ReturnHeight() ){
@@ -231,7 +243,15 @@ void Game::Start(){
 						}
 						this->Square_size = this->Height_percent / (2*this->Square_length+1);
 						break;
+					case SDLK_BACKSPACE: //BACKSPACE
+						if( this->Input.size() != 0 ){
+							this->Input.erase( this->Input.end()-1, this->Input.end() );
+						}
+						break;
 					default:
+						if( this->KeyEvent >= 97 && this->KeyEvent <= 122 ){
+							this->Input += (char)this->KeyEvent;
+						}
 						break;
 					}
 				}
@@ -307,7 +327,13 @@ void Game::Update(){
 		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Width_percent, this->init.SCREEN_HEIGHT );
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->init.SCREEN_HEIGHT );
 	glEnd();
-	this->text.RenderText( "Ala ma kota, ą ę ć ł ó ź ż ń" );
+	//this->text.RenderText( "Ala ma kota, ą ę ć ł ó ź ż ń" );
+	glTranslatef( this->InputPositionX, 7*this->InputPositionY, 0.0 );
+
+	if( this->Input != "" ){
+		Text::RenderTextNow( this->Input );
+	}
+	//glTranslatef( 0.0, this->InputPositionY, 0.0 );
 }
 
 void Game::Load(){

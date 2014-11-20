@@ -27,7 +27,9 @@ private:
 	//std::vector <Img>::iterator imagesIt;
 	Map map2D;
 	bool game_start;
+	//KEY EVENT
 	SDL_Event event;
+	SDLKey KeyEvent;
 	int playerx,playery;
 	int StartImages, EndImages, StartAnim, EndAnim;
 	int CurrentMap, CurrentMapObj;
@@ -37,6 +39,8 @@ private:
 
 	//wyswietlanie mapy
 	GLfloat Square_size, Square_length ;
+	inline void ZoomIN();
+	inline void ZoomOut();
 
 	//wyswietlenie tla
 	GLfloat Background_bottom_length_x, Background_bottom_length_y;
@@ -45,8 +49,10 @@ private:
 	int fps;
 	//TEXT
 	Text text;
-
-
+	std::string Input;
+	GLfloat InputPositionX, InputPositionY;
+	std::string BotMessage;
+	GLfloat BotMessagePositionX, BotMessagePositionY;
 };
 
 #endif

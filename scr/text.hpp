@@ -13,10 +13,12 @@ public:
 	static bool InitText();
 	static void Clear();
 	void RenderText( std::string text );
+	static void RenderTextNow( std::string text );
 	void SetColor( Uint8 r, Uint8 g, Uint8 b);
 private:
 	static bool IsInit;
 	static TTF_Font *Font;
+	//static SDL_Color *TextColorBasic;
 	GLuint ImageID;
 	SDL_Color TextColor;
 };

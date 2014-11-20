@@ -42,16 +42,48 @@ void Map::SetValue(int height, int width){
 	else{
 		this->SetVector();
 		//PODŁOŻE
+		//WODA
 		for( int i=0; i<this->Height; i++ ){
-			this->Map2D[0][i] = 1;
-			this->Map2D[i][0] = 1;
+			this->Map2D[0][i] = this->Pelne[0].ReturnImageID();
+			this->Map2D[i][0] = this->Pelne[0].ReturnImageID();
 
-			this->Map2D[this->Height-1][i] = 1;
-			this->Map2D[i][this->Width-1] = 1;
+			this->Map2D[this->Height-1][i] = this->Pelne[0].ReturnImageID();
+			this->Map2D[i][this->Width-1] = this->Pelne[0].ReturnImageID();
 		}
-		for( int i=1; i<this->Height-1; i++ ){
-			for( int j=1; j<this->Width-1; j++ ){
-				this->Map2D[i][j]=2;//rand()%14+1;
+		//PLAZA
+		for( int i=2; i<this->Height-2; i++ ){
+			this->Map2D[1][i] = this->WodaPiach[1].ReturnImageID();
+			this->Map2D[2][i] = this->Pelne[2].ReturnImageID();
+			this->Map2D[i][1] = this->WodaPiach[11].ReturnImageID();
+			this->Map2D[i][2] = this->Pelne[2].ReturnImageID();
+
+			this->Map2D[this->Height-3][i] = this->Pelne[2].ReturnImageID();
+			this->Map2D[this->Height-2][i] = this->WodaPiach[0].ReturnImageID();
+			this->Map2D[i][this->Width-3] = this->Pelne[2].ReturnImageID();
+			this->Map2D[i][this->Width-2] = this->WodaPiach[10].ReturnImageID();
+		}
+		//NAROZNIKI
+		this->Map2D[1][1] = this->WodaPiach[9].ReturnImageID();
+		this->Map2D[this->Height-2][1] = this->WodaPiach[5].ReturnImageID();
+		this->Map2D[1][this->Width-2] = this->WodaPiach[2].ReturnImageID();
+		this->Map2D[this->Height-2][this->Width-2] = this->WodaPiach[6].ReturnImageID();
+
+		for( int i=4; i<this->Height-4; i++ ){
+			this->Map2D[3][i] = this->TrawaPiach[0].ReturnImageID();
+			this->Map2D[i][3] = this->TrawaPiach[10].ReturnImageID();
+
+			this->Map2D[this->Width-4][i] = this->TrawaPiach[1].ReturnImageID();
+			this->Map2D[i][this->Width-4] = this->TrawaPiach[11].ReturnImageID();
+		}
+		this->Map2D[3][3] = this->TrawaPiach[8].ReturnImageID();
+		this->Map2D[this->Height-4][3] = this->TrawaPiach[4].ReturnImageID();
+		this->Map2D[3][this->Width-4] = this->TrawaPiach[3].ReturnImageID();
+		this->Map2D[this->Height-4][this->Width-4] = this->TrawaPiach[7].ReturnImageID();
+
+		//TRAWA
+		for( int i=4; i<this->Height-4; i++ ){
+			for( int j=4; j<this->Width-4; j++ ){
+				this->Map2D[i][j] = this->Pelne[1].ReturnImageID();
 			}
 		}
 

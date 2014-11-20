@@ -24,6 +24,7 @@ bool Text::InitText(){
 			std::cerr<<SDL_GetTicks()<<": FreeType - Błąd: Niepowodzenie TTF_OpenFont !\n";
 			return false;
 		}
+		TTF_SetFontStyle( Text::Font, TTF_STYLE_BOLD );
 		Text::IsInit = true;
 		std::cout<<SDL_GetTicks()<<": Freetype - Inicjalizacja przebiegła pomyślnie\n";
 	}
@@ -45,6 +46,7 @@ void Text::SetColor( Uint8 r, Uint8 g, Uint8 b){
 
 void Text::RenderText( std::string text ){
 	if( ! Text::IsInit ){
+		TTF_CloseFont( Text::Font );
 		Text::InitText();
 	}
 
@@ -55,11 +57,34 @@ void Text::RenderText( std::string text ){
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
 	glBegin( GL_QUADS );
-		glTexCoord2d( 0.0, 0.0 ); glVertex2d( 10.0, 10.0 );
-		glTexCoord2d( 1.0, 0.0 ); glVertex2d( 10.0+Message->w, 10.0 );
-		glTexCoord2d( 1.0, 1.0 ); glVertex2d( 10.0+Message->w, 10.0+Message->h );
-		glTexCoord2d( 0.0, 1.0 ); glVertex2d( 10.0, 10.0+Message->h );
+		glTexCoord2d( 0.0, 0.0 ); glVertex2d( 0.0, 0.0 );
+		glTexCoord2d( 1.0, 0.0 ); glVertex2d( Message->w, 0.0 );
+		glTexCoord2d( 1.0, 1.0 ); glVertex2d( Message->w, Message->h );
+		glTexCoord2d( 0.0, 1.0 ); glVertex2d( 0.0, Message->h );
 	glEnd();
 
 	SDL_FreeSurface(Message);
+}
+
+void Text::RenderTextNow( std::string text ){
+	SDL_Color TextColorBasic;
+	TextColorBasic.r = 0;
+	TextColorBasic.g = 0;
+	TextColorBasic.b = 0;
+	SDL_Surface *Message = TTF_RenderUTF8_Blended( Text::Font, text.c_str(), TextColorBasic );
+	GLuint ImageID_tmp;
+	glGenTextures( 1, &ImageID_tmp );
+	glBindTexture( GL_TEXTURE_2D, ImageID_tmp );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
+	glBegin( GL_QUADS );
+		glTexCoord2d( 0.0, 0.0 ); glVertex2d( 0.0, 0.0 );
+		glTexCoord2d( 1.0, 0.0 ); glVertex2d( Message->w, 0.0 );
+		glTexCoord2d( 1.0, 1.0 ); glVertex2d( Message->w, Message->h );
+		glTexCoord2d( 0.0, 1.0 ); glVertex2d( 0.0, Message->h );
+	glEnd();
+	glDeleteTextures(1, &ImageID_tmp);
+	SDL_FreeSurface(Message);
+
 }
