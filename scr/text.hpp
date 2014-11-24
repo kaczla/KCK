@@ -1,9 +1,9 @@
 #ifndef TEXT_HPP_
 #define TEXT_HPP_
 
-#include <SDL\SDL.h>
-#include <SDL\SDL_ttf.h>
-#include <SDL\SDL_opengl.h>
+#include "include_SDL.hpp"
+#include "include_SDL_ttf.hpp"
+#include "include_SDL_opengl.hpp"
 #include <iostream>
 
 class Text{

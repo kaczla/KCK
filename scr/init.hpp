@@ -1,9 +1,9 @@
 #ifndef INIT_HPP_
 #define INIT_HPP_
-#include <SDL\SDL.h>
-#include <SDL\SDL_opengl.h>
-#include <SDL\SDL_main.h>
-#include <IL\il.h>
+#include "include_SDL.hpp"
+#include "include_SDL_opengl.hpp"
+#include "include_SDL_main.hpp"
+#include "include_IL.hpp"
 #include <iostream>
 
 

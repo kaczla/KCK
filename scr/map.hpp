@@ -2,7 +2,7 @@
 #define MAP_HPP_
 #include <vector>
 #include <iostream>
-#include <SDL\SDL.h>
+#include "include_SDL.hpp"
 #include "img.hpp"
 #include "anim.hpp"
 
