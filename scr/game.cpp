@@ -2,96 +2,25 @@
 
 Game::Game(){
 	this->game_start = true;
-	//SETTINGS
+//SETTINGS
 	this->settings.init_Settings();
-	//INIT SDL, OPENGL, DevIL
+//INIT SDL, OPENGL, DevIL
 	this->init.set_Screen( this->settings.ReturnWidth(), this->settings.ReturnHeight(), this->settings.ReturnBpp() );
 	if( ! this->init.init() ){
 		this->game_start = false;
 	}
-	//FREE TYPE
+//FREE TYPE
 	if( ! text.InitText() ){
 		this->game_start = false;
 	}
-	//GAME
+//GAME
 	std::cout<<SDL_GetTicks()<<": Inicjalizowanie gry\n";
-	//VAR TO LOAD
-	int tmp_ile, tmp1_id, tmp_wczytano=0;
-	std::string tmp_name, tmp_file_name;
-	std::fstream file;
+//VAR TO LOAD
+
 //Grafika
-	file.open( "bin/img.txt", std::ios::in );
-	if( file.good() ){
-		file>>tmp_ile;
-		this->images.resize(tmp_ile);
-		this->images.clear();
-		for( int i=0; i<tmp_ile; i++ ){
-			if( file.good() ){
-				file>>tmp1_id;
-				file>>tmp_name;
-				file>>tmp_file_name;
-				this->images.push_back( Img( tmp1_id, tmp_name, tmp_file_name ) );
-				if( this->images[i].ReturnSuccess() ){
-					tmp_wczytano++;
-				}
-				//std::cout<<"for:i="<<i<<" tmp1_id="<<tmp1_id<<" tmp_name="<<tmp_name<<" tmp_file_name="<<tmp_file_name<<" images.size()="<<this->images.size()<<"\n";
-			}
-		}
-
-		if(tmp_wczytano==tmp_ile){
-			std::cout<<SDL_GetTicks()<<": Wczytano grafikę w liczbie "<<this->images.size()<<"\n";
-		}
-		else{
-			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" grafik z "<<tmp_ile<<"!\n";
-		}
-
-		file.close();
-	}
-	else{
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img.txt !\n";
-		this->game_start = false;
-	}
+	this->ReadImages();
 //ANIMACJE
-	file.open( "bin/anim.txt", std::ios::in );
-	if( file.good() ){
-		tmp_wczytano=0;
-		file>>tmp_ile;
-		this->anim.resize(tmp_ile);
-		this->anim.clear();
-		Uint32 tmp_time;
-		int ile_img;
-		std::vector <std::string> tmp_name_anim;
-		std::vector <std::string> tmp_file_name_anim;
-		for( int i=0; i<tmp_ile; i++ ){
-			tmp_name_anim.clear();
-			tmp_file_name_anim.clear();
-			file>>tmp1_id;
-			file>>tmp_time;
-			file>>ile_img;
-			for( int j=0; j<ile_img; j++ ){
-				file>>tmp_name;
-				file>>tmp_file_name;
-				tmp_name_anim.push_back( tmp_name );
-				tmp_file_name_anim.push_back( tmp_file_name );
-			}
-			this->anim.push_back( Anim( tmp1_id, ile_img, tmp_time, tmp_name_anim, tmp_file_name_anim ) );
-			if( this->anim[i].ReturnSuccess() ){
-				tmp_wczytano++;
-			}
-		}
-
-		if(tmp_wczytano==tmp_ile){
-			std::cout<<SDL_GetTicks()<<": Wczytano animacje w liczbie "<<this->anim.size()<<"\n";
-		}
-		else{
-			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" animacji z "<<tmp_ile<<"!\n";
-		}
-		file.close();
-	}
-	else{
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/anim.txt !\n";
-		this->game_start = false;
-	}
+	this->ReadAnim();
 //ERROR IMAGE
 	this->error_img.resize( 1 );
 	this->error_img.clear();
@@ -122,6 +51,8 @@ Game::Game(){
 		std::cerr<<SDL_GetTicks()<<": Nie utworzono mapy gry! Błąd: "<<this->map2D.ReturnError()<<" !\n";
 		this->game_start = false;
 	}
+	this->CurrentPlayerX = this->map2D.ReturnPlayerX();
+	this->CurrentPlayerY = this->map2D.ReturnPlayerY();
 //Wielkosc obiektow
 	this->Percent = 0.8;
 	this->Height_percent = this->init.SCREEN_HEIGHT * this->Percent;
@@ -136,9 +67,7 @@ Game::Game(){
 	//std::cout<<"this->Square_length = "<<this->Square_length<<"\tthis->Square_size = "<<this->Square_size<<"\n";
 	this->Background_bottom_length_x = this->Height_percent;
 	this->Background_bottom_length_y = this->init.SCREEN_HEIGHT - this->Height_percent;
-	///
-	playerx=25;
-	playery=25;
+
 	this->StartImages = this->images[0].ReturnImageID();
 	this->EndImages = this->images[this->images.size()-1].ReturnImageID();
 	this->StartAnim = this->anim[0].ReturnImageID();
@@ -215,14 +144,12 @@ void Game::Start(){
 				else if( this->event.type == SDL_KEYDOWN ){
 					this->KeyEvent = event.key.keysym.sym;
 					switch( this->KeyEvent ){
-					case SDLK_COMMA:
+					case SDLK_COMMA: // .
 						//SDL_GL_SwapBuffers();
-							playerx = rand()%40+5;
-							playery = rand()%40+5;
-							//std::cout<<"x="<<playerx<<" y="<<playery<<" :"<<this->map2D.ReturnValueMap( playerx, playery )<<"\n";
+
 						break;
 						//this->map2D.SaveToFile();
-					case SDLK_ESCAPE: //ESC
+					case SDLK_ESCAPE: // ESC
 						this->game_start = false;
 						break;
 					case SDLK_LEFTBRACKET: // [
@@ -278,11 +205,12 @@ void Game::Draw_Square(){
 }
 
 void Game::Update(){
-
+	this->CurrentPlayerX = this->map2D.ReturnPlayerX();
+	this->CurrentPlayerY = this->map2D.ReturnPlayerY();
 	glClear( GL_COLOR_BUFFER_BIT );//| GL_DEPTH_BUFFER_BIT );
 	glLoadIdentity();
-	for( int i=playery-this->Square_length; i<=playery+this->Square_length; i++ ){
-		for( int j=playerx-this->Square_length; j<=playerx+this->Square_length; j++ ){
+	for( int i=this->CurrentPlayerY-this->Square_length; i<=this->CurrentPlayerY+this->Square_length; i++ ){
+		for( int j=this->CurrentPlayerX-this->Square_length; j<=this->CurrentPlayerX+this->Square_length; j++ ){
 			this->CurrentMap = this->map2D.ReturnValueMap( i, j );
 			this->CurrentMapObj = this->map2D.ReturnValueMapObj( i, j );
 			if( this->CurrentMap == 0 or this->CurrentMap == -1 ){
@@ -293,17 +221,27 @@ void Game::Update(){
 				glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMap-this->EndImages-1].ReturnImageID() );
 				this->Draw_Square();
 				if( this->CurrentMapObj != 0){
-					glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
-					this->Draw_Square();
+					if( this->CurrentMapObj > (int)this->images.size() ){
+						glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
+						this->Draw_Square();
+					}
 				}
 			}
 			else{
 				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMap-1].ReturnImageID() );
 				this->Draw_Square();
 				if( this->CurrentMapObj != 0){
-					glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
-					this->Draw_Square();
+					if( this->CurrentMapObj > (int)this->images.size() ){
+						glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
+						this->Draw_Square();
+					}
 				}
+			}
+			//PLAYER
+			if( this->CurrentPlayerY == i && this->CurrentPlayerX == j ){
+				this->CurrentMapObj = this->map2D.ReturnPlayer();
+				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMapObj-1].ReturnImageID() );
+				this->Draw_Square();
 			}
 			glTranslatef( this->Square_size, 0.0, 0.0 );
 		}
@@ -342,6 +280,91 @@ void Game::Load(){
 
 void Game::Save(){
 
+}
+
+void Game::ReadImages(){
+	std::fstream file_img;
+	int tmp_ile_img, tmp1_id, tmp_wczytano=0;
+	std::string tmp_name, tmp_file_name;
+	file_img.open( "bin/img.txt", std::ios::in );
+	if( file_img.good() ){
+		file_img>>tmp_ile_img;
+		this->images.resize( tmp_ile_img );
+		this->images.clear();
+		for( int i=0; i<tmp_ile_img; i++ ){
+			if( file_img.good() ){
+				file_img>>tmp1_id;
+				file_img>>tmp_name;
+				file_img>>tmp_file_name;
+				this->images.push_back( Img( tmp1_id, tmp_name, tmp_file_name ) );
+				if( this->images[i].ReturnSuccess() ){
+					tmp_wczytano++;
+				}
+				//std::cout<<"for:i="<<i<<" tmp1_id="<<tmp1_id<<" tmp_name="<<tmp_name<<" tmp_file_name="<<tmp_file_name<<" images.size()="<<this->images.size()<<"\n";
+			}
+		}
+
+		if( tmp_wczytano == tmp_ile_img ){
+			std::cout<<SDL_GetTicks()<<": Wczytano grafikę w liczbie "<<this->images.size()<<"\n";
+		}
+		else{
+			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" grafik z "<<tmp_ile_img<<"!\n";
+		}
+
+		file_img.close();
+	}
+	else{
+		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img.txt !\n";
+		this->game_start = false;
+	}
+}
+
+void Game::ReadAnim(){
+	std::fstream file_anim;
+	int tmp_ile_anim, tmp1_id, tmp_wczytano=0;
+	std::string tmp_global_name, tmp_name, tmp_file_name;
+	file_anim.open( "bin/anim.txt", std::ios::in );
+	if( file_anim.good() ){
+		file_anim>>tmp_ile_anim;
+		this->anim.resize(tmp_ile_anim);
+		this->anim.clear();
+		Uint32 tmp_time;
+		int ile_img;
+		std::vector <std::string> tmp_name_anim;
+		std::vector <std::string> tmp_file_name_anim;
+		for( int i=0 ; i<tmp_ile_anim; i++ ){
+			tmp_name_anim.clear();
+			tmp_file_name_anim.clear();
+			file_anim>>tmp1_id;
+			file_anim>>tmp_global_name;
+			file_anim>>tmp_time;
+			file_anim>>ile_img;
+			//std::cout<<"for:i="<<i<<" tmp1_id="<<tmp1_id<<" tmp_global_name="<<tmp_global_name<<" tmp_time="<<tmp_time<<" ile_img="<<ile_img<<"\n";
+			for( int j=0; j<ile_img; j++ ){
+				file_anim>>tmp_name;
+				file_anim>>tmp_file_name;
+				tmp_name_anim.push_back( tmp_name );
+				tmp_file_name_anim.push_back( tmp_file_name );
+				//std::cout<<"\tfor:j="<<j<<" tmp_name="<<tmp_name<<" tmp_file_name="<<tmp_file_name<<"\n";
+			}
+			this->anim.push_back( Anim( tmp1_id, tmp_global_name, ile_img, tmp_time, tmp_name_anim, tmp_file_name_anim ) );
+			if( this->anim[i].ReturnSuccess() ){
+				tmp_wczytano++;
+			}
+		}
+
+		if(tmp_wczytano==tmp_ile_anim){
+			std::cout<<SDL_GetTicks()<<": Wczytano animacje w liczbie "<<this->anim.size()<<"\n";
+		}
+		else{
+			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" animacji z "<<tmp_ile_anim<<"!\n";
+		}
+		file_anim.close();
+	}
+	else{
+		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/anim.txt !\n";
+		this->game_start = false;
+	}
 }
 
 

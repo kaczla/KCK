@@ -18,7 +18,7 @@ public:
 private:
 	static bool IsInit;
 	static TTF_Font *Font;
-	//static SDL_Color *TextColorBasic;
+	//static SDL_Color TextColorBasic;
 	GLuint ImageID;
 	SDL_Color TextColor;
 };

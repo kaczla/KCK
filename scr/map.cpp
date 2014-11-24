@@ -5,7 +5,6 @@ Map::Map(){
 	this->Height = 50;
 	this->Success = false;
 	this->SuccessVarMap = false;
-	//this->SetVector();
 
 	this->PlayerX = 1;
 	this->PlayerY = 25;
@@ -21,7 +20,7 @@ Map::Map(int height, int width){
 
 	//INNA LOSOWA!!!
 	this->PlayerX = 1;
-	this->PlayerY = 25;
+	this->PlayerY = width / 2;
 }
 
 bool Map::ReturnSuccess(){
@@ -88,7 +87,9 @@ void Map::SetValue(int height, int width){
 		}
 
 		//OBIEKTY
-
+		this->Map2D_obj[25][25] = 40;
+		this->Map2D_obj[25][26] = 41;
+		this->Map2D_obj[26][25] = 42;
 
 		this->Error_Map = " ";
 		this->Success = true;
@@ -197,6 +198,12 @@ Map::~Map(){
 }
 
 void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
+	this->Player.resize( 4 );
+	this->Player[0].SetLocalName( "PlayerUp" );
+	this->Player[1].SetLocalName( "PlayerLeft" );
+	this->Player[2].SetLocalName( "PlayerRight" );
+	this->Player[3].SetLocalName( "PlayerDown" );
+
 	this->Pelne.resize( 3 );
 	this->Pelne[0].SetLocalName( "fullwoda" );
 	this->Pelne[1].SetLocalName( "fulltrawa" );
@@ -254,6 +261,13 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 
 	bool not_found = true;
 	for( unsigned int i=0; i<img.size(); i++ ){
+		for( unsigned int j=0; j<this->Player.size(); j++ ){
+			if( not_found && this->Player[j].ReturnLocalName() == img[i].ReturnName() ){
+				this->Player[j].SetImageID( img[i].ReturnImageID() );
+				not_found = false;
+				break;
+			}
+		}
 		for( unsigned int j=0; j<this->Pelne.size(); j++ ){
 			if( not_found && this->Pelne[j].ReturnLocalName() == img[i].ReturnName() ){
 				this->Pelne[j].SetImageID( img[i].ReturnImageID() );
@@ -309,6 +323,12 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 	//SPRAWDZENIE
 	int ile = 0;
 	std::string error_tmp = "";
+	for( unsigned int j=0; j<this->Player.size(); j++ ){
+		if(  this->Player[j].ReturnImageID() == 0 ){
+			ile++;
+			error_tmp+= this->Player[j].ReturnLocalName() + "; ";
+		}
+	}
 	for( unsigned int j=0; j<this->Pelne.size(); j++ ){
 		if(  this->Pelne[j].ReturnImageID() == 0 ){
 			ile++;
@@ -360,8 +380,14 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 
 }
 
+int Map::ReturnPlayerX(){
+	return this->PlayerX;
+}
 
+int Map::ReturnPlayerY(){
+	return this->PlayerY;
+}
 
-
-
-
+int Map::ReturnPlayer(){
+	return this->Player[0].ReturnImageID();
+}

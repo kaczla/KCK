@@ -14,6 +14,7 @@ public:
 	ILuint ReturnHeight();
 	ILuint ReturnImageID();
 	std::string ReturnName();
+	int ReturnSize();
 	void Status();
 	bool ReturnSuccess();
 protected:

@@ -20,31 +20,30 @@ private:
 	inline void Draw_Square();
 	Settings settings;
 	Init init;
+	//GRAFIKA
 	std::vector <Img> images;
 	std::vector <Anim> anim;
 	std::vector <Img> error_img;
 	std::vector <Img> backgroud;
-	//std::vector <Img>::iterator imagesIt;
+	inline void ReadImages();
+	inline void ReadAnim();
+	//MAPA GRY
 	Map map2D;
 	bool game_start;
 	//KEY EVENT
 	SDL_Event event;
 	SDLKey KeyEvent;
-	int playerx,playery;
-	int StartImages, EndImages, StartAnim, EndAnim;
-	int CurrentMap, CurrentMapObj;
-	//int tmp_update,tmp_update2;
-
+	//WYŚWIETLANIE MAPY
 	GLfloat Percent, Height_percent, Width_percent;
-
-	//wyswietlanie mapy
 	GLfloat Square_size, Square_length ;
 	inline void ZoomIN();
 	inline void ZoomOut();
-
-	//wyswietlenie tla
+	int StartImages, EndImages, StartAnim, EndAnim;
+	int CurrentMap, CurrentMapObj;
+	int CurrentPlayerX, CurrentPlayerY;
+	//WYŚWIETLANIE TŁA
 	GLfloat Background_bottom_length_x, Background_bottom_length_y;
-	//clock
+	//ZEGAR CPU
 	Uint32 StartTime, StopEnd;
 	int fps;
 	//TEXT

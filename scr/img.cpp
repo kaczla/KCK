@@ -65,7 +65,7 @@ bool Img::LoadFile(){
 		}
 	}
 	else{
-		std::cerr<<SDL_GetTicks()<<": Nie załadowano grafiki: "<<this->File_Name<<"\n";
+		std::cerr<<SDL_GetTicks()<<": Nie załadowano grafiki: "<<this->File_Name<<" (PLIK NIE ISTNIEJE)\n";
 		return false;
 	}
 	return true;
@@ -148,5 +148,9 @@ ILuint Img::ReturnHeight(){
 
 std::string Img::ReturnName(){
 	return this->Name;
+}
+
+int Img::ReturnSize(){
+	return 1;
 }
 

@@ -5,7 +5,6 @@
 #include <SDL\SDL.h>
 #include "img.hpp"
 #include "anim.hpp"
-//using std::vector;
 
 class Map{
 public:
@@ -16,11 +15,14 @@ public:
 	void SetVarMap( std::vector <Img> img, std::vector <Anim> anim);
 	int ReturnValueMap(int x, int y);
 	int ReturnValueMapObj(int x, int y);
+	int ReturnPlayer();
 	std::string ReturnError();
 	void SaveToFile();
 	bool ReturnSuccess();
 	int ReturnWidth();
 	int ReturnHeight();
+	int ReturnPlayerX();
+	int ReturnPlayerY();
 private:
 	class Podloze{
 	public:
@@ -49,6 +51,7 @@ private:
 	std::vector < std::vector <int> > Map2D;
 	std::vector < std::vector <int> > Map2D_obj;
 	int Width, Height;
+	std::vector <Podloze> Player;
 	std::vector <Podloze> Pelne;
 	std::vector <Podloze> TrawaPiach;
 	std::vector <Podloze> WodaPiach;

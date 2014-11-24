@@ -6,9 +6,11 @@
 class Anim : public Img{
 public:
 	Anim();
-	Anim( int tmp_id, int tmp_size, Uint32 time, std::vector <std::string> tmp_name, std::vector <std::string> tmp_name_file );
+	Anim( int tmp_id, std::string tmp_global_name, int tmp_size, Uint32 time, std::vector <std::string> tmp_name, std::vector <std::string> tmp_name_file );
 	~Anim();
 	ILuint ReturnImageID();
+	std::string ReturnName();
+	int ReturnSize();
 	void Status();
 private:
 	void Load();
@@ -21,7 +23,7 @@ private:
 	int Size,CurrentImg,for_int_i;
 	std::vector <std::string> Name,File_Name;
 	std::vector <ILuint> ImageID;
-
+	std::string GlobalName;
 };
 
 

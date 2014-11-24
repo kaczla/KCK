@@ -14,10 +14,11 @@ Anim::Anim(){
 	this->Success = 0;
 	this->Delete = false;
 	this->for_int_i = 0;
-	//std::cout<<SDL_GetTicks()<<": Konstruktor Anim()\n";
+
+	this->GlobalName = "0";
 }
 
-Anim::Anim( int tmp_id, int tmp_size, Uint32 tmp_time, std::vector <std::string> tmp_name, std::vector <std::string> tmp_name_file )
+Anim::Anim( int tmp_id, std::string tmp_global_name, int tmp_size, Uint32 tmp_time, std::vector <std::string> tmp_name, std::vector <std::string> tmp_name_file )
 {
 	this->id = tmp_id;
 	this->Width = 0;
@@ -26,6 +27,7 @@ Anim::Anim( int tmp_id, int tmp_size, Uint32 tmp_time, std::vector <std::string>
 	this->StopEnd = 0;
 	this->DiffTime = tmp_time;
 	this->for_int_i = 0;
+	this->GlobalName = tmp_global_name;
 
 	if( tmp_size < (int)tmp_name.size() ){
 		tmp_size = (int)tmp_name.size();
@@ -86,7 +88,7 @@ bool Anim::LoadFile(){
 			}
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Nie załadowano grafiki: "<<this->File_Name[for_int_i]<<"\n";
+			std::cerr<<SDL_GetTicks()<<": Nie załadowano grafiki: "<<this->File_Name[for_int_i]<<" (PLIK NIE ISTNIEJE)\n";
 			return false;
 		}
 	}
@@ -182,5 +184,14 @@ void Anim::Update(){
 			this->CurrentImg = 0;
 		}
 	}
+}
+
+int Anim::ReturnSize(){
+	return this->ImageID.size();
+}
+
+
+std::string Anim::ReturnName(){
+	return this->GlobalName;
 }
 
