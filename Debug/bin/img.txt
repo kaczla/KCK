@@ -1,4 +1,4 @@
-43
+44
 1 fullwoda bin/img/pelne/fullwoda.png
 2 fulltrawa bin/img/pelne/fulltrawa.png
 3 fullpiach bin/img/pelne/fullpiach.png
@@ -42,3 +42,4 @@
 41 PlayerLeft bin/img/player/PlayerLeft.png
 42 PlayerRight bin/img/player/PlayerRight.png
 43 PlayerDown bin/img/player/PlayerDown.png
+44 ognichoready bin/img/ognichoready.png
