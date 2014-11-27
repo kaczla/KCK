@@ -1,7 +1,7 @@
 43
-1 fullwoda bin/img/pelne/fullwoda.jpg
-2 fulltrawa bin/img/pelne/fulltrawa.jpg
-3 fullpiach bin/img/pelne/fullpiach.jpg
+1 fullwoda bin/img/pelne/fullwoda.png
+2 fulltrawa bin/img/pelne/fulltrawa.png
+3 fullpiach bin/img/pelne/fullpiach.png
 4 GD_piachtrawa bin/img/trawapiach/GD_piachtrawa.png
 5 GD_trawapiach bin/img/trawapiach/GD_trawapiach.png
 6 LD1_GP3_piachtrawa bin/img/trawapiach/LD1_GP3_piachtrawa.png
