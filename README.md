@@ -54,3 +54,9 @@
 
 > [zlib](http://www.zlib.net/)
 
+> [libaiml (AIML):](http://www.alicebot.org/downloads/programs.html)
+
+> [libxml2](http://xmlsoft.org/)
+
+> [std_utils-0.7.5](http://omicron.ig3.net/)
+
