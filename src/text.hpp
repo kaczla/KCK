@@ -5,6 +5,7 @@
 #include "include_SDL_ttf.hpp"
 #include "include_SDL_opengl.hpp"
 #include <iostream>
+#include "log_game.hpp"
 
 class Text{
 public:

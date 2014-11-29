@@ -2,6 +2,13 @@
 
 Game::Game(){
 	this->game_start = true;
+	if( ! logGame.ReturnLogGame() ){
+		this->game_start = false;
+		std::cout<<"Nie można utworzyć pliku \"log.txt\"\n";
+	}
+	else{
+		this->DateToFile();
+	}
 //SETTINGS
 	this->settings.init_Settings();
 //INIT SDL, OPENGL, DevIL
@@ -14,9 +21,9 @@ Game::Game(){
 		this->game_start = false;
 	}
 //GAME
-	std::cout<<SDL_GetTicks()<<": Inicjalizowanie gry\n";
-//VAR TO LOAD
-
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": Inicjalizowanie gry\n" );
 //Grafika
 	this->ReadImages();
 //ANIMACJE
@@ -26,7 +33,9 @@ Game::Game(){
 	this->error_img.clear();
 	this->error_img.push_back( Img( 0, "error", "bin/img/error.png" ) );
 	if( ! this->error_img[0].ReturnSuccess() ){
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/error.png !\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Brak pliku bin/img/error.png !\n" );
 		this->game_start = false;
 	}
 //BACKGROUND
@@ -34,12 +43,16 @@ Game::Game(){
 	this->backgroud.clear();
 	this->backgroud.push_back( Img( 100, "background_bottom", "bin/img/background_bottom.png" ) );
 	if( ! this->backgroud[0].ReturnSuccess() ){
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/background_bottom.png !\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Brak pliku bin/img/background_bottom.png !\n" );
 		this->game_start = false;
 	}
 	this->backgroud.push_back( Img( 101, "background_right", "bin/img/background_right.png" ) );
 	if( ! this->backgroud[1].ReturnSuccess() ){
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img/background_right.png !\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Brak pliku bin/img/background_right.png !\n" );
 		this->game_start = false;
 	}
 //TEXT LOAD TO BIT MAP
@@ -48,7 +61,11 @@ Game::Game(){
 	this->map2D.SetVarMap( this->images, this->anim );
 	this->map2D.SetValue( 50, 50 );
 	if( ! this->map2D.ReturnSuccess() ){
-		std::cerr<<SDL_GetTicks()<<": Nie utworzono mapy gry! Błąd: "<<this->map2D.ReturnError()<<" !\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Nie utworzono mapy gry! Błąd: " );
+		LogGame::Write( this->map2D.ReturnError() );
+		LogGame::NewLine();
 		this->game_start = false;
 	}
 	this->CurrentPlayerX = this->map2D.ReturnPlayerX();
@@ -92,7 +109,10 @@ Game::Game(){
 Game::~Game(){
 	this->settings.SaveSettings();
 	Text::Clear();
-	std::cout<<SDL_GetTicks()<<": Niszczenie obiektów\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": Niszczenie obiektów\n" );
+	this->init.clean_up();
 }
 
 void Game::ZoomIN(){
@@ -122,7 +142,9 @@ void Game::ZoomOut(){
 }
 
 void Game::Start(){
-	std::cout<<SDL_GetTicks()<<": Uruchamianie gry\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": Uruchamianie gry\n" );
 	//std::cout<<"player x="<<playerx<<" y="<<playery<<" \n";//<<this->map2D.ReturnValueMap( playerx, playery )<<"\n";
 	//this->map2D.SaveToFile();
 	if( this->game_start ){
@@ -160,6 +182,13 @@ void Game::Start(){
 					case SDLK_KP_PLUS: // NUM +
 						this->ZoomIN();
 						break;
+					case SDLK_SPACE: // SPACE
+						if( this->Input.size() > 0 ){
+							if( this->Input[this->Input.size()-1] != ' ' ){
+								this->Input += ' ';
+							}
+						}
+						break;
 					case SDLK_BACKQUOTE: // `
 						//ALL MAP
 						if( this->map2D.ReturnWidth() > this->map2D.ReturnHeight() ){
@@ -192,7 +221,9 @@ void Game::Start(){
 			/////////////////////
 		}
 	}
-	std::cout<<SDL_GetTicks()<<": KONIEC GRY\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": KONIEC GRY\n" );
 }
 
 void Game::Draw_Square(){
@@ -305,16 +336,28 @@ void Game::ReadImages(){
 		}
 
 		if( tmp_wczytano == tmp_ile_img ){
-			std::cout<<SDL_GetTicks()<<": Wczytano grafikę w liczbie "<<this->images.size()<<"\n";
+			LogGame::Write( "[LOG] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Wczytano grafikę w liczbie " );
+			LogGame::Write( this->images.size() );
+			LogGame::NewLine();
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" grafik z "<<tmp_ile_img<<"!\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Wczytano " );
+			LogGame::Write( tmp_wczytano );
+			LogGame::Write( " grafik z " );
+			LogGame::Write( tmp_ile_img );
+			LogGame::NewLine();
 		}
 
 		file_img.close();
 	}
 	else{
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/img.txt !\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Brak pliku bin/img.txt !\n" );
 		this->game_start = false;
 	}
 }
@@ -354,18 +397,35 @@ void Game::ReadAnim(){
 		}
 
 		if(tmp_wczytano==tmp_ile_anim){
-			std::cout<<SDL_GetTicks()<<": Wczytano animacje w liczbie "<<this->anim.size()<<"\n";
+			LogGame::Write( "[LOG] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Wczytano animacje w liczbie " );
+			LogGame::Write( this->anim.size() );
+			LogGame::NewLine();
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Wczytano "<<tmp_wczytano<<" animacji z "<<tmp_ile_anim<<"!\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Wczytano " );
+			LogGame::Write( tmp_wczytano );
+			LogGame::Write( " animacji z " );
+			LogGame::Write( tmp_ile_anim );
+			LogGame::NewLine();
 		}
 		file_anim.close();
 	}
 	else{
-		std::cerr<<SDL_GetTicks()<<": Brak pliku bin/anim.txt !\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Brak pliku bin/anim.txt !\n" );
 		this->game_start = false;
 	}
 }
 
-
-
+void Game::DateToFile(){
+	time_t time_tmp = time( NULL );
+	struct tm *date_tmp = localtime( &time_tmp );
+	LogGame::Write( "[LOG] Utworzenie pliku log.txt: " );
+	LogGame::Write( asctime( date_tmp ) );
+	//LogGame::NewLine();
+}

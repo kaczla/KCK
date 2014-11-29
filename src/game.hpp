@@ -2,11 +2,13 @@
 #define GAME_HPP_
 #include <vector>
 #include "init.hpp"
+#include <time.h>
 #include "settings.hpp"
 #include "img.hpp"
 #include "anim.hpp"
 #include "map.hpp"
 #include "text.hpp"
+#include "log_game.hpp"
 
 class Game{
 public:
@@ -20,6 +22,9 @@ private:
 	inline void Draw_Square();
 	Settings settings;
 	Init init;
+	//LOGI
+	inline void DateToFile();
+	LogGame logGame;
 	//GRAFIKA
 	std::vector <Img> images;
 	std::vector <Anim> anim;

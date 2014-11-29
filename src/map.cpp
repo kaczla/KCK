@@ -373,8 +373,17 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 	}
 
 	if( ile != 0 ){
-		std::cerr<<SDL_GetTicks()<<": Liczba zmiennych mapy odpowiedzialnych za wyświetlanie grafiki, które nie zostały zinicjalizowane to: "<<ile<<"\n";
-		std::cerr<<SDL_GetTicks()<<": Nazwy zmiennych: "<<error_tmp<<"\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Liczba zmiennych mapy odpowiedzialnych za wyświetlanie grafiki, które nie zostały zinicjalizowane to: " );
+		LogGame::Write( ile );
+		LogGame::NewLine();
+
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Nazwy zmiennych: " );
+		LogGame::Write( error_tmp );
+		LogGame::NewLine();
 	}
 	this->SuccessVarMap = true;
 

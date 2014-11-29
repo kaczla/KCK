@@ -53,20 +53,29 @@ void Settings::init_Settings(){
 		//Set value
 		if( this->width < 640 ){
 			this->width = 640;
-			std::cerr<<"Zmieniono szerokość okna na 640\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "Zmieniono szerokość okna na 640\n" );
 		}
 		if( this->height < 480 ){
 			this->height = 480;
-			std::cerr<<"Zmieniono wysokość okna na 480\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "Zmieniono wysokość okna na 480\n" );
 		}
 		if( this->bpp > 32 or this->bpp < 8){
 			this->bpp = 32;
-			std::cerr<<"Zmieniono głębie kolorów dla okna na 32 (2^32)\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "Zmieniono głębie kolorów dla okna na 32 (2^32)\n" );
 		}
-
-		std::cout<<"0: Wczytano ustawienia z pliku settings.ini: ";
-		std::cout<<"fullscreen="<<this->ReturnFullscreen()<<";width="<<this->ReturnWidth()
-				<<";height="<<this->ReturnHeight()<<";bpp="<<this->ReturnBpp()<<";\n";
+		LogGame::Write( "[LOG] " );
+		LogGame::Write( "Wczytano ustawienia z pliku settings.ini: fullscreen=" );
+		LogGame::Write( this->ReturnFullscreen() );
+		LogGame::Write( ";width= " );
+		LogGame::Write( this->ReturnWidth() );
+		LogGame::Write( ";height= " );
+		LogGame::Write( this->ReturnHeight() );
+		LogGame::Write( ";bpp=" );
+		LogGame::Write( this->ReturnBpp() );
+		LogGame::NewLine();
 
 	}
 	else{
@@ -77,9 +86,16 @@ void Settings::init_Settings(){
 			<<"bpp= 32\n"
 			<<"";
 		file.close();
-		std::cout<<"0: Stworzono ustawienia w pliku settings.ini: ";
-		std::cout<<"fullscreen="<<this->ReturnFullscreen()<<";width="<<this->ReturnWidth()
-						<<";height="<<this->ReturnHeight()<<";bpp="<<this->ReturnBpp()<<";\n";
+		LogGame::Write( "[LOG] " );
+		LogGame::Write( "Stworzono ustawienia w pliku settings.ini: fullscreen=" );
+		LogGame::Write( this->ReturnFullscreen() );
+		LogGame::Write( ";width= " );
+		LogGame::Write( this->ReturnWidth() );
+		LogGame::Write( ";height= " );
+		LogGame::Write( this->ReturnHeight() );
+		LogGame::Write( ";bpp=" );
+		LogGame::Write( this->ReturnBpp() );
+		LogGame::NewLine();
 	}
 }
 

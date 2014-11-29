@@ -5,6 +5,7 @@
 #include "include_SDL.hpp"
 #include "img.hpp"
 #include "anim.hpp"
+#include "log_game.hpp"
 
 class Map{
 public:

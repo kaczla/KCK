@@ -5,6 +5,7 @@
 #include "include_SDL_main.hpp"
 #include "include_IL.hpp"
 #include <iostream>
+#include "log_game.hpp"
 
 
 /*
@@ -22,21 +23,15 @@ public:
 	int SCREEN_WIDTH;
 	int SCREEN_HEIGHT;
 	int SCREEN_BPP;
-	Init(){
-		this->SCREEN_BPP=32;
-		this->SCREEN_HEIGHT=480;
-		this->SCREEN_WIDTH=640;
-	}
-	~Init(){
-		this->clean_up();
-	}
+	Init();
+	~Init();
 	bool init();
 	void set_Screen(int Height, int Width, int BPP);
+	void clean_up();
 private:
 	bool init_SDL();
 	bool init_GL();
 	bool init_IL();
-	void clean_up();
 };
 
 #endif

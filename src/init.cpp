@@ -1,26 +1,48 @@
 #include "init.hpp"
 
+Init::Init(){
+	this->SCREEN_BPP=32;
+	this->SCREEN_HEIGHT=480;
+	this->SCREEN_WIDTH=640;
+}
+
+Init::~Init(){
+	this->clean_up();
+}
+
 bool Init::init(){
 	if( ! init_SDL() ){
-		clean_up();
+		this->clean_up();
 		return false;
 	}
 	return true;
 }
 
 bool Init::init_SDL(){
-	std::cout<<SDL_GetTicks()<<": SDL - Inicjalizowanie\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": SDL - Inicjalizowanie\n" );
 	if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ){
-		std::cerr<<SDL_GetTicks()<<": SDL - Problem z inicjalizacją \"SDL_Init\" ! "<<SDL_GetError()<<"\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": SDL - Problem z inicjalizacją \"SDL_Init\" ! " );
+		LogGame::Write( SDL_GetError() );
+		LogGame::NewLine();
 		return false;
 	}
 	if( SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL | SDL_HWSURFACE ) == NULL  ){
-		std::cerr<<SDL_GetTicks()<<": SDL - Problem z tworzeniem okna \"SDL_SetVideoMode\" ! "<<SDL_GetError()<<"\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": SDL - Problem z tworzeniem okna \"SDL_SetVideoMode\" ! " );
+		LogGame::Write( SDL_GetError() );
+		LogGame::NewLine();
 		return false;
 	}
 	SDL_EnableUNICODE( SDL_TRUE );
 	SDL_WM_SetCaption( "Komunikacja Człowiek-Komputer", NULL );
-	std::cout<<SDL_GetTicks()<<": SDL - Inicjalizacja przebiegła pomyślnie\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": SDL - Inicjalizacja przebiegła pomyślnie\n" );
 	if( ! init_GL() ){
 		return false;
 	}
@@ -32,7 +54,9 @@ bool Init::init_SDL(){
 }
 
 bool Init::init_GL(){
-	std::cout<<SDL_GetTicks()<<": OpenGL - Inicjalizowanie\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": OpenGL - Inicjalizowanie\n" );
 	glViewport( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
 	glEnable( GL_TEXTURE_2D );
 	glMatrixMode( GL_PROJECTION );
@@ -49,26 +73,42 @@ bool Init::init_GL(){
 
 	GLenum errorGL = glGetError();
 	if( errorGL != GL_NO_ERROR ){
-		std::cerr<<SDL_GetTicks()<<": OpenGL - Problem z inicjalizacją: "<<gluErrorString( errorGL )<<"\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": OpenGL - Problem z inicjalizacją: " );
+		LogGame::Write( errorGL );
+		LogGame::NewLine();
 		return false;
 	}
-	std::cout<<SDL_GetTicks()<<": OpenGL - Inicjalizacja przebiegła pomyślnie\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": OpenGL - Inicjalizacja przebiegła pomyślnie\n" );
 	return true;
 }
 
 bool Init::init_IL(){
-	std::cout<<SDL_GetTicks()<<": DevIL - Inicjalizowanie\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": DevIL - Inicjalizowanie\n" );
 	if( ilGetInteger( IL_VERSION_NUM ) < IL_VERSION ){
-		std::cerr<<SDL_GetTicks()<<": DevIL - Zła wersja DevIL!\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": DevIL - Zła wersja DevIL!\n" );
 		return false;
 	}
 	ilInit();
 	ILenum errorIL = ilGetError();
 	if( errorIL != IL_NO_ERROR ){
-		std::cerr<<SDL_GetTicks()<<": DevIL - Problem z inicjalizacją: "<<errorIL<<"\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": DevIL - Problem z inicjalizacją: " );
+		LogGame::Write( errorIL );
+		LogGame::NewLine();
 		return false;
 	}
-	std::cout<<SDL_GetTicks()<<": DevIL - Inicjalizacja przebiegła pomyślnie\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": DevIL - Inicjalizacja przebiegła pomyślnie\n" );
 	return true;
 }
 
@@ -79,9 +119,13 @@ void Init::set_Screen(int Width, int Height, int BPP){
 }
 
 void Init::clean_up(){
-	std::cout<<SDL_GetTicks()<<": Czyszczenie:\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": Czyszczenie:\n" );
 	//clear memory!
-	std::cout<<SDL_GetTicks()<<": SDL QUIT\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( ": SDL QUIT\n" );
 	SDL_Quit();
 }
 

@@ -2,6 +2,7 @@
 #define SETTINGS_HPP_
 #include <fstream>
 #include <iostream>
+#include "log_game.hpp"
 
 class Settings{
 public:

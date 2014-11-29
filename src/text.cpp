@@ -14,19 +14,27 @@ Text::~Text(){
 
 bool Text::InitText(){
 	if( ! Text::IsInit ){
-		std::cout<<SDL_GetTicks()<<": Freetype - Inicjalizowanie\n";
+		LogGame::Write( "[LOG] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Freetype - Inicjalizowanie\n" );
 		if( TTF_Init() == -1 ){
-			std::cerr<<SDL_GetTicks()<<": FreeType - Błąd: Niepowodzenie TTF_Init !\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": FreeType - Błąd: Niepowodzenie TTF_Init !\n" );
 			return false;
 		}
 		Text::Font = TTF_OpenFont( "bin/font.ttf", 14 );
 		if( Text::Font == NULL ){
-			std::cerr<<SDL_GetTicks()<<": FreeType - Błąd: Niepowodzenie TTF_OpenFont !\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": FreeType - Błąd: Niepowodzenie TTF_OpenFont !\n" );
 			return false;
 		}
 		TTF_SetFontStyle( Text::Font, TTF_STYLE_BOLD );
 		Text::IsInit = true;
-		std::cout<<SDL_GetTicks()<<": Freetype - Inicjalizacja przebiegła pomyślnie\n";
+		LogGame::Write( "[LOG] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Freetype - Inicjalizacja przebiegła pomyślnie\n" );
 	}
 	return true;
 }
