@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<userset>
+  <user name="localhost">
+    <set name="it"><![CDATA[bay bay]]></set>
+    <set name="top"><![CDATA[bay]]></set>
+    <set name="topic"><![CDATA[bay bay]]></set>
+  </user>
+</userset>
