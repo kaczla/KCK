@@ -60,3 +60,7 @@
 
 > [std_utils-0.7.5](http://omicron.ig3.net/)
 
+**Opcjonalnie:**
+
+> [SpiderMonkey](http://www.mozilla.org/js/spidermonkey/)
+
