@@ -9,6 +9,10 @@ Game::Game(){
 	else{
 		this->DateToFile();
 	}
+//AIML
+	if( ! bot.InitBot() ){
+		this->game_start = false;
+	}
 //SETTINGS
 	this->settings.init_Settings();
 //INIT SDL, OPENGL, DevIL
@@ -97,11 +101,11 @@ Game::Game(){
 	this->StopEnd = 0;
 	//TEXT
 	this->Input = "";
-	this->InputPositionX = this->init.SCREEN_WIDTH * 0.10;
-	this->InputPositionY = this->init.SCREEN_HEIGHT * 0.11;
+	this->InputPositionX =  this->Height_percent + this->init.SCREEN_WIDTH * 0.085;
+	this->InputPositionY =  this->init.SCREEN_HEIGHT * 0.1;
 	this->BotMessage = "";
-	this->BotMessagePositionX = this->init.SCREEN_WIDTH * 0.11;
-	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.11;
+	this->BotMessagePositionX = this->init.SCREEN_WIDTH * 0.09;
+	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.105;
 
 	this->KeyEvent = SDLK_UNKNOWN;
 	this->KeyEventState = KMOD_NONE;
@@ -211,82 +215,11 @@ void Game::Start(){
 							}
 						}
 						break;
+					case SDLK_RETURN:
+						this->BotMessage = this->bot.ReturnAnswer( this->Input );
+						break;
 					default:
-						if( this->KeyEvent >= 97 && this->KeyEvent <= 122 ){
-							this->KeyEventState = SDL_GetModState();
-							if( ( this->KeyEventState & KMOD_SHIFT ) and ( this->KeyEventState & KMOD_ALT ) ){
-								switch( this->KeyEvent ){
-								case SDLK_a:
-									this->Input += "Ą";
-									break;
-								case SDLK_s:
-									this->Input += "Ś";
-									break;
-								case SDLK_c:
-									this->Input += "Ć";
-									break;
-								case SDLK_e:
-									this->Input += "Ę";
-									break;
-								case SDLK_o:
-									this->Input += "Ó";
-									break;
-								case SDLK_l:
-									this->Input += "Ł";
-									break;
-								case SDLK_n:
-									this->Input += "Ń";
-									break;
-								case SDLK_z:
-									this->Input += "Ż";
-									break;
-								case SDLK_x:
-									this->Input += "Ź";
-									break;
-								default:
-									break;
-								}
-							}
-							else if( ( this->KeyEventState & KMOD_SHIFT ) or ( this->KeyEventState & KMOD_CAPS ) ){
-								this->Input += (char)this->KeyEvent - 32;
-							}
-							else if( this->KeyEventState & KMOD_ALT ){
-								switch( this->KeyEvent ){
-								case SDLK_a:
-									this->Input += "ą";
-									break;
-								case SDLK_s:
-									this->Input += "ś";
-									break;
-								case SDLK_c:
-									this->Input += "ć";
-									break;
-								case SDLK_e:
-									this->Input += "ę";
-									break;
-								case SDLK_o:
-									this->Input += "ó";
-									break;
-								case SDLK_l:
-									this->Input += "ł";
-									break;
-								case SDLK_n:
-									this->Input += "ń";
-									break;
-								case SDLK_z:
-									this->Input += "ż";
-									break;
-								case SDLK_x:
-									this->Input += "ź";
-									break;
-								default:
-									break;
-								}
-							}
-							else{
-								this->Input += (char)this->KeyEvent;
-							}
-						}
+						this->ReadKey();
 						break;
 					}
 				}
@@ -366,8 +299,8 @@ void Game::Update(){
 		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Background_bottom_length_x, this->Background_bottom_length_y );
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->Background_bottom_length_y );
 	glEnd();
-	glTranslatef( this->Height_percent, -this->Height_percent, 0.0 );
 //RIGHT BACKGROUD
+	glTranslatef( this->Height_percent, -this->Height_percent, 0.0 );
 	glBindTexture( GL_TEXTURE_2D, this->backgroud[1].ReturnImageID() );
 	glBegin( GL_QUADS );
 		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
@@ -375,9 +308,17 @@ void Game::Update(){
 		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Width_percent, this->init.SCREEN_HEIGHT );
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->init.SCREEN_HEIGHT );
 	glEnd();
-	//this->text.RenderText( "Ala ma kota, ą ę ć ł ó ź ż ń" );
-	glTranslatef( this->InputPositionX, 7*this->InputPositionY, 0.0 );
 
+	//BOT MESSAGE
+	//57 51
+	glTranslatef( this->BotMessagePositionX, this->BotMessagePositionY, 0.0 );
+	if( this->BotMessage != "" ){
+		this->text.RenderText( this->BotMessage );
+	}
+
+	//INPUT
+	glLoadIdentity();
+	glTranslatef( this->InputPositionX, 7*this->InputPositionY, 0.0 );
 	if( this->Input != "" ){
 		Text::RenderTextNow( this->Input );
 	}
@@ -507,5 +448,82 @@ void Game::DateToFile(){
 	struct tm *date_tmp = localtime( &time_tmp );
 	LogGame::Write( "[LOG] Utworzenie pliku log.txt: " );
 	LogGame::Write( asctime( date_tmp ) );
-	//LogGame::NewLine();
+}
+
+void Game::ReadKey(){
+	if( this->KeyEvent >= 97 && this->KeyEvent <= 122 ){
+		this->KeyEventState = SDL_GetModState();
+		if( ( this->KeyEventState & KMOD_SHIFT ) and ( this->KeyEventState & KMOD_ALT ) ){
+			switch( this->KeyEvent ){
+			case SDLK_a:
+				this->Input += "Ą";
+				break;
+			case SDLK_s:
+				this->Input += "Ś";
+				break;
+			case SDLK_c:
+				this->Input += "Ć";
+				break;
+			case SDLK_e:
+				this->Input += "Ę";
+				break;
+			case SDLK_o:
+				this->Input += "Ó";
+				break;
+			case SDLK_l:
+				this->Input += "Ł";
+				break;
+			case SDLK_n:
+				this->Input += "Ń";
+				break;
+			case SDLK_z:
+				this->Input += "Ż";
+				break;
+			case SDLK_x:
+				this->Input += "Ź";
+				break;
+			default:
+				break;
+			}
+		}
+		else if( ( this->KeyEventState & KMOD_SHIFT ) or ( this->KeyEventState & KMOD_CAPS ) ){
+			this->Input += (char)this->KeyEvent - 32;
+		}
+		else if( this->KeyEventState & KMOD_ALT ){
+			switch( this->KeyEvent ){
+			case SDLK_a:
+				this->Input += "ą";
+				break;
+			case SDLK_s:
+				this->Input += "ś";
+				break;
+			case SDLK_c:
+				this->Input += "ć";
+				break;
+			case SDLK_e:
+				this->Input += "ę";
+				break;
+			case SDLK_o:
+				this->Input += "ó";
+				break;
+			case SDLK_l:
+				this->Input += "ł";
+				break;
+			case SDLK_n:
+				this->Input += "ń";
+				break;
+			case SDLK_z:
+				this->Input += "ż";
+				break;
+			case SDLK_x:
+				this->Input += "ź";
+				break;
+			default:
+				break;
+			}
+		}
+		else{
+			this->Input += (char)this->KeyEvent;
+		}
+	}
 }

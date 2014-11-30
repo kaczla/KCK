@@ -9,6 +9,7 @@
 #include "map.hpp"
 #include "text.hpp"
 #include "log_game.hpp"
+#include "bot.hpp"
 
 class Game{
 public:
@@ -39,6 +40,7 @@ private:
 	SDL_Event event;
 	SDLKey KeyEvent;
 	SDLMod KeyEventState;
+	inline void ReadKey();
 	//WYŚWIETLANIE MAPY
 	GLfloat Percent, Height_percent, Width_percent;
 	GLfloat Square_size, Square_length ;
@@ -58,6 +60,8 @@ private:
 	GLfloat InputPositionX, InputPositionY;
 	std::string BotMessage;
 	GLfloat BotMessagePositionX, BotMessagePositionY;
+	//AIML
+	Bot bot;
 };
 
 #endif
