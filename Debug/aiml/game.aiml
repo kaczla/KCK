@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml> 
+	<category>
+		<pattern>Co słychać</pattern>
+		<template>Jakoś leci</template>
+	</category>
+	
+	<category>
+		<pattern>*</pattern>
+		<template>Nie znam odpowiedzi na to pytanie.</template>
+	</category> 
+	     
+</aiml>
