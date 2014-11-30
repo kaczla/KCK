@@ -38,6 +38,7 @@ private:
 	//KEY EVENT
 	SDL_Event event;
 	SDLKey KeyEvent;
+	SDLMod KeyEventState;
 	//WYŚWIETLANIE MAPY
 	GLfloat Percent, Height_percent, Width_percent;
 	GLfloat Square_size, Square_length ;

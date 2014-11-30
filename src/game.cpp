@@ -104,6 +104,7 @@ Game::Game(){
 	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.11;
 
 	this->KeyEvent = SDLK_UNKNOWN;
+	this->KeyEventState = KMOD_NONE;
 }
 
 Game::~Game(){
@@ -201,12 +202,90 @@ void Game::Start(){
 						break;
 					case SDLK_BACKSPACE: //BACKSPACE
 						if( this->Input.size() != 0 ){
-							this->Input.erase( this->Input.end()-1, this->Input.end() );
+							this->KeyEventState = SDL_GetModState();
+							if( this->KeyEventState & KMOD_SHIFT ){
+								this->Input.clear();
+							}
+							else{
+								this->Input.erase( this->Input.end()-1, this->Input.end() );
+							}
 						}
 						break;
 					default:
 						if( this->KeyEvent >= 97 && this->KeyEvent <= 122 ){
-							this->Input += (char)this->KeyEvent;
+							this->KeyEventState = SDL_GetModState();
+							if( ( this->KeyEventState & KMOD_SHIFT ) and ( this->KeyEventState & KMOD_ALT ) ){
+								switch( this->KeyEvent ){
+								case SDLK_a:
+									this->Input += "Ą";
+									break;
+								case SDLK_s:
+									this->Input += "Ś";
+									break;
+								case SDLK_c:
+									this->Input += "Ć";
+									break;
+								case SDLK_e:
+									this->Input += "Ę";
+									break;
+								case SDLK_o:
+									this->Input += "Ó";
+									break;
+								case SDLK_l:
+									this->Input += "Ł";
+									break;
+								case SDLK_n:
+									this->Input += "Ń";
+									break;
+								case SDLK_z:
+									this->Input += "Ż";
+									break;
+								case SDLK_x:
+									this->Input += "Ź";
+									break;
+								default:
+									break;
+								}
+							}
+							else if( ( this->KeyEventState & KMOD_SHIFT ) or ( this->KeyEventState & KMOD_CAPS ) ){
+								this->Input += (char)this->KeyEvent - 32;
+							}
+							else if( this->KeyEventState & KMOD_ALT ){
+								switch( this->KeyEvent ){
+								case SDLK_a:
+									this->Input += "ą";
+									break;
+								case SDLK_s:
+									this->Input += "ś";
+									break;
+								case SDLK_c:
+									this->Input += "ć";
+									break;
+								case SDLK_e:
+									this->Input += "ę";
+									break;
+								case SDLK_o:
+									this->Input += "ó";
+									break;
+								case SDLK_l:
+									this->Input += "ł";
+									break;
+								case SDLK_n:
+									this->Input += "ń";
+									break;
+								case SDLK_z:
+									this->Input += "ż";
+									break;
+								case SDLK_x:
+									this->Input += "ź";
+									break;
+								default:
+									break;
+								}
+							}
+							else{
+								this->Input += (char)this->KeyEvent;
+							}
 						}
 						break;
 					}
@@ -302,6 +381,7 @@ void Game::Update(){
 	if( this->Input != "" ){
 		Text::RenderTextNow( this->Input );
 	}
+
 	//glTranslatef( 0.0, this->InputPositionY, 0.0 );
 }
 
