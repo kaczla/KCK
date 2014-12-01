@@ -9,7 +9,6 @@ Img::Img(){
 	this->File_Name = " ";
 	this->Success = 0;
 	this->Delete = false;
-	//std::cout<<SDL_GetTicks()<<": Konstruktor Img()\n";
 }
 
 Img::Img( int tmp_id, std::string tmp_name, std::string tmp_name_file ){
@@ -22,7 +21,6 @@ Img::Img( int tmp_id, std::string tmp_name, std::string tmp_name_file ){
 	this->Success = 0;
 	this->Delete = false;
 	this->Load();
-	//std::cout<<SDL_GetTicks()<<": Konstruktor Img( int tmp_id, std::string tmp_name, std::string tmp_name_file )\n";
 }
 
 Img::Img( int tmp_id ){
@@ -32,7 +30,6 @@ Img::Img( int tmp_id ){
 	this->id = tmp_id;
 	this->Success = 0;
 	this->Delete = false;
-	//std::cout<<SDL_GetTicks()<<": Konstruktor Img( int tmp_id )\n";
 }
 
 Img::~Img(){
@@ -55,17 +52,31 @@ bool Img::LoadFile(){
 			glTexImage2D( GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_BPP), this->Width, this->Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLuint*)ilGetData() );
 			GLenum error = glGetError();
 			if( error != GL_NO_ERROR ){
-				std::cerr<<SDL_GetTicks()<<": Nie przetworzono grafiki: "<<this->File_Name<<" "<<error<<"\n";
+				LogGame::Write( "[ERR] " );
+				LogGame::Write( SDL_GetTicks() );
+				LogGame::Write( ": Nie przetworzono grafiki: " );
+				LogGame::Write( this->File_Name );
+				LogGame::Write( " Błąd: " );
+				LogGame::Write( error );
+				LogGame::NewLine();
 				return false;
 			}
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Nie przekształcono grafiki: "<<this->File_Name<<"\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Nie przekształcono grafiki: " );
+			LogGame::Write( this->File_Name );
+			LogGame::NewLine();
 			return false;
 		}
 	}
 	else{
-		std::cerr<<SDL_GetTicks()<<": Nie załadowano grafiki: "<<this->File_Name<<" (PLIK NIE ISTNIEJE)\n";
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( SDL_GetTicks() );
+		LogGame::Write( ": Nie załadowano grafiki: " );
+		LogGame::Write( this->File_Name );
+		LogGame::Write( " (PLIK NIE ISTNIEJE)\n" );
 		return false;
 	}
 	return true;
@@ -79,7 +90,9 @@ void Img::Load(){
 			}
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Brakuje niezbędnych danych do załadawania obrazka!\n Zawartość obiektu: ";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Brakuje niezbędnych danych do załadawania obrazka!\n Zawartość obiektu:\n" );
 			this->ReturnAllText_to_Error();
 		}
 	}
@@ -90,7 +103,6 @@ void Img::Clear(){
 	if( ! this->Delete and this->ImageID != 0 ){
 		ilDeleteImages( 1, &this->ImageID );
 		this->Delete = true;
-		//std::cout<<SDL_GetTicks()<<": Usunięto grafike o nazwie pliku \""<<this->File_Name<<"\" z pamięci\n";
 	}
 }
 
@@ -104,29 +116,61 @@ bool Img::ReturnSuccess(){
 }
 
 void Img::ReturnAllText(){
-	std::cout<<SDL_GetTicks()
-		<<": id="<<this->id
-		<<" name="<<this->Name
-		<<" file_name="<<this->File_Name
-		<<" imageID="<<this->ImageID
-		<<" width="<<this->Width
-		<<" height="<<this->Height
-		<<" Success="<<(int)this->Success
-		<<" Delete="<<this->Delete
-		<<"\n";
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( ": id=" );
+	LogGame::Write( this->id );
+
+	LogGame::Write( " name=" );
+	LogGame::Write( this->Name );
+
+	LogGame::Write( " file_name=" );
+	LogGame::Write( this->File_Name );
+
+	LogGame::Write( " imageID=" );
+	LogGame::Write( this->ImageID );
+
+	LogGame::Write( " width=" );
+	LogGame::Write( this->Width );
+
+	LogGame::Write( " height=" );
+	LogGame::Write( this->Height );
+
+	LogGame::Write( " Success=" );
+	LogGame::Write( (int)this->Success );
+
+	LogGame::Write( " Delete=" );
+	LogGame::Write( this->Delete );
+
+	LogGame::NewLine();
 }
 
 void Img::ReturnAllText_to_Error(){
-	std::cerr<<SDL_GetTicks()
-		<<": id="<<this->id
-		<<" name="<<this->Name
-		<<" file_name="<<this->File_Name
-		<<" imageID="<<this->ImageID
-		<<" width="<<this->Width
-		<<" height="<<this->Height
-		<<" Success="<<(int)this->Success
-		<<" Delete="<<this->Delete
-		<<"\n";
+	LogGame::Write( "[ERR] " );
+	LogGame::Write( ": id=" );
+	LogGame::Write( this->id );
+
+	LogGame::Write( " name=" );
+	LogGame::Write( this->Name );
+
+	LogGame::Write( " file_name=" );
+	LogGame::Write( this->File_Name );
+
+	LogGame::Write( " imageID=" );
+	LogGame::Write( this->ImageID );
+
+	LogGame::Write( " width=" );
+	LogGame::Write( this->Width );
+
+	LogGame::Write( " height=" );
+	LogGame::Write( this->Height );
+
+	LogGame::Write( " Success=" );
+	LogGame::Write( (int)this->Success );
+
+	LogGame::Write( " Delete=" );
+	LogGame::Write( this->Delete );
+
+	LogGame::NewLine();
 }
 
 

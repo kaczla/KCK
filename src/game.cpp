@@ -85,7 +85,7 @@ Game::Game(){
 	^ Ilość kwadratów x2 + 1 środkowy
 */
 	this->Square_size = this->Height_percent / (2*this->Square_length+1);
-	//std::cout<<"this->Square_length = "<<this->Square_length<<"\tthis->Square_size = "<<this->Square_size<<"\n";
+
 	this->Background_bottom_length_x = this->Height_percent;
 	this->Background_bottom_length_y = this->init.SCREEN_HEIGHT - this->Height_percent;
 
@@ -93,7 +93,7 @@ Game::Game(){
 	this->EndImages = this->images[this->images.size()-1].ReturnImageID();
 	this->StartAnim = this->anim[0].ReturnImageID();
 	this->EndAnim = this->anim[this->anim.size()-1].ReturnImageID();
-	//std::cout<<"this->EndImages="<<this->EndImages<<" this->EndAnim="<<this->EndAnim<<"\n";
+
 	this->CurrentMap = 0;
 	this->CurrentMapObj = 0;
 	this->fps = 0;
@@ -150,15 +150,14 @@ void Game::Start(){
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
 	LogGame::Write( ": Uruchamianie gry\n" );
-	//std::cout<<"player x="<<playerx<<" y="<<playery<<" \n";//<<this->map2D.ReturnValueMap( playerx, playery )<<"\n";
-	//this->map2D.SaveToFile();
 	if( this->game_start ){
 		while( this->game_start ){
 			//CLOCK////////////////
 			/*
 			this->StartTime = SDL_GetTicks();
 			if( this->StartTime >= this->StopEnd ){
-				std::cout<<this->fps<<"\n";
+				LogGame::Write( this->fps );
+				LogGame::NewLine();
 				this->StopEnd = this->StartTime + 1000;
 				fps=0;
 			}
@@ -217,6 +216,13 @@ void Game::Start(){
 						break;
 					case SDLK_RETURN:
 						this->BotMessage = this->bot.ReturnAnswer( this->Input );
+						if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
+							this->BotMessage.erase( this->BotMessage.begin() );
+
+						}
+						if( this->BotMessage[0] == '1' ){
+							this->BotMessage = this->map2D.Operation( this->BotMessage );
+						}
 						break;
 					default:
 						this->ReadKey();
@@ -352,7 +358,6 @@ void Game::ReadImages(){
 				if( this->images[i].ReturnSuccess() ){
 					tmp_wczytano++;
 				}
-				//std::cout<<"for:i="<<i<<" tmp1_id="<<tmp1_id<<" tmp_name="<<tmp_name<<" tmp_file_name="<<tmp_file_name<<" images.size()="<<this->images.size()<<"\n";
 			}
 		}
 
@@ -403,13 +408,11 @@ void Game::ReadAnim(){
 			file_anim>>tmp_global_name;
 			file_anim>>tmp_time;
 			file_anim>>ile_img;
-			//std::cout<<"for:i="<<i<<" tmp1_id="<<tmp1_id<<" tmp_global_name="<<tmp_global_name<<" tmp_time="<<tmp_time<<" ile_img="<<ile_img<<"\n";
 			for( int j=0; j<ile_img; j++ ){
 				file_anim>>tmp_name;
 				file_anim>>tmp_file_name;
 				tmp_name_anim.push_back( tmp_name );
 				tmp_file_name_anim.push_back( tmp_file_name );
-				//std::cout<<"\tfor:j="<<j<<" tmp_name="<<tmp_name<<" tmp_file_name="<<tmp_file_name<<"\n";
 			}
 			this->anim.push_back( Anim( tmp1_id, tmp_global_name, ile_img, tmp_time, tmp_name_anim, tmp_file_name_anim ) );
 			if( this->anim[i].ReturnSuccess() ){

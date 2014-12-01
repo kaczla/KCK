@@ -53,11 +53,9 @@ Anim::Anim( int tmp_id, std::string tmp_global_name, int tmp_size, Uint32 tmp_ti
 	this->Success = 0;
 	this->Delete = false;
 	this->Load();
-	//std::cout<<SDL_GetTicks()<<": Konstruktor Anim( int tmp_id, int tmp_size, Uint32 tmp_time, std::vector <std::string> tmp_name, std::vector <std::string> tmp_name_file )\n";
 }
 
 Anim::~Anim(){
-	//std::cout<<"Dek!\n";
 	this->Clear();
 }
 
@@ -78,17 +76,31 @@ bool Anim::LoadFile(){
 				glTexImage2D( GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_BPP), this->Width, this->Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLuint*)ilGetData() );
 				GLenum error = glGetError();
 				if( error != GL_NO_ERROR ){
-					std::cerr<<SDL_GetTicks()<<": Nie przetworzono grafiki: "<<this->File_Name[for_int_i]<<" "<<error<<"\n";
+					LogGame::Write( "[ERR] " );
+					LogGame::Write( SDL_GetTicks() );
+					LogGame::Write( ": Nie przetworzono grafiki: " );
+					LogGame::Write( this->File_Name[for_int_i] );
+					LogGame::Write( " Błąd: " );
+					LogGame::Write( error );
+					LogGame::NewLine();
 					return false;
 				}
 			}
 			else{
-				std::cerr<<SDL_GetTicks()<<": Nie przekształcono grafiki: "<<this->File_Name[for_int_i]<<"\n";
+				LogGame::Write( "[ERR] " );
+				LogGame::Write( SDL_GetTicks() );
+				LogGame::Write( ": Nie przekształcono grafiki: " );
+				LogGame::Write( this->File_Name[for_int_i] );
+				LogGame::NewLine();
 				return false;
 			}
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Nie załadowano grafiki: "<<this->File_Name[for_int_i]<<" (PLIK NIE ISTNIEJE)\n";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Nie załadowano grafiki: " );
+			LogGame::Write( this->File_Name[for_int_i] );
+			LogGame::Write( " (PLIK NIE ISTNIEJE)\n" );
 			return false;
 		}
 	}
@@ -104,7 +116,9 @@ void Anim::Load(){
 			}
 		}
 		else{
-			std::cerr<<SDL_GetTicks()<<": Brakuje niezbędnych danych do załadawania obrazka!\n Zawartość obiektu: ";
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Brakuje niezbędnych danych do załadawania obrazka!\n Zawartość obiektu:\n" );
 			this->ReturnAllText_to_Error();
 		}
 	}
@@ -118,7 +132,6 @@ void Anim::Clear(){
 
 			if( this->ImageID[i] != 0){
 				ilDeleteImages( 1, &this->ImageID[i] );
-				//std::cout<<SDL_GetTicks()<<":  Anim()\n";
 			}
 		}
 		this->Delete = true;
@@ -126,43 +139,113 @@ void Anim::Clear(){
 }
 
 void Anim::ReturnAllText(){
-	std::cout<<SDL_GetTicks()
-		<<": id="<<this->id
-		<<" ImageID.size()="<<this->ImageID.size()
-		<<" File_Name.size()="<<this->File_Name.size()
-		<<" Name.size()="<<this->Name.size();
+	LogGame::Write( "[LOG] " );
+	LogGame::Write( SDL_GetTicks() );
+
+	LogGame::Write( ": id=" );
+	LogGame::Write( this->id );
+
+	LogGame::Write( ": ImageID.size()=" );
+	LogGame::Write( this->ImageID.size() );
+
+	LogGame::Write( ": File_Name.size()=" );
+	LogGame::Write( this->File_Name.size() );
+
+	LogGame::Write( ": Name.size()=" );
+	LogGame::Write( this->Name.size() );
 	for( this->for_int_i=0; this->for_int_i<this->Size; this->for_int_i++){
-		std::cout<<" name_"<<for_int_i<<"="<<this->Name[this->for_int_i]
-		   <<" file_name_"<<for_int_i<<"="<<this->File_Name[this->for_int_i]
-		   <<" imageID_"<<for_int_i<<"="<<this->ImageID[this->for_int_i];
+		LogGame::Write( "[LOG] " );
+		LogGame::Write( " name_" );
+		LogGame::Write( for_int_i );
+		LogGame::Write( "=" );
+		LogGame::Write( this->Name[this->for_int_i] );
+
+		LogGame::Write( " file_name_" );
+		LogGame::Write( for_int_i );
+		LogGame::Write( "=" );
+		LogGame::Write( this->File_Name[this->for_int_i] );
+
+		LogGame::Write( " imageID_" );
+		LogGame::Write( for_int_i );
+		LogGame::Write( "=" );
+		LogGame::Write( this->ImageID[this->for_int_i] );
 	}
-	std::cout<<" size="<<this->Size
-		<<" time="<<this->DiffTime
-		<<" width="<<this->Width
-		<<" height="<<this->Height
-		<<" Success="<<(int)this->Success
-		<<" Delete="<<this->Delete
-		<<"\n";
+
+	LogGame::Write( "\n[LOG] " );
+	LogGame::Write( " size=" );
+	LogGame::Write( this->Size );
+
+	LogGame::Write( " time=" );
+	LogGame::Write( this->DiffTime );
+
+	LogGame::Write( " width=" );
+	LogGame::Write( this->Width );
+
+	LogGame::Write( " height=" );
+	LogGame::Write( this->Height );
+
+	LogGame::Write( " Success=" );
+	LogGame::Write( (int)this->Success );
+
+	LogGame::Write( " Delete=" );
+	LogGame::Write( this->Delete );
+
+	LogGame::NewLine();
 }
 
 void Anim::ReturnAllText_to_Error(){
-	std::cerr<<SDL_GetTicks()
-		<<": id="<<this->id
-		<<" ImageID.size()="<<this->ImageID.size()
-		<<" File_Name.size()="<<this->File_Name.size()
-		<<" Name.size()="<<this->Name.size();
+	LogGame::Write( "[ERR] " );
+	LogGame::Write( SDL_GetTicks() );
+
+	LogGame::Write( ": id=" );
+	LogGame::Write( this->id );
+
+	LogGame::Write( ": ImageID.size()=" );
+	LogGame::Write( this->ImageID.size() );
+
+	LogGame::Write( ": File_Name.size()=" );
+	LogGame::Write( this->File_Name.size() );
+
+	LogGame::Write( ": Name.size()=" );
+	LogGame::Write( this->Name.size() );
 	for( this->for_int_i=0; this->for_int_i<this->Size; this->for_int_i++){
-		std::cerr<<" name_"<<for_int_i<<"="<<this->Name[this->for_int_i]
-		   <<" file_name_"<<for_int_i<<"="<<this->File_Name[this->for_int_i]
-		   <<" imageID_"<<for_int_i<<"="<<this->ImageID[this->for_int_i];
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( " name_" );
+		LogGame::Write( for_int_i );
+		LogGame::Write( "=" );
+		LogGame::Write( this->Name[this->for_int_i] );
+
+		LogGame::Write( " file_name_" );
+		LogGame::Write( for_int_i );
+		LogGame::Write( "=" );
+		LogGame::Write( this->File_Name[this->for_int_i] );
+
+		LogGame::Write( " imageID_" );
+		LogGame::Write( for_int_i );
+		LogGame::Write( "=" );
+		LogGame::Write( this->ImageID[this->for_int_i] );
 	}
-	std::cerr<<" size="<<this->Size
-		<<" time="<<this->DiffTime
-		<<" width="<<this->Width
-		<<" height="<<this->Height
-		<<" Success="<<(int)this->Success
-		<<" Delete="<<this->Delete
-		<<"\n";
+
+	LogGame::Write( "\n[ERR] " );
+	LogGame::Write( " size=" );
+	LogGame::Write( this->Size );
+
+	LogGame::Write( " time=" );
+	LogGame::Write( this->DiffTime );
+
+	LogGame::Write( " width=" );
+	LogGame::Write( this->Width );
+
+	LogGame::Write( " height=" );
+	LogGame::Write( this->Height );
+
+	LogGame::Write( " Success=" );
+	LogGame::Write( (int)this->Success );
+
+	LogGame::Write( " Delete=" );
+	LogGame::Write( this->Delete );
+
+	LogGame::NewLine();
 }
 
 void Anim::Status(){
