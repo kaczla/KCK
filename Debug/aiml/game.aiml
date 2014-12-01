@@ -2,9 +2,27 @@
 <aiml> 
 	<category>
 		<pattern>Co słychać</pattern>
-		<template>Jakoś leci</template>
+		<template>
+			<random>
+				<li>Jakoś leci</li>
+				<li>Jakoś leci 2</li>
+				<li>Jakoś leci 3</li>
+				<li>Jakoś leci 4</li>
+			</random>
+		</template>
 	</category>
 	
+	<category>
+		<pattern>Pokonaj krótki odcinek na północ</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+		
 	<category>
 		<pattern>*</pattern>
 		<template>Nie znam odpowiedzi na to pytanie.</template>
