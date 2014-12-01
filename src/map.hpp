@@ -1,7 +1,6 @@
 #ifndef MAP_HPP_
 #define MAP_HPP_
 #include <vector>
-#include <iostream>
 #include "include_SDL.hpp"
 #include "img.hpp"
 #include "anim.hpp"
@@ -24,6 +23,7 @@ public:
 	int ReturnHeight();
 	int ReturnPlayerX();
 	int ReturnPlayerY();
+	std::string Operation( std::string text );
 private:
 	class Podloze{
 	public:

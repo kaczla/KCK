@@ -97,8 +97,6 @@ void Map::SetValue(int height, int width){
 }
 
 int Map::ReturnValueMap(int x, int y){
-	//std::cout<<"map x="<<x<<" y="<<y<<" :"<<this->Map2D[x][y]
-    //         <<" Width="<<this->Width<<" Height="<<this->Height<<"\n";
 	if( x<0 or x>=this->Width ){
 		return this->Pelne[0].ReturnImageID();
 	}
@@ -135,40 +133,70 @@ int Map::ReturnHeight(){
 }
 
 void Map::SaveToFile(){
-	std::cout<<"MAP:\n";
+	LogGame::Write( "[LOG] MAP:\n" );
 	for( int i=0; i<this->Height; i++ ){
 		for( int j=0; j<this->Width; j++ ){
-			std::cout<<this->Map2D[i][j]<<" ";
+			LogGame::Write( this->Map2D[i][j] );
+			LogGame::Write( " " );
 		}
-		std::cout<<"\n";
+		LogGame::NewLine();
 	}
-	std::cout<<"OBJ:\n";
+	LogGame::Write( "[LOG] OBJ:\n" );
 	for( int i=0; i<this->Height; i++ ){
 		for( int j=0; j<this->Width; j++ ){
-			std::cout<<this->Map2D_obj[i][j]<<" ";
+			LogGame::Write( this->Map2D_obj[i][j] );
+			LogGame::Write( " " );
 		}
-		std::cout<<"\n";
+		LogGame::NewLine();
 	}
 
-	std::cout<<"Pelne.size() = "<<Pelne.size()<<" ";
+	LogGame::Write( "[LOG] Pelne.size() = " );
+	LogGame::Write( Pelne.size() );
+	LogGame::Write( " " );
 	for( unsigned int j=0; j<this->Pelne.size(); j++ ){
-		std::cout<<j<<";LocalName="<<this->Pelne[j].ReturnLocalName()<<";ImageID="<<this->Pelne[j].ReturnImageID()<<" ";
+		LogGame::Write( j );
+		LogGame::Write( ";LocalName=" );
+		LogGame::Write( this->Pelne[j].ReturnLocalName() );
+		LogGame::Write( ";ImageID=" );
+		LogGame::Write( this->Pelne[j].ReturnImageID() );
 	}
-	std::cout<<"\n";
+	LogGame::NewLine();
 
+	LogGame::Write( "[LOG] TrawaPiach.size() = " );
+	LogGame::Write( TrawaPiach.size() );
+	LogGame::Write( " " );
 	for( unsigned int j=0; j<this->TrawaPiach.size(); j++ ){
-		std::cout<<j<<";LocalName="<<this->TrawaPiach[j].ReturnLocalName()<<";ImageID="<<this->TrawaPiach[j].ReturnImageID()<<" ";
+		LogGame::Write( j );
+		LogGame::Write( ";LocalName=" );
+		LogGame::Write( this->TrawaPiach[j].ReturnLocalName() );
+		LogGame::Write( ";ImageID=" );
+		LogGame::Write( this->TrawaPiach[j].ReturnImageID() );
 	}
-	std::cout<<"\n";
-	for( unsigned int j=0; j<this->WodaPiach.size(); j++ ){
-		std::cout<<j<<";LocalName="<<this->WodaPiach[j].ReturnLocalName()<<";ImageID="<<this->WodaPiach[j].ReturnImageID()<<" ";
-	}
-	std::cout<<"\n";
-	for( unsigned int j=0; j<this->WodaTrawa.size(); j++ ){
-		std::cout<<j<<";LocalName="<<this->WodaTrawa[j].ReturnLocalName()<<";ImageID="<<this->WodaTrawa[j].ReturnImageID()<<" ";
-	}
-	std::cout<<"\n";
+	LogGame::NewLine();
 
+	LogGame::Write( "[LOG] WodaPiach.size() = " );
+	LogGame::Write( WodaPiach.size() );
+	LogGame::Write( " " );
+	for( unsigned int j=0; j<this->WodaPiach.size(); j++ ){
+		LogGame::Write( j );
+		LogGame::Write( ";LocalName=" );
+		LogGame::Write( this->WodaPiach[j].ReturnLocalName() );
+		LogGame::Write( ";ImageID=" );
+		LogGame::Write( this->WodaPiach[j].ReturnImageID() );
+	}
+	LogGame::NewLine();
+
+	LogGame::Write( "[LOG] WodaTrawa.size() = " );
+	LogGame::Write( WodaTrawa.size() );
+	LogGame::Write( " " );
+	for( unsigned int j=0; j<this->WodaTrawa.size(); j++ ){
+		LogGame::Write( j );
+		LogGame::Write( ";LocalName=" );
+		LogGame::Write( this->WodaTrawa[j].ReturnLocalName() );
+		LogGame::Write( ";ImageID=" );
+		LogGame::Write( this->WodaTrawa[j].ReturnImageID() );
+	}
+	LogGame::NewLine();
 }
 
 void Map::SetVector(){
@@ -399,4 +427,46 @@ int Map::ReturnPlayerY(){
 
 int Map::ReturnPlayer(){
 	return this->Player[0].ReturnImageID();
+}
+
+std::string Map::Operation( std::string text ){
+	//REMOVE SPACE CHAR
+	std::string tmp = text;
+	text.clear();
+	for( unsigned int i=0; i<tmp.size(); i++ ){
+		if( tmp[i] != ' ' ){
+			text += tmp[i];
+		}
+	}
+
+	if( text[1] == 'g' ){
+		//GO
+		if( text[2] == 'u' ){
+			//UP
+			if( text[3] == '3' ){
+
+
+			}
+			text = "Pokonałem krótki odcinek na północ";
+		}
+		else if( text[2] == 'd' ){
+			//DOWN
+
+			text = "Pokonałem krótki odcinek na południe";
+		}
+		else if( text[2] == 'l' ){
+			//LEFT
+
+			text = "Pokonałem krótki odcinek na zachód";
+		}
+		else if( text[2] == 'r' ){
+			//RIGHT
+
+			text = "Pokonałem krótki odcinek na wschód";
+		}
+		else{
+			text = "Nie wiem co mam zrobić!";
+		}
+	}
+	return text;
 }
