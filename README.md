@@ -22,7 +22,7 @@
 
 **Przykład działania/komend:**
 
-> "Pokonaj krótki odcinek na pólnoc" - rozbitek pokona niewielki odcinek drogi na północ
+> "Pokonaj krótki odcinek na północ" - rozbitek pokona niewielki odcinek drogi na północ
 
 > "Pokonaj długi odcinek na północ" - rozbitek będzie szedł na połnoc tak długo, aż napotka jakąś przeszkodę
 
