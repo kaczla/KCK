@@ -5,6 +5,7 @@ Map::Map(){
 	this->Height = 50;
 	this->Success = false;
 	this->SuccessVarMap = false;
+	this->Animation = true;
 
 	this->PlayerX = 1;
 	this->PlayerY = 25;
@@ -16,6 +17,7 @@ Map::Map(int height, int width){
 	this->Height = height;
 	this->Success = false;
 	this->SuccessVarMap = false;
+	this->Animation = true;
 	this->SetVector();
 
 	//INNA LOSOWA!!!
@@ -87,9 +89,9 @@ void Map::SetValue(int height, int width){
 		}
 
 		//OBIEKTY
-		this->Map2D_obj[25][25] = 40;
-		this->Map2D_obj[25][26] = 41;
-		this->Map2D_obj[26][25] = 42;
+		this->Map2D_obj[this->PlayerY][this->PlayerX+3] = this->Drzewo[0].ReturnImageID();
+		this->Map2D_obj[this->PlayerY+1][this->PlayerX+3] = this->Drzewo[1].ReturnImageID();
+		this->Map2D_obj[this->PlayerY+2][this->PlayerX+3] = this->Drzewo[2].ReturnImageID();
 
 		this->Error_Map = " ";
 		this->Success = true;
@@ -197,6 +199,18 @@ void Map::SaveToFile(){
 		LogGame::Write( this->WodaTrawa[j].ReturnImageID() );
 	}
 	LogGame::NewLine();
+
+	LogGame::Write( "[LOG] Player.size() = " );
+	LogGame::Write( Player.size() );
+	LogGame::Write( " " );
+	for( unsigned int j=0; j<this->Player.size(); j++ ){
+		LogGame::Write( j );
+		LogGame::Write( ";LocalName=" );
+		LogGame::Write( this->Player[j].ReturnLocalName() );
+		LogGame::Write( ";ImageID=" );
+		LogGame::Write( this->Player[j].ReturnImageID() );
+	}
+	LogGame::NewLine();
 }
 
 void Map::SetVector(){
@@ -211,7 +225,7 @@ void Map::SetVector(){
 
 	for( int i=0; i<this->Height; i++ ){
 		for( int j=0; j<this->Width; j++ ){
-			this->Map2D[i][j] = 0;
+			this->Map2D[i][j] = -1;
 		}
 	}
 	for( int i=0; i<this->Height; i++ ){
@@ -226,6 +240,10 @@ Map::~Map(){
 }
 
 void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
+	if( anim.size() == 0 ){
+		this->Animation = false;
+	}
+
 	this->Player.resize( 4 );
 	this->Player[0].SetLocalName( "PlayerUp" );
 	this->Player[1].SetLocalName( "PlayerLeft" );
@@ -279,6 +297,21 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 	this->WodaTrawa[10].SetLocalName( "LP_trawawoda" );
 	this->WodaTrawa[11].SetLocalName( "LP_wodatrawa" );
 
+	this->Drzewo.resize( 3 );
+	this->Drzewo[0].SetLocalName( "tree1" );
+	this->Drzewo[1].SetLocalName( "tree2" );
+	this->Drzewo[2].SetLocalName( "tree3" );
+
+	this->Ognisko.resize( 3 );
+	this->Ognisko[0].SetLocalName( "ognichoready" );
+	this->Ognisko[1].SetLocalName( "ognichofire" );
+	this->Ognisko[2].SetLocalName( "ognichospalone" );
+
+	this->Kamien.resize( 3 );
+	this->Kamien[0].SetLocalName( "stone1" );
+	this->Kamien[1].SetLocalName( "stone2" );
+	this->Kamien[2].SetLocalName( "stone3" );
+
 	bool equal_size = false;
 	if( this->TrawaPiach.size() == this->WodaPiach.size() and this->TrawaPiach.size() == this->WodaTrawa.size() ){
 		equal_size = true;
@@ -287,59 +320,88 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 		equal_size = false;
 	}
 
+	unsigned int i,j;
+	//Grafika
 	bool not_found = true;
-	for( unsigned int i=0; i<img.size(); i++ ){
-		for( unsigned int j=0; j<this->Player.size(); j++ ){
+	for( i=0; i<img.size(); i++ ){
+		for( j=0; j<this->Player.size(); j++ ){
 			if( not_found && this->Player[j].ReturnLocalName() == img[i].ReturnName() ){
-				this->Player[j].SetImageID( img[i].ReturnImageID() );
+				this->Player[j].SetImageID( i );
 				not_found = false;
 				break;
 			}
 		}
-		for( unsigned int j=0; j<this->Pelne.size(); j++ ){
+		for( j=0; j<this->Pelne.size(); j++ ){
 			if( not_found && this->Pelne[j].ReturnLocalName() == img[i].ReturnName() ){
-				this->Pelne[j].SetImageID( img[i].ReturnImageID() );
+				this->Pelne[j].SetImageID( i );
 				not_found = false;
 				break;
 			}
 		}
 		if( equal_size ){
-			for( unsigned int j=0; j<this->TrawaPiach.size(); j++ ){
+			for( j=0; j<this->TrawaPiach.size(); j++ ){
 				if( not_found && this->TrawaPiach[j].ReturnLocalName() == img[i].ReturnName() ){
-					this->TrawaPiach[j].SetImageID( img[i].ReturnImageID() );
+					this->TrawaPiach[j].SetImageID( i );
 					not_found = false;
 					break;
 				}
 				else if( not_found && this->WodaPiach[j].ReturnLocalName() == img[i].ReturnName() ){
-					this->WodaPiach[j].SetImageID( img[i].ReturnImageID() );
+					this->WodaPiach[j].SetImageID( i );
 					not_found = false;
 					break;
 				}
 				else if( not_found && this->WodaTrawa[j].ReturnLocalName() == img[i].ReturnName() ){
-					this->WodaTrawa[j].SetImageID( img[i].ReturnImageID() );
+					this->WodaTrawa[j].SetImageID( i );
 					not_found = false;
 					break;
 				}
 			}
 		}
 		else{
-			for( unsigned int j=0; j<this->TrawaPiach.size(); j++ ){
+			for( j=0; j<this->TrawaPiach.size(); j++ ){
 				if( not_found && this->TrawaPiach[j].ReturnLocalName() == img[i].ReturnName() ){
-					this->TrawaPiach[j].SetImageID( img[i].ReturnImageID() );
+					this->TrawaPiach[j].SetImageID( i );
 					not_found = false;
 					break;
 				}
 			}
-			for( unsigned int j=0; j<this->WodaPiach.size(); j++ ){
+			for( j=0; j<this->WodaPiach.size(); j++ ){
 				if( not_found && this->WodaPiach[j].ReturnLocalName() == img[i].ReturnName() ){
-					this->WodaPiach[j].SetImageID( img[i].ReturnImageID() );
+					this->WodaPiach[j].SetImageID( i );
 					not_found = false;
 					break;
 				}
 			}
-			for( unsigned int j=0; j<this->WodaTrawa.size(); j++ ){
+			for( j=0; j<this->WodaTrawa.size(); j++ ){
 				if( not_found && this->WodaTrawa[j].ReturnLocalName() == img[i].ReturnName() ){
-					this->WodaTrawa[j].SetImageID( img[i].ReturnImageID() );
+					this->WodaTrawa[j].SetImageID( i );
+					not_found = false;
+					break;
+				}
+			}
+		}
+		if( not_found && this->Ognisko[0].ReturnLocalName() == img[i].ReturnName() ){
+			this->Ognisko[0].SetImageID( i );
+			not_found = false;
+		}
+		for( j=0; j<this->Kamien.size(); j++ ){
+			if( not_found && this->Kamien[j].ReturnLocalName() == img[i].ReturnName() ){
+				this->Kamien[j].SetImageID( i );
+				not_found = false;
+				break;
+			}
+		}
+		if( not_found && ( ! this->Animation ) ){
+			for( j=1; j<this->Ognisko.size(); j++ ){
+				if( not_found && this->Ognisko[j].ReturnLocalName() == img[i].ReturnName() ){
+					this->Ognisko[j].SetImageID( i );
+					not_found = false;
+					break;
+				}
+			}
+			for( j=0; j<this->Drzewo.size(); j++ ){
+				if( not_found && this->Drzewo[j].ReturnLocalName() == img[i].ReturnName() ){
+					this->Drzewo[j].SetImageID( i );
 					not_found = false;
 					break;
 				}
@@ -347,56 +409,100 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 		}
 		not_found = true;
 	}
+	//Animacje
+	if( this->Animation ){
+		not_found = true;
+		for( i=0; i<anim.size(); i++ ){
+			if( not_found ){
+				for( j=0; j<this->Ognisko.size(); j++ ){
+					if( not_found && this->Ognisko[j].ReturnLocalName() == anim[i].ReturnName() ){
+						this->Ognisko[j].SetImageID( img.size()+i );
+						not_found = false;
+						break;
+					}
+				}
+			}
+			if( not_found ){
+				for( j=0; j<this->Drzewo.size(); j++ ){
+					if( not_found && this->Drzewo[j].ReturnLocalName() == anim[i].ReturnName() ){
+						this->Drzewo[j].SetImageID( img.size()+i );
+						not_found = false;
+						break;
+					}
+				}
+			}
+			not_found = true;
+		}
+	}
 
 	//SPRAWDZENIE
 	int ile = 0;
 	std::string error_tmp = "";
-	for( unsigned int j=0; j<this->Player.size(); j++ ){
-		if(  this->Player[j].ReturnImageID() == 0 ){
+	for( j=0; j<this->Player.size(); j++ ){
+		if(  this->Player[j].ReturnImageID() == -1 ){
 			ile++;
 			error_tmp+= this->Player[j].ReturnLocalName() + "; ";
 		}
 	}
-	for( unsigned int j=0; j<this->Pelne.size(); j++ ){
-		if(  this->Pelne[j].ReturnImageID() == 0 ){
+	for( j=0; j<this->Pelne.size(); j++ ){
+		if(  this->Pelne[j].ReturnImageID() == -1 ){
 			ile++;
 			error_tmp+= this->Pelne[j].ReturnLocalName() + "; ";
 		}
 	}
 	if( equal_size ){
-		for( unsigned int j=0; j<this->TrawaPiach.size(); j++ ){
-			if( this->TrawaPiach[j].ReturnImageID() == 0 ){
+		for( j=0; j<this->TrawaPiach.size(); j++ ){
+			if( this->TrawaPiach[j].ReturnImageID() == -1 ){
 				ile++;
 				error_tmp+= this->TrawaPiach[j].ReturnLocalName() + "; ";
 			}
-			if( this->WodaPiach[j].ReturnImageID() == 0 ){
+			if( this->WodaPiach[j].ReturnImageID() == -1 ){
 				ile++;
 				error_tmp+= this->WodaPiach[j].ReturnLocalName() + "; ";
 			}
-			if( this->WodaTrawa[j].ReturnImageID() == 0 ){
+			if( this->WodaTrawa[j].ReturnImageID() == -1 ){
 				ile++;
 				error_tmp+= this->WodaTrawa[j].ReturnLocalName() + "; ";
 			}
 		}
 	}
 	else{
-		for( unsigned int j=0; j<this->TrawaPiach.size(); j++ ){
-			if( this->TrawaPiach[j].ReturnImageID() == 0 ){
+		for( j=0; j<this->TrawaPiach.size(); j++ ){
+			if( this->TrawaPiach[j].ReturnImageID() == -1 ){
 				ile++;
 				error_tmp+= this->TrawaPiach[j].ReturnLocalName() + "; ";
 			}
 		}
-		for( unsigned int j=0; j<this->WodaPiach.size(); j++ ){
-			if( this->WodaPiach[j].ReturnImageID() == 0 ){
+		for( j=0; j<this->WodaPiach.size(); j++ ){
+			if( this->WodaPiach[j].ReturnImageID() == -1 ){
 				ile++;
 				error_tmp+= this->WodaPiach[j].ReturnLocalName() + "; ";
 			}
 		}
-		for( unsigned int j=0; j<this->WodaTrawa.size(); j++ ){
-			if( this->WodaTrawa[j].ReturnImageID() == 0 ){
+		for( j=0; j<this->WodaTrawa.size(); j++ ){
+			if( this->WodaTrawa[j].ReturnImageID() == -1 ){
 				ile++;
 				error_tmp+= this->WodaTrawa[j].ReturnLocalName() + "; ";
 			}
+		}
+	}
+
+	for( j=0; j<this->Drzewo.size(); j++ ){
+		if( this->Drzewo[j].ReturnImageID() == -1 ){
+			ile++;
+			error_tmp+= this->Drzewo[j].ReturnLocalName() + "; ";
+		}
+	}
+	for( j=0; j<this->Ognisko.size(); j++ ){
+		if( this->Ognisko[j].ReturnImageID() == -1 ){
+			ile++;
+			error_tmp+= this->Ognisko[j].ReturnLocalName() + "; ";
+		}
+	}
+	for( j=0; j<this->Kamien.size(); j++ ){
+		if( this->Kamien[j].ReturnImageID() == -1 ){
+			ile++;
+			error_tmp+= this->Kamien[j].ReturnLocalName() + "; ";
 		}
 	}
 
@@ -469,4 +575,13 @@ std::string Map::Operation( std::string text ){
 		}
 	}
 	return text;
+}
+
+void Map::TurnOnAnimation( bool value ){
+	if( value ){
+		this->Animation = true;
+	}
+	else{
+		this->Animation = false;
+	}
 }

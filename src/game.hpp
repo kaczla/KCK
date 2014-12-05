@@ -58,6 +58,7 @@ private:
 	Text text;
 	std::string Input;
 	GLfloat InputPositionX, InputPositionY;
+	GLfloat InputPositionLengthMax;
 	std::string BotMessage;
 	GLfloat BotMessagePositionX, BotMessagePositionY;
 	//AIML

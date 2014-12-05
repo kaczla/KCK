@@ -5,6 +5,7 @@
 #include "img.hpp"
 #include "anim.hpp"
 #include "log_game.hpp"
+#include <cstdlib>
 
 class Map{
 public:
@@ -24,14 +25,15 @@ public:
 	int ReturnPlayerX();
 	int ReturnPlayerY();
 	std::string Operation( std::string text );
+	void TurnOnAnimation( bool value );
 private:
 	class Podloze{
 	public:
 		Podloze(){
 			this->LocalName = "NULL";
-			this->ImageID = 0;
+			this->ImageID = -1;
 		}
-		unsigned int ReturnImageID(){
+		int ReturnImageID(){
 			return this->ImageID;
 		}
 		std::string ReturnLocalName(){
@@ -41,11 +43,14 @@ private:
 			this->LocalName = value;
 		}
 		void SetImageID( unsigned int value ){
+				this->ImageID = (int)value;
+			}
+		void SetImageID( int value ){
 			this->ImageID = value;
 		}
 	private:
 		std::string LocalName;
-		unsigned int ImageID;
+		int ImageID;
 	};
 	inline void SetVector();
 	int PlayerX, PlayerY;
@@ -57,10 +62,12 @@ private:
 	std::vector <Podloze> TrawaPiach;
 	std::vector <Podloze> WodaPiach;
 	std::vector <Podloze> WodaTrawa;
+	std::vector <Podloze> Drzewo;
+	std::vector <Podloze> Ognisko;
+	std::vector <Podloze> Kamien;
 	std::string Error_Map;
 	bool Success, SuccessVarMap;
+	bool Animation;
 };
-
-
 
 #endif

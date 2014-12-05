@@ -62,6 +62,7 @@ Game::Game(){
 //TEXT LOAD TO BIT MAP
 
 //MAPA
+	this->map2D.TurnOnAnimation( true );
 	this->map2D.SetVarMap( this->images, this->anim );
 	this->map2D.SetValue( 50, 50 );
 	if( ! this->map2D.ReturnSuccess() ){
@@ -102,7 +103,10 @@ Game::Game(){
 	//TEXT
 	this->Input = "";
 	this->InputPositionX =  this->Height_percent + this->init.SCREEN_WIDTH * 0.085;
-	this->InputPositionY =  this->init.SCREEN_HEIGHT * 0.1;
+	this->InputPositionY =  this->init.SCREEN_HEIGHT * 0.7;
+	this->InputPositionLengthMax = ( this->init.SCREEN_WIDTH * 0.9 - this->InputPositionX ) / 10;
+	this->text.SetMaxLength( this->InputPositionLengthMax );
+
 	this->BotMessage = "";
 	this->BotMessagePositionX = this->init.SCREEN_WIDTH * 0.09;
 	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.105;
@@ -223,6 +227,7 @@ void Game::Start(){
 						if( this->BotMessage[0] == '1' ){
 							this->BotMessage = this->map2D.Operation( this->BotMessage );
 						}
+						Text::RenderTextNow( this->Input );
 						break;
 					default:
 						this->ReadKey();
@@ -262,26 +267,34 @@ void Game::Update(){
 		for( int j=this->CurrentPlayerX-this->Square_length; j<=this->CurrentPlayerX+this->Square_length; j++ ){
 			this->CurrentMap = this->map2D.ReturnValueMap( i, j );
 			this->CurrentMapObj = this->map2D.ReturnValueMapObj( i, j );
-			if( this->CurrentMap == 0 or this->CurrentMap == -1 ){
+			if( this->CurrentMap < 0 ){
 				glBindTexture( GL_TEXTURE_2D, this->error_img[0].ReturnImageID() );
 				this->Draw_Square();
 			}
 			else if( this->CurrentMap > this->EndImages ){
-				glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMap-this->EndImages-1].ReturnImageID() );
+				glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMap-this->EndImages].ReturnImageID() );
 				this->Draw_Square();
 				if( this->CurrentMapObj != 0){
-					if( this->CurrentMapObj > (int)this->images.size() ){
-						glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
+					if( this->CurrentMapObj >= this->EndImages ){
+						glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages].ReturnImageID() );
+						this->Draw_Square();
+					}
+					else{
+						glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMapObj].ReturnImageID() );
 						this->Draw_Square();
 					}
 				}
 			}
 			else{
-				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMap-1].ReturnImageID() );
+				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMap].ReturnImageID() );
 				this->Draw_Square();
 				if( this->CurrentMapObj != 0){
-					if( this->CurrentMapObj > (int)this->images.size() ){
-						glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages-1].ReturnImageID() );
+					if( this->CurrentMapObj >= this->EndImages ){
+						glBindTexture( GL_TEXTURE_2D, this->anim[this->CurrentMapObj-this->EndImages].ReturnImageID() );
+						this->Draw_Square();
+					}
+					else{
+						glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMapObj].ReturnImageID() );
 						this->Draw_Square();
 					}
 				}
@@ -289,7 +302,7 @@ void Game::Update(){
 			//PLAYER
 			if( this->CurrentPlayerY == i && this->CurrentPlayerX == j ){
 				this->CurrentMapObj = this->map2D.ReturnPlayer();
-				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMapObj-1].ReturnImageID() );
+				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMapObj].ReturnImageID() );
 				this->Draw_Square();
 			}
 			glTranslatef( this->Square_size, 0.0, 0.0 );
@@ -316,7 +329,6 @@ void Game::Update(){
 	glEnd();
 
 	//BOT MESSAGE
-	//57 51
 	glTranslatef( this->BotMessagePositionX, this->BotMessagePositionY, 0.0 );
 	if( this->BotMessage != "" ){
 		this->text.RenderText( this->BotMessage );
@@ -324,12 +336,10 @@ void Game::Update(){
 
 	//INPUT
 	glLoadIdentity();
-	glTranslatef( this->InputPositionX, 7*this->InputPositionY, 0.0 );
+	glTranslatef( this->InputPositionX, this->InputPositionY, 0.0 );
 	if( this->Input != "" ){
 		Text::RenderTextNow( this->Input );
 	}
-
-	//glTranslatef( 0.0, this->InputPositionY, 0.0 );
 }
 
 void Game::Load(){

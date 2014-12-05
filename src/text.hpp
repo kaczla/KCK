@@ -16,6 +16,7 @@ public:
 	void RenderText( std::string text );
 	static void RenderTextNow( std::string text );
 	void SetColor( Uint8 r, Uint8 g, Uint8 b);
+	static void SetMaxLength( float max );
 private:
 	static bool IsInit;
 	static TTF_Font *Font;
@@ -24,6 +25,8 @@ private:
 	static SDL_Color TextColorRed;
 	static SDL_Color TextColorGreen;
 	static SDL_Color TextColorBlue;
+	static int FontSize;
+	static unsigned int MaxLength;
 	GLuint ImageID;
 	SDL_Color TextColor;
 };

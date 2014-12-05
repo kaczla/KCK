@@ -7,6 +7,8 @@ SDL_Color Text::TextColorWhite = { 255, 255, 255 };
 SDL_Color Text::TextColorRed = { 255, 0, 0 };
 SDL_Color Text::TextColorGreen = { 0, 255, 0 };
 SDL_Color Text::TextColorBlue = { 0, 0, 255 };
+int Text::FontSize = 14;
+unsigned int Text::MaxLength = 17;
 
 Text::Text(){
 	this->SetColor( 255, 255, 255 );
@@ -28,7 +30,10 @@ bool Text::InitText(){
 			LogGame::Write( ": FreeType - Błąd: Niepowodzenie TTF_Init !\n" );
 			return false;
 		}
-		Text::Font = TTF_OpenFont( "bin/font.ttf", 14 );
+		if( Text::FontSize < 14 or Text::FontSize > 18 ){
+			Text::FontSize = 14;
+		}
+		Text::Font = TTF_OpenFont( "bin/font.ttf", Text::FontSize );
 		if( Text::Font == NULL ){
 			LogGame::Write( "[ERR] " );
 			LogGame::Write( SDL_GetTicks() );
@@ -80,21 +85,27 @@ void Text::RenderText( std::string text ){
 }
 
 void Text::RenderTextNow( std::string text ){
-	SDL_Surface *Message = TTF_RenderUTF8_Blended( Text::Font, text.c_str(), Text::TextColorBlack );
-	GLuint ImageID_tmp;
-	glGenTextures( 1, &ImageID_tmp );
-	glBindTexture( GL_TEXTURE_2D, ImageID_tmp );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
-	glRotatef( -5.0, 0.0, 0.0, 1.0 );
-	glBegin( GL_QUADS );
-		glTexCoord2d( 0.0, 0.0 ); glVertex2d( 0.0, 0.0 );
-		glTexCoord2d( 1.0, 0.0 ); glVertex2d( Message->w, 0.0 );
-		glTexCoord2d( 1.0, 1.0 ); glVertex2d( Message->w, Message->h );
-		glTexCoord2d( 0.0, 1.0 ); glVertex2d( 0.0, Message->h );
-	glEnd();
-	glDeleteTextures(1, &ImageID_tmp);
-	SDL_FreeSurface(Message);
+		SDL_Surface *Message = TTF_RenderUTF8_Blended( Text::Font, text.c_str(), Text::TextColorBlack );
+		GLuint ImageID_tmp;
+		glGenTextures( 1, &ImageID_tmp );
+		glBindTexture( GL_TEXTURE_2D, ImageID_tmp );
+		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
+		glRotatef( -5.0, 0.0, 0.0, 1.0 );
+		glBegin( GL_QUADS );
+			glTexCoord2d( 0.0, 0.0 ); glVertex2d( 0.0, 0.0 );
+			glTexCoord2d( 1.0, 0.0 ); glVertex2d( Message->w, 0.0 );
+			glTexCoord2d( 1.0, 1.0 ); glVertex2d( Message->w, Message->h );
+			glTexCoord2d( 0.0, 1.0 ); glVertex2d( 0.0, Message->h );
+		glEnd();
+		glDeleteTextures(1, &ImageID_tmp);
+		SDL_FreeSurface(Message);
+}
 
+void Text::SetMaxLength( float max ){
+	if( max<17.0 or max>100 ){
+		max = 17.0;
+	}
+	Text::MaxLength = (unsigned int)max;
 }
