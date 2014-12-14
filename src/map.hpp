@@ -6,6 +6,7 @@
 #include "anim.hpp"
 #include "log_game.hpp"
 #include <cstdlib>
+#include <cmath>
 
 class Map{
 public:
