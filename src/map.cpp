@@ -29,6 +29,7 @@ bool Map::ReturnSuccess(){
 	return this->Success;
 }
 
+
 void Map::SetValue(int height, int width){
 	this->Width = width;
 	this->Height = height;
@@ -87,6 +88,223 @@ void Map::SetValue(int height, int width){
 				this->Map2D[i][j] = this->Pelne[1].ReturnImageID();
 			}
 		}
+
+		//BIOMY
+		srand( time( NULL ));
+		int randombiomcount;
+		bool range = true;
+		randombiomcount=(std::rand() % 8) +26; //od 26 do 34
+		for(int i=0;i<randombiomcount; i++){
+			//range = false;
+			int bioms[50][50];
+			int x = (std::rand() % (this->Width-11)) + 5; // <5;44>
+			int y = (std::rand() % (this->Height-11)) + 5;
+
+			//zerowanie tablicy
+			for(int p=0;p<50;p++)
+			{
+				for(int l=0;l<50;l++)
+				{
+					bioms[p][l]=0;
+				}
+			}
+			//sprawdzenie odleglosci wylosowanych juz biomow
+////////////////////////////////// NIESKONCZONE
+			/*for(int q=0;q<50;q++)
+			{
+				for(int w=0;w<50;w++)
+				{
+					if( sqrt( (x-q) * (x-q) + (y-w) * (y-w)  ) < 8 && bioms[q][w]==1)
+						{
+							i--;
+						}
+							else
+						{
+							bioms[x][y]=1;
+							range=true;
+						}
+				}
+				if(range==true)
+				{
+					break;
+				}
+
+			}*/
+////////////////////////////////
+			if(range==true)
+			{
+				int randombiom = (std::rand() % 3) + 0;
+				int randomshape;
+				this->Map2D[x][y] = this->Pelne[randombiom].ReturnImageID(); //punkt bezwzgledny (czerwona kropka)
+					//trzeba tutaj wstawic cos co na chwile zatrzyma program
+				for(int lol=0;lol<10000;lol++)
+				{
+					;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+				}
+					randomshape = (std::rand() % 12) + 0;
+					//randomshape = 11; //do testowania
+					/*
+					 * 0 niepelny prostokat
+					 * 1 kwadrat
+					 * 2 pieseł
+					 * 3 .|.
+					 * 4 maly kwadrat
+					 * 5 to co w 0 ale odwrocony
+					 * 6 gwiazda
+					 * 7 krzyz lotniczy
+					 * 8 pacman w prawo
+					 * 9 pacman w lewo
+					 * 10 pacman w gore
+					 * 11 pacman w dol
+					 */
+					switch (randomshape)
+					{
+					default: break;
+					case 0:
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y+1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 1:
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 2:
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 3:
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 4:
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 5:
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y-1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 6:
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+2] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 7:
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 8:
+						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y+2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y+2] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 9:
+						this->Map2D[x-2][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 10:
+						this->Map2D[x-2][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-2][y+2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						break;
+					case 11:
+						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x][y+2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y+2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y-2] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+2][y+2] = this->Pelne[randombiom].ReturnImageID();
+						break;
+				}
+			}
+		}
+
+
 
 		//OBIEKTY
 		this->Map2D_obj[this->PlayerY][this->PlayerX+3] = this->Drzewo[0].ReturnImageID();
@@ -576,6 +794,8 @@ std::string Map::Operation( std::string text ){
 	}
 	return text;
 }
+
+
 
 void Map::TurnOnAnimation( bool value ){
 	if( value ){
