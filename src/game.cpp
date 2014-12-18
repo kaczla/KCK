@@ -21,7 +21,7 @@ Game::Game(){
 		this->game_start = false;
 	}
 //FREE TYPE
-	if( ! text.InitText() ){
+	if( ! TextInput.InitText() ){
 		this->game_start = false;
 	}
 //GAME
@@ -59,8 +59,6 @@ Game::Game(){
 		LogGame::Write( ": Brak pliku bin/img/background_right.png !\n" );
 		this->game_start = false;
 	}
-//TEXT LOAD TO BIT MAP
-
 //MAPA
 	this->map2D.TurnOnAnimation( true );
 	this->map2D.SetVarMap( this->images, this->anim );
@@ -100,16 +98,21 @@ Game::Game(){
 	this->fps = 0;
 	this->StartTime = 0;
 	this->StopEnd = 0;
-	//TEXT
-	this->Input = "";
+//TEXT
+	this->CheckAddChar = false;
+	this->Input.clear();
 	this->InputPositionX =  this->Height_percent + this->init.SCREEN_WIDTH * 0.085;
 	this->InputPositionY =  this->init.SCREEN_HEIGHT * 0.7;
 	this->InputPositionLengthMax = ( this->init.SCREEN_WIDTH * 0.9 - this->InputPositionX ) / 10;
-	this->text.SetMaxLength( this->InputPositionLengthMax );
+	this->TextInput.SetMaxLength( this->InputPositionLengthMax );
+	this->TextInput.SetNextLine( this->InputPositionLengthMax );
 
-	this->BotMessage = "";
+	this->BotMessage.clear();
 	this->BotMessagePositionX = this->init.SCREEN_WIDTH * 0.09;
 	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.105;
+	this->BotMessagePositionLengthMax = 10;
+	this->TextBotMessage.SetMaxLength( this->BotMessagePositionLengthMax );
+	this->TextBotMessage.SetNextLine( this->init.SCREEN_HEIGHT * 0.143 - this->BotMessagePositionY  );
 
 	this->KeyEvent = SDLK_UNKNOWN;
 	this->KeyEventState = KMOD_NONE;
@@ -175,10 +178,8 @@ void Game::Start(){
 					this->KeyEvent = event.key.keysym.sym;
 					switch( this->KeyEvent ){
 					case SDLK_COMMA: // .
-						//SDL_GL_SwapBuffers();
 
 						break;
-						//this->map2D.SaveToFile();
 					case SDLK_ESCAPE: // ESC
 						this->game_start = false;
 						break;
@@ -194,6 +195,9 @@ void Game::Start(){
 						if( this->Input.size() > 0 ){
 							if( this->Input[this->Input.size()-1] != ' ' ){
 								this->Input += ' ';
+							}
+							if( this->Input.size() > 0 ){
+								TextInput.RenderText( this->Input );
 							}
 						}
 						break;
@@ -214,7 +218,11 @@ void Game::Start(){
 								this->Input.clear();
 							}
 							else{
-								this->Input.erase( this->Input.end()-1, this->Input.end() );
+								this->Input.resize( this->Input.size()-1 );
+								//this->Input = this->Input.substr( 0, this->Input.size()-1 );	//this->Input.erase( this->Input.end()-1, this->Input.end() );
+								if( this->Input.size() > 0 ){
+									TextInput.RenderText( this->Input );
+								}
 							}
 						}
 						break;
@@ -227,7 +235,12 @@ void Game::Start(){
 						if( this->BotMessage[0] == '1' ){
 							this->BotMessage = this->map2D.Operation( this->BotMessage );
 						}
-						Text::RenderTextNow( this->Input );
+						if( this->Input.size() > 0 ){
+							TextInput.RenderText( this->Input );
+						}
+						if( this->BotMessage.size() > 0 ){
+							this->TextBotMessage.RenderText( this->BotMessage );
+						}
 						break;
 					default:
 						this->ReadKey();
@@ -267,7 +280,7 @@ void Game::Update(){
 		for( int j=this->CurrentPlayerX-this->Square_length; j<=this->CurrentPlayerX+this->Square_length; j++ ){
 			this->CurrentMap = this->map2D.ReturnValueMap( i, j );
 			this->CurrentMapObj = this->map2D.ReturnValueMapObj( i, j );
-			if( this->CurrentMap < 0 ){
+			if( this->CurrentMap <0 ){
 				glBindTexture( GL_TEXTURE_2D, this->error_img[0].ReturnImageID() );
 				this->Draw_Square();
 			}
@@ -327,19 +340,10 @@ void Game::Update(){
 		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Width_percent, this->init.SCREEN_HEIGHT );
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->init.SCREEN_HEIGHT );
 	glEnd();
-
-	//BOT MESSAGE
-	glTranslatef( this->BotMessagePositionX, this->BotMessagePositionY, 0.0 );
-	if( this->BotMessage != "" ){
-		this->text.RenderText( this->BotMessage );
-	}
-
-	//INPUT
-	glLoadIdentity();
-	glTranslatef( this->InputPositionX, this->InputPositionY, 0.0 );
-	if( this->Input != "" ){
-		Text::RenderTextNow( this->Input );
-	}
+//BOT MESSAGE
+	this->DrawBotMessage();
+//INPUT
+	this->DrawInput();
 }
 
 void Game::Load(){
@@ -464,38 +468,41 @@ void Game::DateToFile(){
 }
 
 void Game::ReadKey(){
+
 	if( this->KeyEvent >= 97 && this->KeyEvent <= 122 ){
+		this->CheckAddChar = true;
 		this->KeyEventState = SDL_GetModState();
 		if( ( this->KeyEventState & KMOD_SHIFT ) and ( this->KeyEventState & KMOD_ALT ) ){
 			switch( this->KeyEvent ){
 			case SDLK_a:
-				this->Input += "Ą";
+				this->Input += 0x104;	// Ą
 				break;
 			case SDLK_s:
-				this->Input += "Ś";
+				this->Input += 0x15A;	// Ś
 				break;
 			case SDLK_c:
-				this->Input += "Ć";
+				this->Input += 0x106;	// Ć
 				break;
 			case SDLK_e:
-				this->Input += "Ę";
+				this->Input += 0x118;	// Ę
 				break;
 			case SDLK_o:
-				this->Input += "Ó";
+				this->Input += 0xD3;	// Ó
 				break;
 			case SDLK_l:
-				this->Input += "Ł";
+				this->Input += 0x141;	// Ł
 				break;
 			case SDLK_n:
-				this->Input += "Ń";
+				this->Input += 0x143;	// Ń
 				break;
 			case SDLK_z:
-				this->Input += "Ż";
+				this->Input += 0x17B;	// Ż
 				break;
 			case SDLK_x:
-				this->Input += "Ź";
+				this->Input += 0x179;	// Ź
 				break;
 			default:
+				this->CheckAddChar = false;
 				break;
 			}
 		}
@@ -505,38 +512,57 @@ void Game::ReadKey(){
 		else if( this->KeyEventState & KMOD_ALT ){
 			switch( this->KeyEvent ){
 			case SDLK_a:
-				this->Input += "ą";
+				this->Input += 0x105;	// ą
 				break;
 			case SDLK_s:
-				this->Input += "ś";
+				this->Input += 0x15B;	// ś
 				break;
 			case SDLK_c:
-				this->Input += "ć";
+				this->Input += 0x107;	// ć
 				break;
 			case SDLK_e:
-				this->Input += "ę";
+				this->Input += 0x119;	// ę
 				break;
 			case SDLK_o:
-				this->Input += "ó";
+				this->Input += 0xF3;	// ó
 				break;
 			case SDLK_l:
-				this->Input += "ł";
+				this->Input += 0x142;	// ł
 				break;
 			case SDLK_n:
-				this->Input += "ń";
+				this->Input += 0x144;	// ń
 				break;
 			case SDLK_z:
-				this->Input += "ż";
+				this->Input += 0x17C;	// ż
 				break;
 			case SDLK_x:
-				this->Input += "ź";
+				this->Input += 0x17A;	// ź
 				break;
 			default:
+				this->CheckAddChar = false;
 				break;
 			}
 		}
 		else{
 			this->Input += (char)this->KeyEvent;
 		}
+		if( this->CheckAddChar && this->Input.size() > 0  ){
+			TextInput.RenderText( this->Input );
+		}
+	}
+}
+
+void Game::DrawInput(){
+	if( this->Input.size() > 0 ){
+		glLoadIdentity();
+		glTranslatef( this->InputPositionX, this->InputPositionY, 0.0 );
+		this->TextInput.DrawPlusAngle();
+	}
+}
+
+void Game::DrawBotMessage(){
+	if( this->BotMessage.size() > 0 ){
+		glTranslatef( this->BotMessagePositionX, this->BotMessagePositionY, 0.0 );
+		this->TextBotMessage.Draw();
 	}
 }

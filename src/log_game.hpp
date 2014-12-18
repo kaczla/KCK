@@ -1,6 +1,5 @@
 #ifndef LOG_GAME_HPP_
 #define LOG_GAME_HPP_
-//#include <iostream>
 #include <fstream>
 
 class LogGame{

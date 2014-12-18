@@ -11,6 +11,8 @@
 #include "log_game.hpp"
 #include "bot.hpp"
 
+typedef std::basic_string<Uint16, std::char_traits<Uint16>, std::allocator<Uint16> > u16string;
+
 class Game{
 public:
 	Game();
@@ -55,12 +57,17 @@ private:
 	Uint32 StartTime, StopEnd;
 	int fps;
 	//TEXT
-	Text text;
-	std::string Input;
+	bool CheckAddChar;
+	Text TextInput;
+	u16string Input;
 	GLfloat InputPositionX, InputPositionY;
 	GLfloat InputPositionLengthMax;
+	void DrawInput();
+	Text TextBotMessage;
 	std::string BotMessage;
 	GLfloat BotMessagePositionX, BotMessagePositionY;
+	GLfloat BotMessagePositionLengthMax;
+	void DrawBotMessage();
 	//AIML
 	Bot bot;
 };

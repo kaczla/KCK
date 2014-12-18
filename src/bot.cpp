@@ -44,3 +44,8 @@ std::string Bot::ReturnAnswer( std::string text ){
 	return this->Answer;
 }
 
+std::string Bot::ReturnAnswer( u16string text ){
+	std::string tmp_text ( text.begin(), text.end() );
+	return this->ReturnAnswer( tmp_text );
+}
+

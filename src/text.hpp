@@ -5,7 +5,10 @@
 #include "include_SDL_ttf.hpp"
 #include "include_SDL_opengl.hpp"
 #include <iostream>
+#include <vector>
 #include "log_game.hpp"
+
+typedef std::basic_string<Uint16, std::char_traits<Uint16>, std::allocator<Uint16> > u16string;
 
 class Text{
 public:
@@ -14,9 +17,12 @@ public:
 	static bool InitText();
 	static void Clear();
 	void RenderText( std::string text );
-	static void RenderTextNow( std::string text );
+	void RenderText( u16string text );
 	void SetColor( Uint8 r, Uint8 g, Uint8 b);
-	static void SetMaxLength( float max );
+	void SetMaxLength( float max );
+	void SetNextLine( float line );
+	void Draw();
+	void DrawPlusAngle();
 private:
 	static bool IsInit;
 	static TTF_Font *Font;
@@ -26,8 +32,11 @@ private:
 	static SDL_Color TextColorGreen;
 	static SDL_Color TextColorBlue;
 	static int FontSize;
-	static unsigned int MaxLength;
-	GLuint ImageID;
+	unsigned int MaxLength;
+	float NextLine;
+	std::vector <GLuint> ImageID;
+	std::vector <GLint> Width;
+	std::vector <GLint> Height;
 	SDL_Color TextColor;
 };
 
