@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+	<category>
+		<pattern>Jakiej drużynie kibicujesz</pattern>
+		<template>
+			<random>
+				<li>Real Madryt</li>
+				<li>Arsenal Londyn</li>
+				<li>reprezentacji Polski</li>
+			</random>
+		</template>
+	</category>
+
+</aiml>

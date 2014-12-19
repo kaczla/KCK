@@ -7,6 +7,7 @@
 			<random>
 				<li>Rozbitek Joey</li>
 				<li>Joey</li>
+				<li>Rozbitek</li>
 			</random>
 		</template>
 	</category>
@@ -14,11 +15,7 @@
 	<category>
 		<pattern>Jak się nazywasz</pattern>
 		<template>
-			<random>
-				<li>Rozbitek Joey</li>
-				<li>Joey</li>
-				<li>Rozbitek</li>
-			</random>
+			<srai>Jak masz na imię</srai>
 		</template>
 	</category>
 
@@ -51,39 +48,21 @@
 	<category>
 		<pattern>Co * słychać</pattern>
 		<template>
-			<random>
-				<li>Jakoś leci</li>
-				<li>Nie jest źle</li>
-				<li>Jest OK</li>
-				<li>W porządku</li>
-				<li>Nie pytaj</li>
-			</random>
+			<srai>Co słychać</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co słychać *</pattern>
 		<template>
-			<random>
-				<li>Jakoś leci</li>
-				<li>Nie jest źle</li>
-				<li>Jest OK</li>
-				<li>W porządku</li>
-				<li>Nie pytaj</li>
-			</random>
+			<srai>Co słychać</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co * słychać *</pattern>
 		<template>
-			<random>
-				<li>Jakoś leci</li>
-				<li>Nie jest źle</li>
-				<li>Jest OK</li>
-				<li>W porządku</li>
-				<li>Nie pytaj</li>
-			</random>
+			<srai>Co słychać</srai>
 		</template>
 	</category>
 
@@ -123,11 +102,7 @@
 	<category>
 		<pattern>Kto cię stworzył</pattern>
 		<template>
-			<random>
-				<li>Karol Kaczmarek, Sergiusz Jańczura, Kamil Legierski i Adrian Małolepszy</li>
-				<li>Programści z WMI</li>
-				<li>Najlepsi polscy programiści</li>
-			</random>
+			<srai>Kto jest twoim twórcą</srai>
 		</template>
 	</category>
 
@@ -238,7 +213,7 @@
 	<category>
 		<pattern>Jaki jest twój ulubiony system *</pattern>
 		<template>
-			Windows Vista
+			<srai>Jaki jest twój ulubiony system</srai>
 		</template>
 	</category>
 
@@ -252,7 +227,7 @@
 	<category>
 		<pattern>Jaka jest twoja ulubiona strona *</pattern>
 		<template>
-			w3schools.com
+			<srai>Jaka jest twoja ulubiona strona</srai>
 		</template>
 	</category>
 	<category>
