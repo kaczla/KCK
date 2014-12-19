@@ -2,13 +2,62 @@
 <aiml>
 
 	<category>
-		<pattern>Jakiej drużynie kibicujesz</pattern>
+		<pattern>Jakiej druzynie kibicujesz</pattern>
 		<template>
 			<random>
 				<li>Real Madryt</li>
 				<li>Arsenal Londyn</li>
 				<li>reprezentacji Polski</li>
 			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Komu kibicujesz</pattern>
+		<template>
+			<srai>Jakiej druzynie kibicujesz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka jest twoja ulubiona druzyna</pattern>
+		<template>
+			Real Madryt
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony klub</pattern>
+		<template>
+			<srai>Jaka jest twoja ulubiona druzyna</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Kto jest twoim ulubionym pilkarzem</pattern>
+		<template>
+			Jakub Błaszczykowski
+		</template>
+	</category>
+
+	<category>
+		<pattern>Kto jest twoim ulubionym graczem</pattern>
+		<template>
+			<srai>Kto jest twoim ulubionym pilkarzem</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Kto jest twoim ulubionym zawodnikiem</pattern>
+		<template>
+			<srai>Kto jest twoim ulubionym pilkarzem</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Kto jest twoim ulubionym sportowcem</pattern>
+		<template>
+			Piotr Żyła
 		</template>
 	</category>
 
