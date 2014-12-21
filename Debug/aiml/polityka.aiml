@@ -4,7 +4,7 @@
 	<category>
 		<pattern>Lubisz bron ?</pattern>
 		<template>
-			Nie lubię, bo tata mi nie pozawala nosić. 
+			Nie wiem czy lubię, bo tata mi nie chce dać.  
 		</template>
 	</category>
 	
@@ -19,13 +19,6 @@
 		<pattern>Bron</pattern>
 		<template>
 			Wiele ludzi ją lubi.
-		</template>
-	</category>
-	
-	<category>
-		<pattern>Lubisz bron ?</pattern>
-		<template>
-			Nie wiem czy lubię, bo tata mi nie chce dać.  
 		</template>
 	</category>
 	
