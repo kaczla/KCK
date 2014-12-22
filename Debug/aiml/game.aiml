@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <aiml>
 
 	<category>
@@ -140,7 +141,7 @@
 			<random>
 				<li>Znanym polskim programistą</li>
 				<li>Ojcem Chucka Norrisa</li>
-				<li>Twórcą Linuxa</li>
+				<li>Twórcą Linuksa</li>
 				<li>Moim ojcem</li>
 			</random>
 		</template>
@@ -188,16 +189,16 @@
 			</random>
 		</template>
 	</category>
-
+	
 	<category>
-		<pattern>Kim jest Marcin Junczys-Dowmunt</pattern>
+		<pattern>Kim jest Marcin Junczys Dowmunt</pattern>
 		<template>
 			<srai>Kim jest Marcin Dowmunt</srai>
 		</template>
 	</category>
 
 	<category>
-		<pattern>Kto jest twoim ojcem *</pattern>
+		<pattern>Kto jest twoim ojcem</pattern>
 		<template>
 			<random>
 				<li>Nie mam jednego ojca</li>
@@ -222,56 +223,26 @@
 	</category>
 
 	<category>
+		<pattern>Jaki jest twoj ulubiony program</pattern>
+		<template>
+			Rolnik szuka żony
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony program *</pattern>
+		<template>
+			<srai>Jaki jest twoj ulubiony program</srai>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Jaka jest twoja ulubiona ksiazka</pattern>
 		<template>
 			Thinking in Java
 		</template>
 	</category>
 
-	<category>
-		<pattern>Jaka jest twoja ulubiona gra</pattern>
-		<template>
-			<random>
-				<li>bash</li>			
-				<li>Rozbitek</li>
-			</random>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jaki jest twoj ulubiony jezyk programowania</pattern>
-		<template>
-			Java
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jaki jest twoj ulubiony system</pattern>
-		<template>
-			Windows Vista
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jaki jest twoj ulubiony system *</pattern>
-		<template>
-			<srai>Jaki jest twoj ulubiony system</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jaka jest twoja ulubiona strona</pattern>
-		<template>
-			w3schools.com
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jaka jest twoja ulubiona strona *</pattern>
-		<template>
-			<srai>Jaka jest twoja ulubiona strona</srai>
-		</template>
-	</category>
 	<category>
 		<pattern>Kiedy sie urodziles *</pattern>
 		<template>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+
+	<category>
+		<pattern>Jaka jest twoja ulubiona gra</pattern>
+		<template>
+			<random>
+				<li>Bash</li>			
+				<li>Rozbitek</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka jest twoje ulubiona gra *</pattern>
+		<template>
+			<srai>Jaka jest twoja ulubiona gra</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony jezyk</pattern>
+		<template>
+			<random>
+				<li>Java</li>
+				<li>C++</li>
+				<li>C</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony jezyk *</pattern>
+		<template>
+			<srai>Jaki jest twoj ulubiony jezyk</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony system</pattern>
+		<template>
+			Windows Vista
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony system *</pattern>
+		<template>
+			<srai>Jaki jest twoj ulubiony system</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka jest twoja ulubiona strona</pattern>
+		<template>
+			w3schools.com
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka jest twoja ulubiona strona *</pattern>
+		<template>
+			<srai>Jaka jest twoja ulubiona strona</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Windows</pattern>
+		<template>
+			System operacyjny
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Linux</pattern>
+		<template>
+			Najlepszy system operacyjny
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Ubuntu</pattern>
+		<template>
+			Dystrybucja Linuxa
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Debian</pattern>
+		<template>
+			Dystrybucja Linuxa
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Fedora</pattern>
+		<template>
+			Dystrybucja Linuxa
+		</template>
+	</category>
+
+	<category>
+		<pattern>* openSUSE</pattern>
+		<template>
+			Dystrybucja Linuxa
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Arch Linux</pattern>
+		<template>
+			Dystrybucja Linuxa
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Gates</pattern>
+		<template>
+			Założyciel Microsoftu
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Jobs</pattern>
+		<template>
+			Założyciel Apple
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Torvalds</pattern>
+		<template>
+			Twórca Linuxa
+		</template>
+	</category>
+
+	<category>
+		<pattern>* Facebook</pattern>
+		<template>
+			Baza danych amerykańskich służb
+		</template>
+	</category>
+
+	<category>
+		<pattern>Masz konto na Facebooku</pattern>
+		<template>
+			Nie, tata mi nie pozwolił założyć
+		</template>
+	</category>
+
+</aiml>
