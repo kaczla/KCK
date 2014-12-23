@@ -96,6 +96,100 @@
 	</category>
 
 	<category>
+		<pattern>Co tam</pattern>
+		<template>
+			<random>
+				<li>W porządku</li>
+				<li>Dobrze</li>
+				<li>OK</li>
+				<li>Spoko</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co tam *</pattern>
+		<template>
+			<srai>Co tam</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak tam</pattern>
+		<template>
+			<srai>Co tam</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak tam *</pattern>
+		<template>
+			<srai>Co tam</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co robisz</pattern>
+		<template>
+			<random>
+				<li>Nic</li>
+				<li>Nudzę się</li>
+				<li>Rozmawiam z tobą</li>
+				<li>Odpowiadam na twoje pytania</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co * robisz</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co robisz *</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co * robisz *</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co porabiasz</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co * porabiasz</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co porabiasz *</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co * porabiasz *</pattern>
+		<template>
+			<srai>Co robisz</srai>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Co lubisz robic</pattern>
 		<template>
 			<random>
