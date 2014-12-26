@@ -106,13 +106,16 @@ Game::Game(){
 	this->InputPositionLengthMax = ( this->init.SCREEN_WIDTH * 0.9 - this->InputPositionX ) / 10;
 	this->TextInput.SetMaxLength( this->InputPositionLengthMax );
 	this->TextInput.SetNextLine( this->InputPositionLengthMax );
+	this->LastInput = 0;
+	this->NextInput = 0;
 
 	this->BotMessage.clear();
 	this->BotMessagePositionX = this->init.SCREEN_WIDTH * 0.09;
 	this->BotMessagePositionY = this->init.SCREEN_HEIGHT * 0.105;
-	this->BotMessagePositionLengthMax = 10;
+	this->BotMessagePositionLengthMax = this->init.SCREEN_WIDTH * 0.125 - this->BotMessagePositionX;
+
 	this->TextBotMessage.SetMaxLength( this->BotMessagePositionLengthMax );
-	this->TextBotMessage.SetNextLine( this->init.SCREEN_HEIGHT * 0.143 - this->BotMessagePositionY  );
+	this->TextBotMessage.SetNextLine( this->init.SCREEN_HEIGHT * 0.143 - this->BotMessagePositionY );
 
 	this->KeyEvent = SDLK_UNKNOWN;
 	this->KeyEventState = KMOD_NONE;
@@ -227,19 +230,33 @@ void Game::Start(){
 						}
 						break;
 					case SDLK_RETURN:
-						this->BotMessage = this->bot.ReturnAnswer( this->Input );
-						if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
-							this->BotMessage.erase( this->BotMessage.begin() );
+						this->LastInput = SDL_GetTicks();
+						if( this->LastInput >= this->NextInput ){
+							this->BotMessage = this->bot.ReturnAnswer( this->Input );
+							if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
+								this->BotMessage.erase( this->BotMessage.begin() );
 
-						}
-						if( this->BotMessage[0] == '1' ){
-							this->BotMessage = this->map2D.Operation( this->BotMessage );
-						}
-						if( this->Input.size() > 0 ){
-							TextInput.RenderText( this->Input );
-						}
-						if( this->BotMessage.size() > 0 ){
-							this->TextBotMessage.RenderText( this->BotMessage );
+							}
+							if( this->BotMessage[0] != '1' ){
+								if( this->Input.size() > 0 ){
+									TextInput.RenderText( this->Input );
+								}
+								if( this->BotMessage.size() > 0 ){
+									this->TextBotMessage.RenderText( this->BotMessage );
+								}
+							}
+							else if( this->BotMessage[0] == '1' and ! this->map2D.ReturnBusy() ){
+								this->map2D.Operation( this->BotMessage );
+								this->map2D.Update();
+								this->BotMessage = this->map2D.ReturnAnswer();
+								if( this->Input.size() > 0 ){
+									TextInput.RenderText( this->Input );
+								}
+								if( this->BotMessage.size() > 0 ){
+									this->TextBotMessage.RenderText( this->BotMessage );
+								}
+							}
+							this->NextInput = this->LastInput + 1000;
 						}
 						break;
 					default:
@@ -274,6 +291,11 @@ void Game::Draw_Square(){
 void Game::Update(){
 	this->CurrentPlayerX = this->map2D.ReturnPlayerX();
 	this->CurrentPlayerY = this->map2D.ReturnPlayerY();
+	this->map2D.Update();
+	if( !this->map2D.ReturnAnswer().empty() && this->BotMessage != this->map2D.ReturnAnswer() ){
+		this->BotMessage = this->map2D.ReturnAnswer();
+		this->TextBotMessage.RenderText( this->BotMessage );
+	}
 	glClear( GL_COLOR_BUFFER_BIT );//| GL_DEPTH_BUFFER_BIT );
 	glLoadIdentity();
 	for( int i=this->CurrentPlayerY-this->Square_length; i<=this->CurrentPlayerY+this->Square_length; i++ ){

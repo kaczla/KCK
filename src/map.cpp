@@ -9,7 +9,16 @@ Map::Map(){
 
 	this->PlayerX = 1;
 	this->PlayerY = 25;
+	this->LastOperation = 0;
+	this->NextOperation = 0;
+	this->TextOperation.clear();
+	this->Answer.clear();
+	this->PlayerDirection = 'r';
+	this->ToDeleteAnswer = false;
+	this->Busy = false;
+
 	this->Error_Map = "nie zainicjalizawano mapy ( void SetValue(int height, int width); )";
+
 }
 
 Map::Map(int height, int width){
@@ -23,6 +32,14 @@ Map::Map(int height, int width){
 	//INNA LOSOWA!!!
 	this->PlayerX = 1;
 	this->PlayerY = width / 2;
+
+	this->LastOperation = 0;
+	this->NextOperation = 0;
+	this->TextOperation.clear();
+	this->Answer.clear();
+	this->PlayerDirection = 'r';
+	this->ToDeleteAnswer = false;
+	this->Busy = false;
 }
 
 bool Map::ReturnSuccess(){
@@ -750,10 +767,26 @@ int Map::ReturnPlayerY(){
 }
 
 int Map::ReturnPlayer(){
+	switch( this->PlayerDirection ){
+		case 'u':
+			return this->Player[0].ReturnImageID();
+			break;
+		case 'd':
+			return this->Player[3].ReturnImageID();
+			break;
+		case 'l':
+			return this->Player[1].ReturnImageID();
+			break;
+		case 'r':
+			return this->Player[2].ReturnImageID();
+			break;
+		default:
+			return this->Player[0].ReturnImageID();
+	}
 	return this->Player[0].ReturnImageID();
 }
 
-std::string Map::Operation( std::string text ){
+void Map::Operation( std::string text ){
 	//REMOVE SPACE CHAR
 	std::string tmp = text;
 	text.clear();
@@ -763,38 +796,370 @@ std::string Map::Operation( std::string text ){
 		}
 	}
 
-	if( text[1] == 'g' ){
-		//GO
-		if( text[2] == 'u' ){
-			//UP
-			if( text[3] == '3' ){
-
-
-			}
-			text = "Pokonałem krótki odcinek na północ";
-		}
-		else if( text[2] == 'd' ){
-			//DOWN
-
-			text = "Pokonałem krótki odcinek na południe";
-		}
-		else if( text[2] == 'l' ){
-			//LEFT
-
-			text = "Pokonałem krótki odcinek na zachód";
-		}
-		else if( text[2] == 'r' ){
-			//RIGHT
-
-			text = "Pokonałem krótki odcinek na wschód";
-		}
-		else{
-			text = "Nie wiem co mam zrobić!";
-		}
+	if( text[0] == '1' ){
+		this->TextOperation = text;
 	}
-	return text;
+	else{
+		this->TextOperation.clear();
+	}
 }
 
+void Map::Update(){
+	if( this->ToDeleteAnswer ){
+		this->Answer.clear();
+		this->ToDeleteAnswer = false;
+	}
+	this->LastOperation = SDL_GetTicks();
+	if( this->LastOperation >= this->NextOperation && ! this->TextOperation.empty() ){
+		this->NextOperation = this->LastOperation;
+		if( this->TextOperation[1] == 'g' ){
+			//GO
+			this->OperationGo();
+		}
+		else if( this->TextOperation[1] == 't' ){
+			//TURN
+			this->OperationTurn();
+		}
+	}
+}
+
+void Map::OperationGo(){
+	if( this->TextOperation[2] == 'u' ){
+		//UP
+		this->Answer = text_go_up;
+		this->NextOperation += time_move;
+		this->ToDeleteAnswer = true;
+		this->Busy = true;
+		switch( this->TextOperation[3] ){
+			case '1':
+				this->PlayerDirection = 'u';
+				this->Answer = text_on_place;
+				this->NextOperation -= time_move;
+				this->TextOperation.clear();
+				this->Busy = false;
+				break;
+			case '2':
+				this->PlayerDirection = 'u';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY-1 ) ){
+					this->TextOperation[3] = '1';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '3':
+				this->PlayerDirection = 'u';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY-1 ) ){
+					this->TextOperation[3] = '2';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '4':
+				this->PlayerDirection = 'u';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY-1 ) ){
+					this->TextOperation[3] = '3';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '5':
+				this->PlayerDirection = 'u';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY-1 ) ){
+					this->TextOperation[3] = '4';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '6':
+				this->PlayerDirection = 'u';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY-1 ) ){
+					this->TextOperation[3] = '5';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			default:
+				this->Answer = text_dont_know;
+				this->NextOperation -= time_move;
+				this->Busy = false;
+				break;
+		}
+	}
+	else if( this->TextOperation[2] == 'd' ){
+		//DOWN
+		this->Answer = text_go_down;
+		this->NextOperation += time_move;
+		this->ToDeleteAnswer = true;
+		this->Busy = true;
+		switch( this->TextOperation[3] ){
+			case '1':
+				this->PlayerDirection = 'd';
+				this->Answer = text_on_place;
+				this->NextOperation -= time_move;
+				this->TextOperation.clear();
+				this->Busy = false;
+				break;
+			case '2':
+				this->PlayerDirection = 'd';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY+1 ) ){
+					this->TextOperation[3] = '1';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '3':
+				this->PlayerDirection = 'd';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY+1 ) ){
+					this->TextOperation[3] = '2';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '4':
+				this->PlayerDirection = 'd';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY+1 ) ){
+					this->TextOperation[3] = '3';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '5':
+				this->PlayerDirection = 'd';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY+1 ) ){
+					this->TextOperation[3] = '4';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '6':
+				this->PlayerDirection = 'd';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY+1 ) ){
+					this->TextOperation[3] = '5';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			default:
+				this->Answer = text_dont_know;
+				this->NextOperation -= time_move;
+				this->Busy = false;
+				break;
+		}
+	}
+	else if( this->TextOperation[2] == 'l' ){
+		//LEFT
+		this->Answer = text_go_left;
+		this->NextOperation += time_move;
+		this->ToDeleteAnswer = true;
+		this->Busy = true;
+		switch( this->TextOperation[3] ){
+			case '1':
+				this->PlayerDirection = 'l';
+				this->Answer = text_on_place;
+				this->NextOperation -= time_move;
+				this->TextOperation.clear();
+				this->Busy = false;
+				break;
+			case '2':
+				this->PlayerDirection = 'l';
+				if( this->MovePlayerTo( this->PlayerX-1, this->PlayerY ) ){
+					this->TextOperation[3] = '1';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '3':
+				this->PlayerDirection = 'l';
+				if( this->MovePlayerTo( this->PlayerX-1, this->PlayerY ) ){
+					this->TextOperation[3] = '2';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '4':
+				this->PlayerDirection = 'l';
+				if( this->MovePlayerTo( this->PlayerX-1, this->PlayerY ) ){
+					this->TextOperation[3] = '3';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '5':
+				this->PlayerDirection = 'l';
+				if( this->MovePlayerTo( this->PlayerX-1, this->PlayerY ) ){
+					this->TextOperation[3] = '4';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '6':
+				this->PlayerDirection = 'l';
+				if( this->MovePlayerTo( this->PlayerX-1, this->PlayerY ) ){
+					this->TextOperation[3] = '5';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			default:
+				this->Answer = text_dont_know;
+				this->NextOperation -= time_move;
+				this->Busy = false;
+				break;
+		}
+	}
+	else if( this->TextOperation[2] == 'r' ){
+		//RIGHT
+		this->Answer = text_go_right;
+		this->NextOperation += time_move;
+		this->ToDeleteAnswer = true;
+		this->Busy = true;
+		switch( this->TextOperation[3] ){
+			case '1':
+				this->PlayerDirection = 'r';
+				this->Answer = text_on_place;
+				this->NextOperation -= time_move;
+				this->TextOperation.clear();
+				this->Busy = false;
+				break;
+			case '2':
+				this->PlayerDirection = 'r';
+				if( this->MovePlayerTo( this->PlayerX+1, this->PlayerY ) ){
+					this->TextOperation[3] = '1';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '3':
+				this->PlayerDirection = 'r';
+				if( this->MovePlayerTo( this->PlayerX+1, this->PlayerY ) ){
+					this->TextOperation[3] = '2';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '4':
+				this->PlayerDirection = 'r';
+				if( this->MovePlayerTo( this->PlayerX+1, this->PlayerY ) ){
+					this->TextOperation[3] = '3';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '5':
+				this->PlayerDirection = 'r';
+				if( this->MovePlayerTo( this->PlayerX+1, this->PlayerY ) ){
+					this->TextOperation[3] = '4';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			case '6':
+				this->PlayerDirection = 'r';
+				if( this->MovePlayerTo( this->PlayerX+1, this->PlayerY ) ){
+					this->TextOperation[3] = '5';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
+				break;
+			default:
+				this->Answer = text_dont_know;
+				this->NextOperation -= time_move;
+				this->Busy = false;
+				break;
+		}
+	}
+	else{
+		this->Answer = text_dont_know;
+	}
+}
+
+void Map::OperationTurn(){
+	this->NextOperation += time_turn;
+	this->ToDeleteAnswer = true;
+	switch( this->TextOperation[2] ){
+		case 'u': //UP
+			this->PlayerDirection = 'u';
+			this->Answer = text_turn_up;
+			break;
+		case 'd': //DOWN
+			this->PlayerDirection = 'd';
+			this->Answer = text_turn_down;
+			break;
+		case 'l': //LEFT
+			this->PlayerDirection = 'l';
+			this->Answer = text_turn_left;
+			break;
+		case 'r': //RIGHT
+			this->PlayerDirection = 'r';
+			this->Answer = text_turn_right;
+			break;
+		default:
+			this->NextOperation -= time_turn;
+			this->Answer = text_dont_know;
+			break;
+	}
+	this->TextOperation.clear();
+}
 
 
 void Map::TurnOnAnimation( bool value ){
@@ -804,4 +1169,32 @@ void Map::TurnOnAnimation( bool value ){
 	else{
 		this->Animation = false;
 	}
+}
+
+std::string Map::ReturnAnswer(){
+	return this->Answer;
+}
+
+bool Map::MovePlayerTo( int x, int y ){
+	if( x<0 or x>=this->Width ){
+		return false;
+	}
+	else if( y<0 or y>=this->Height ){
+		return false;
+	}
+	else if( Map2D[x][y] == this->Pelne[0].ReturnImageID() ){
+		return false;
+	}
+	else if( Map2D_obj[y][x] == 0 ){
+		this->PlayerX = x;
+		this->PlayerY = y;
+	}
+	else{
+		return false;
+	}
+	return true;
+}
+
+bool Map::ReturnBusy(){
+	return this->Busy;
 }
