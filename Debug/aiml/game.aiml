@@ -190,12 +190,32 @@
 	</category>
 
 	<category>
+		<pattern>Co lubisz</pattern>
+		<template>
+			<random>
+				<li>Dobrą książkę (oczywiście ebooka)</li>
+				<li>Programowanie w asemblerze o poranku</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Co lubisz robic</pattern>
 		<template>
 			<random>
 				<li>Odpowiadać na ciekawe pytania</li>
 				<li>Rozmawiać z tobą</li>
 				<li>Rozpalać ognisko</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Czym sie interesujesz</pattern>
+		<template>
+			<random>
+				<li>Informatyką</li>
+				<li>Lingwistyką komputerową</li>
 			</random>
 		</template>
 	</category>
@@ -209,7 +229,6 @@
 			</random>
 		</template>
 	</category>
-
 
 	<category>
 		<pattern>Kto jest twoim tworca</pattern>

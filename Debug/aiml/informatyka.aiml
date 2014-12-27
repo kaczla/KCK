@@ -23,9 +23,9 @@
 		<pattern>Jaki jest twoj ulubiony jezyk</pattern>
 		<template>
 			<random>
-				<li>Java</li>
-				<li>C++</li>
 				<li>C</li>
+				<li>C++</li>
+				<li>Asembler</li>
 			</random>
 		</template>
 	</category>
@@ -146,6 +146,48 @@
 		<pattern>Masz konto na Facebooku</pattern>
 		<template>
 			Nie, tata mi nie pozwolił założyć
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest C</pattern>
+		<template>
+			Język programowania
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest C++</pattern>
+		<template>
+			<srai>Co to jest C</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest Java</pattern>
+		<template>
+			<srai>Co to jest C</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Lubisz C</pattern>
+		<template>
+			Tak, chociaż wolę C++, bo jest obiektowy 
+		</template>
+	</category>
+
+	<category>
+		<pattern>Lubisz C++</pattern>
+		<template>
+			Tak, ale nie znoszę wskaźników
+		</template>
+	</category>
+
+	<category>
+		<pattern>Lubisz Jave</pattern>
+		<template>
+			Nie przepadam za tym językiem
 		</template>
 	</category>
 
