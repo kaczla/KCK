@@ -16,6 +16,13 @@ Map::Map(){
 	this->PlayerDirection = 'r';
 	this->ToDeleteAnswer = false;
 	this->Busy = false;
+	this->Builds = false;
+
+	this->Food = 0;
+	this->Wood = 0;
+	this-> Stone = 0;
+
+	this->Cheats = false;
 
 	this->Error_Map = "nie zainicjalizawano mapy ( void SetValue(int height, int width); )";
 
@@ -40,6 +47,13 @@ Map::Map(int height, int width){
 	this->PlayerDirection = 'r';
 	this->ToDeleteAnswer = false;
 	this->Busy = false;
+	this->Builds = false;
+
+	this->Food = 0;
+	this->Wood = 0;
+	this-> Stone = 0;
+
+	this->Cheats = false;
 }
 
 bool Map::ReturnSuccess(){
@@ -341,7 +355,7 @@ int Map::ReturnValueMap(int x, int y){
 		return this->Pelne[0].ReturnImageID();
 	}
 	else{
-		return this->Map2D[x][y];
+		return this->Map2D[y][x];
 	}
 }
 
@@ -353,7 +367,7 @@ int Map::ReturnValueMapObj(int x, int y){
 		return 0;
 	}
 	else{
-		return this->Map2D_obj[x][y];
+		return this->Map2D_obj[y][x];
 	}
 }
 
@@ -808,6 +822,7 @@ void Map::Update(){
 	if( this->ToDeleteAnswer ){
 		this->Answer.clear();
 		this->ToDeleteAnswer = false;
+		this->Busy = false;
 	}
 	this->LastOperation = SDL_GetTicks();
 	if( this->LastOperation >= this->NextOperation && ! this->TextOperation.empty() ){
@@ -820,6 +835,40 @@ void Map::Update(){
 			//TURN
 			this->OperationTurn();
 		}
+		else if( this->TextOperation[1] == 'b' ){
+			if( this->TextOperation[2] == 'f' ){
+				this->OperationBuildFire();
+			}
+			else{
+				this->Answer = text_dont_know;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+		}
+		else if( this->TextOperation == "1cheatson" ){
+			this->Cheats = true;
+			this->Answer = text_cheats_on;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
+		else if( this->Cheats ){
+			if( this->TextOperation == "1allresources" ){
+				this->Food = 9;
+				this->Wood = 9;
+				this->Stone = 9;
+				this->Answer = text_cheats_on;
+			}
+			else{
+				this->Answer = text_dont_know;
+			}
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
+		else{
+			this->Answer = text_dont_know;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
 	}
 }
 
@@ -831,12 +880,23 @@ void Map::OperationGo(){
 		this->ToDeleteAnswer = true;
 		this->Busy = true;
 		switch( this->TextOperation[3] ){
-			case '1':
+			case '0':
 				this->PlayerDirection = 'u';
 				this->Answer = text_on_place;
 				this->NextOperation -= time_move;
 				this->TextOperation.clear();
 				this->Busy = false;
+				break;
+			case '1':
+				this->PlayerDirection = 'u';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY-1 ) ){
+					this->TextOperation[3] = '0';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
 				break;
 			case '2':
 				this->PlayerDirection = 'u';
@@ -907,12 +967,23 @@ void Map::OperationGo(){
 		this->ToDeleteAnswer = true;
 		this->Busy = true;
 		switch( this->TextOperation[3] ){
-			case '1':
+			case '0':
 				this->PlayerDirection = 'd';
 				this->Answer = text_on_place;
 				this->NextOperation -= time_move;
 				this->TextOperation.clear();
 				this->Busy = false;
+				break;
+			case '1':
+				this->PlayerDirection = 'd';
+				if( this->MovePlayerTo( this->PlayerX, this->PlayerY+1 ) ){
+					this->TextOperation[3] = '0';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
 				break;
 			case '2':
 				this->PlayerDirection = 'd';
@@ -983,12 +1054,23 @@ void Map::OperationGo(){
 		this->ToDeleteAnswer = true;
 		this->Busy = true;
 		switch( this->TextOperation[3] ){
-			case '1':
+			case '0':
 				this->PlayerDirection = 'l';
 				this->Answer = text_on_place;
 				this->NextOperation -= time_move;
 				this->TextOperation.clear();
 				this->Busy = false;
+				break;
+			case '1':
+				this->PlayerDirection = 'l';
+				if( this->MovePlayerTo( this->PlayerX-1, this->PlayerY ) ){
+					this->TextOperation[3] = '0';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
 				break;
 			case '2':
 				this->PlayerDirection = 'l';
@@ -1059,12 +1141,23 @@ void Map::OperationGo(){
 		this->ToDeleteAnswer = true;
 		this->Busy = true;
 		switch( this->TextOperation[3] ){
-			case '1':
+			case '0':
 				this->PlayerDirection = 'r';
 				this->Answer = text_on_place;
 				this->NextOperation -= time_move;
 				this->TextOperation.clear();
 				this->Busy = false;
+				break;
+			case '1':
+				this->PlayerDirection = 'r';
+				if( this->MovePlayerTo( this->PlayerX+1, this->PlayerY ) ){
+					this->TextOperation[3] = '0';
+				}
+				else{
+					this->Answer = text_cant_move;
+					this->TextOperation.clear();
+					this->Busy = false;
+				}
 				break;
 			case '2':
 				this->PlayerDirection = 'r';
@@ -1130,6 +1223,8 @@ void Map::OperationGo(){
 	}
 	else{
 		this->Answer = text_dont_know;
+		this->ToDeleteAnswer = true;
+		this->TextOperation.clear();
 	}
 }
 
@@ -1161,6 +1256,147 @@ void Map::OperationTurn(){
 	this->TextOperation.clear();
 }
 
+void Map::OperationBuildFire(){
+	if( this->LastOperation >= this->NextOperation ){
+		if( this->Builds ){
+			this->Builds = false;
+			this->Busy = false;
+			this->Answer = text_build_fire;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+			//BUDOWA
+			if( this->PlayerDirection == 'u' ){
+				this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[0].ReturnImageID();
+				this->Wood -= 4;
+				this->Stone -= 2;
+			}
+			else if( this->PlayerDirection == 'd' ){
+				this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[0].ReturnImageID();
+				this->Wood -= 4;
+				this->Stone -= 2;
+			}
+			else if( this->PlayerDirection == 'l' ){
+				this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[0].ReturnImageID();
+				this->Wood -= 4;
+				this->Stone -= 2;
+			}
+			else if( this->PlayerDirection == 'r' ){
+				this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[0].ReturnImageID();
+				this->Wood -= 4;
+				this->Stone -= 2;
+			}
+			else{
+				this->Answer = text_dont_know;
+			}
+		}
+		else{
+			int tmp = -1;
+			if( this->Wood >= 4 and this->Stone >= 2 ){
+				if( this->PlayerDirection == 'u' ){
+					tmp = this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 );
+					if( tmp == 0 ){
+						tmp = this->ReturnValueMap( this->PlayerX, this->PlayerY-1 );
+						if( tmp == this->Pelne[1].ReturnImageID() or tmp == this->Pelne[2].ReturnImageID()
+							or ( tmp >= this->TrawaPiach[0].ReturnImageID() and tmp <= this->TrawaPiach[11].ReturnImageID() ) ){
+								this->Builds = true;
+								this->Busy = true;
+								this->Answer = text_builds;
+								this->NextOperation = SDL_GetTicks() + 5000;
+						}
+						else{
+							this->Answer = text_build_wrong_place;
+							this->ToDeleteAnswer = true;
+							this->TextOperation.clear();
+						}
+					}
+					else{
+						this->Answer = text_build_is_item;
+						this->ToDeleteAnswer = true;
+						this->TextOperation.clear();
+					}
+
+				}
+				else if( this->PlayerDirection == 'd' ){
+					tmp = this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 );
+					if( tmp == 0 ){
+						tmp = this->ReturnValueMap( this->PlayerX, this->PlayerY+1 );
+						if( tmp == this->Pelne[1].ReturnImageID() or tmp == this->Pelne[2].ReturnImageID()
+							or ( tmp >= this->TrawaPiach[0].ReturnImageID() and tmp <= this->TrawaPiach[11].ReturnImageID() ) ){
+								this->Builds = true;
+								this->Busy = true;
+								this->Answer = text_builds;
+								this->NextOperation = SDL_GetTicks() + 5000;
+						}
+						else{
+							this->Answer = text_build_wrong_place;
+							this->ToDeleteAnswer = true;
+							this->TextOperation.clear();
+						}
+					}
+					else{
+						this->Answer = text_build_is_item;
+						this->ToDeleteAnswer = true;
+						this->TextOperation.clear();
+					}
+				}
+				else if( this->PlayerDirection == 'l' ){
+					tmp = this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY );
+					if( tmp == 0 ){
+						tmp = this->ReturnValueMap( this->PlayerX-1, this->PlayerY );
+						if( tmp == this->Pelne[1].ReturnImageID() or tmp == this->Pelne[2].ReturnImageID()
+							or ( tmp >= this->TrawaPiach[0].ReturnImageID() and tmp <= this->TrawaPiach[11].ReturnImageID() ) ){
+								this->Builds = true;
+								this->Busy = true;
+								this->Answer = text_builds;
+								this->NextOperation = SDL_GetTicks() + 5000;
+						}
+						else{
+							this->Answer = text_build_wrong_place;
+							this->ToDeleteAnswer = true;
+							this->TextOperation.clear();
+						}
+					}
+					else{
+						this->Answer = text_build_is_item;
+						this->ToDeleteAnswer = true;
+						this->TextOperation.clear();
+					}
+				}
+				else if( this->PlayerDirection == 'r' ){
+					tmp = this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY );
+					if( tmp == 0 ){
+						tmp = this->ReturnValueMap( this->PlayerX+1, this->PlayerY );
+						if( tmp == this->Pelne[1].ReturnImageID() or tmp == this->Pelne[2].ReturnImageID()
+							or ( tmp >= this->TrawaPiach[0].ReturnImageID() and tmp <= this->TrawaPiach[11].ReturnImageID() ) ){
+								this->Builds = true;
+								this->Busy = true;
+								this->Answer = text_builds;
+								this->NextOperation = SDL_GetTicks() + 5000;
+						}
+						else{
+							this->Answer = text_build_wrong_place;
+							this->ToDeleteAnswer = true;
+							this->TextOperation.clear();
+						}
+					}
+					else{
+						this->Answer = text_build_is_item;
+						this->ToDeleteAnswer = true;
+						this->TextOperation.clear();
+					}
+				}
+				else{
+					this->Answer = text_dont_know;
+				}
+			}
+			else{
+				this->Answer = text_build_no_items;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+		}
+	}
+}
 
 void Map::TurnOnAnimation( bool value ){
 	if( value ){
@@ -1182,7 +1418,7 @@ bool Map::MovePlayerTo( int x, int y ){
 	else if( y<0 or y>=this->Height ){
 		return false;
 	}
-	else if( Map2D[x][y] == this->Pelne[0].ReturnImageID() ){
+	else if( Map2D[y][x] == this->Pelne[0].ReturnImageID() ){
 		return false;
 	}
 	else if( Map2D_obj[y][x] == 0 ){
@@ -1197,4 +1433,89 @@ bool Map::MovePlayerTo( int x, int y ){
 
 bool Map::ReturnBusy(){
 	return this->Busy;
+}
+
+void Map::StopOperation(){
+	this->TextOperation.clear();
+	this->Answer = text_stop;
+	this->ToDeleteAnswer = true;
+	this->Builds = false;
+	this->Busy = false;
+	this->LastOperation = SDL_GetTicks();
+	this->NextOperation = this->LastOperation;
+}
+
+unsigned int Map::ReturnFood(){
+	if( this->Food == 0 ){
+		return 0;
+	}
+	else if( this->Food >= 1 and this->Food <= 3 ){
+		//1-3
+		return 1;
+	}
+	else if( this->Food >= 4 and this->Food <= 6 ){
+		//4-6
+		return 2;
+	}
+	else if( this->Food >= 7 and this->Food <= 9 ){
+		//7-9
+		return 3;
+	}
+	else{
+		if( this->Food > 9 or this->Food < 0 ){
+			this->Food = 0;
+		}
+		return 0;
+	}
+	return 0;
+}
+
+unsigned int Map::ReturnWood(){
+	if( this->Wood == 0 ){
+		return 0;
+	}
+	else if( this->Wood >= 1 and this->Wood <= 3 ){
+		//1-3
+		return 1;
+	}
+	else if( this->Wood >= 4 and this->Wood <= 6 ){
+		//4-6
+		return 2;
+	}
+	else if( this->Wood >= 7 and this->Wood <= 9 ){
+		//7-9
+		return 3;
+	}
+	else{
+		if( this->Wood > 9 or this->Wood < 0 ){
+			this->Wood = 0;
+		}
+		return 0;
+	}
+	return 0;
+}
+
+unsigned int Map::ReturnStone(){
+	if( this->Stone == 0 ){
+		return 0;
+	}
+	else if( this->Stone >= 1 and this->Stone <= 3 ){
+		//1-3
+		return 1;
+	}
+	else if( this->Stone >= 4 and this->Stone <= 6 ){
+		//4-6
+		return 2;
+	}
+	else if( this->Stone >= 7 and this->Stone <= 9 ){
+		//7-9
+		return 3;
+	}
+	else{
+		if( this->Stone > 9 or this->Stone < 0 ){
+			this->Stone = 0;
+		}
+		return 0;
+	}
+	return 0;
 }

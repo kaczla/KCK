@@ -561,5 +561,10 @@
 			</random>
 		</template>
 	</category> 
+	
+	<category>
+		<pattern>cheats on</pattern>
+		<template>1cheatson</template>
+	</category>
 	     
 </aiml>

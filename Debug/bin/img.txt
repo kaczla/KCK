@@ -1,4 +1,4 @@
-49
+59
 1 fullwoda bin/img/pelne/fullwoda.png
 2 fulltrawa bin/img/pelne/fulltrawa.png
 3 fullpiach bin/img/pelne/fullpiach.png
@@ -48,3 +48,13 @@
 47 ognichoready bin/img/ognichoready.png
 48 ognichofire bin/img/ognichofire.png
 49 ognichospalone bin/img/ognichospalone.png
+50 menuglod1 bin/img/menuglod1.png
+51 menuglod2 bin/img/menuglod2.png
+52 menuglod3 bin/img/menuglod3.png
+53 menudrewno bin/img/menudrewno.png
+54 menukamien bin/img/menukamien.png
+55 menugrzyby bin/img/menugrzyby.png
+56 menu0 bin/img/menu0.png
+57 menu1 bin/img/menu1.png
+58 menu2 bin/img/menu2.png
+59 menu3 bin/img/menu3.png

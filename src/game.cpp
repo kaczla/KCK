@@ -29,6 +29,13 @@ Game::Game(){
 	LogGame::Write( SDL_GetTicks() );
 	LogGame::Write( ": Inicjalizowanie gry\n" );
 //Grafika
+	this->MenuFood = NULL;
+	this->MenuWood = NULL;
+	this->MenuStone = NULL;
+	this->MenuBar[0] = NULL;
+	this->MenuBar[1] = NULL;
+	this->MenuBar[2] = NULL;
+	this->MenuBar[3] = NULL;
 	this->ReadImages();
 //ANIMACJE
 	this->ReadAnim();
@@ -123,6 +130,13 @@ Game::Game(){
 
 Game::~Game(){
 	this->settings.SaveSettings();
+	this->MenuFood = NULL;
+	this->MenuWood = NULL;
+	this->MenuStone = NULL;
+	this->MenuBar[0] = NULL;
+	this->MenuBar[1] = NULL;
+	this->MenuBar[2] = NULL;
+	this->MenuBar[3] = NULL;
 	Text::Clear();
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
@@ -231,6 +245,7 @@ void Game::Start(){
 						break;
 					case SDLK_RETURN:
 						this->LastInput = SDL_GetTicks();
+
 						if( this->LastInput >= this->NextInput ){
 							this->BotMessage = this->bot.ReturnAnswer( this->Input );
 							if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
@@ -300,8 +315,8 @@ void Game::Update(){
 	glLoadIdentity();
 	for( int i=this->CurrentPlayerY-this->Square_length; i<=this->CurrentPlayerY+this->Square_length; i++ ){
 		for( int j=this->CurrentPlayerX-this->Square_length; j<=this->CurrentPlayerX+this->Square_length; j++ ){
-			this->CurrentMap = this->map2D.ReturnValueMap( i, j );
-			this->CurrentMapObj = this->map2D.ReturnValueMapObj( i, j );
+			this->CurrentMap = this->map2D.ReturnValueMap( j, i );
+			this->CurrentMapObj = this->map2D.ReturnValueMapObj( j, i );
 			if( this->CurrentMap <0 ){
 				glBindTexture( GL_TEXTURE_2D, this->error_img[0].ReturnImageID() );
 				this->Draw_Square();
@@ -353,8 +368,10 @@ void Game::Update(){
 		glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->Background_bottom_length_x, this->Background_bottom_length_y );
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->Background_bottom_length_y );
 	glEnd();
+	this->DrawMenu();
 //RIGHT BACKGROUD
-	glTranslatef( this->Height_percent, -this->Height_percent, 0.0 );
+	glLoadIdentity();
+	glTranslatef( this->Height_percent, 0.0, 0.0 );
 	glBindTexture( GL_TEXTURE_2D, this->backgroud[1].ReturnImageID() );
 	glBegin( GL_QUADS );
 		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
@@ -421,6 +438,31 @@ void Game::ReadImages(){
 		LogGame::Write( SDL_GetTicks() );
 		LogGame::Write( ": Brak pliku bin/img.txt !\n" );
 		this->game_start = false;
+	}
+
+	//Przypisanie wskaźników
+	for( unsigned int i=0; i<this->images.size(); i++ ){
+		if( this->images[i].ReturnName() == "menudrewno" ){
+			this->MenuWood = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menukamien" ){
+			this->MenuStone = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menugrzyby" ){
+			this->MenuFood = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menu0" ){
+			this->MenuBar[0] = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menu1" ){
+			this->MenuBar[1] = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menu2" ){
+			this->MenuBar[2] = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menu3" ){
+			this->MenuBar[3] = &this->images[i];
+		}
 	}
 }
 
@@ -587,4 +629,60 @@ void Game::DrawBotMessage(){
 		glTranslatef( this->BotMessagePositionX, this->BotMessagePositionY, 0.0 );
 		this->TextBotMessage.Draw();
 	}
+}
+
+void Game::DrawMenu(){
+//FOOD
+	glTranslatef( 25.0, 25.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->MenuFood->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 25.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 25.0, 25.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
+	glEnd();
+	glTranslatef( 25.0, 0.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->MenuBar[this->map2D.ReturnFood()]->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 75.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 75.0, 25.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
+	glEnd();
+	glTranslatef( -50.0, 0.0, 0.0 );
+//WOOD
+	glTranslatef( 25.0, 25.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->MenuWood->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 25.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 25.0, 25.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
+	glEnd();
+	glTranslatef( 25.0, 0.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->MenuBar[this->map2D.ReturnWood()]->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 75.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 75.0, 25.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
+	glEnd();
+	glTranslatef( -50.0, 0.0, 0.0 );
+//STONE
+	glTranslatef( 25.0, 25.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->MenuStone->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 25.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 25.0, 25.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
+	glEnd();
+	glTranslatef( 25.0, 0.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->MenuBar[this->map2D.ReturnStone()]->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 75.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 75.0, 25.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
+	glEnd();
 }

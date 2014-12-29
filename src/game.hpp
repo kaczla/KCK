@@ -35,6 +35,8 @@ private:
 	std::vector <Img> backgroud;
 	inline void ReadImages();
 	inline void ReadAnim();
+	Img *MenuFood, *MenuWood, *MenuStone, *MenuBar[4];
+	inline void DrawMenu();
 	//MAPA GRY
 	Map map2D;
 	bool game_start;
@@ -63,6 +65,7 @@ private:
 	GLfloat InputPositionX, InputPositionY;
 	GLfloat InputPositionLengthMax;
 	void DrawInput();
+	unsigned int LastInput, NextInput;
 	Text TextBotMessage;
 	std::string BotMessage;
 	GLfloat BotMessagePositionX, BotMessagePositionY;
