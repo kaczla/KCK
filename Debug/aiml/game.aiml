@@ -3,6 +3,39 @@
 <aiml>
 
 	<category>
+		<pattern>Witaj</pattern>
+		<template>
+			<random>
+				<li>Witaj</li>
+				<li>Cześć</li>
+				<li>Hej</li>
+				<li>Siema</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Czesc</pattern>
+		<template>
+			<srai>Witaj</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Hej</pattern>
+		<template>
+			<srai>Witaj</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Siema</pattern>
+		<template>
+			<srai>Witaj</srai>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Jak masz na imie</pattern>
 		<template>
 			<random>
@@ -30,6 +63,41 @@
 				<li>W porządku</li>
 				<li>Bywało lepiej</li>
 			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak sie masz *</pattern>
+		<template>
+			<srai>Jak sie masz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak sie czujesz</pattern>
+		<template>
+			<srai>Jak sie masz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak sie * czujesz</pattern>
+		<template>
+			<srai>Jak sie masz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak sie czujesz *</pattern>
+		<template>
+			<srai>Jak sie masz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak sie * czujesz *</pattern>
+		<template>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
@@ -316,7 +384,7 @@
 			<random>
 				<li>Nie mam jednego ojca</li>
 				<li>Jest ich czterech</li>
-                                <li>Mam wielu ojców</li>
+            <li>Mam wielu ojców</li>
 			</random>
 		</template>
 	</category>

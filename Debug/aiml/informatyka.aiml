@@ -20,6 +20,41 @@
 	</category>
 
 	<category>
+		<pattern>Lubisz grac</pattern>
+		<template>
+			Jasne, mógłbym grać bez przerwy
+		</template>
+	</category>
+
+	<category>
+		<pattern>Lubisz grac *</pattern>
+		<template>
+			<srai>Lubisz grac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Lubisz gry</pattern>
+		<template>
+			<srai>Lubisz grac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Lubisz gry *</pattern>
+		<template>
+			<srai>Lubisz grac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jakie gry lubisz</pattern>
+		<template>
+			Lubię strzelanki, wyścigówki... właściwie to uwielbiam wszytkie gry
+		</template>
+	</category>
+	
+	<category>
 		<pattern>Jaki jest twoj ulubiony jezyk</pattern>
 		<template>
 			<random>
@@ -136,6 +171,13 @@
 	</category>
 
 	<category>
+		<pattern>* Zuckerberg</pattern>
+		<template>
+			Twórca Facebooka
+		</template>
+	</category>
+
+	<category>
 		<pattern>* Facebook</pattern>
 		<template>
 			Baza danych amerykańskich służb
@@ -188,6 +230,76 @@
 		<pattern>Lubisz Jave</pattern>
 		<template>
 			Nie przepadam za tym językiem
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest komputer</pattern>
+		<template>
+			Urządzenie, na którym mogę pykać w gry
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest laptop</pattern>
+		<template>
+			Przenośny komputer
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest monitor</pattern>
+		<template>
+			Urządzenie wyjścia, służące do komunikacji użytkownika z komputerem
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest klawiatura</pattern>
+		<template>
+			Coś, dzięki czemu zadałeś mi to pytanie
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest myszka</pattern>
+		<template>
+			Urządzenie wskazujące, służące do obsługi komputera
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest touchpad</pattern>
+		<template>
+			Urządzenie wskazujące, reagujące na dotyk, zwykle spotykane w laptopach
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest tablet</pattern>
+		<template>
+			Rodzaj przenośnego komputera z ekranem dotykowym, większego niż smartfon
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest smartfon</pattern>
+		<template>
+			Telefon, aparat, kamera, konsola do gier, kalendarz, kalkulator, zegarek...
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest komorka</pattern>
+		<template>
+			Przenośny, bezprzewodowy telefon z dodatkowymi funkcjami, np. SMS
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest telefon komorkowy</pattern>
+		<template>
+			<srai>Co to jest komorka</srai>
 		</template>
 	</category>
 

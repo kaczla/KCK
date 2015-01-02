@@ -107,7 +107,7 @@
 	<category>
 		<pattern>Lubisz grac w pilke</pattern>
 		<template>
-			<srai>Nie mogę grać, przecież jestem botem</srai>
+			Tak, ale nie mam z kim grać, bo jestem sam na wyspie
 		</template>
 	</category>
 
@@ -156,7 +156,7 @@
 	<category>
 		<pattern>Lubisz grac w koszykowke</pattern>
 		<template>
-			<srai>Lubisz grac w pilke</srai>
+			Nie, nie przepadam za tym
 		</template>
 	</category>
 
@@ -191,14 +191,14 @@
 	<category>
 		<pattern>Lubisz grac w tenisa</pattern>
 		<template>
-			<srai>Lubisz grac w pilke</srai>
+			Nie, nigdy w niego nie grałem
 		</template>
 	</category>
 
 	<category>
 		<pattern>Lubisz grac w tenisa *</pattern>
 		<template>
-			<srai>Lubisz grac w pilke</srai>
+			<srai>Lubisz grac w tenisa</srai>
 		</template>
 	</category>
 
