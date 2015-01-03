@@ -234,6 +234,27 @@
 	</category>
 
 	<category>
+		<pattern>Co to jest informatyka</pattern>
+		<template>
+			Dyscyplina nauki zaliczana do nauk ścisłych zajmująca się przetwarzaniem informacji
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest KCK</pattern>
+		<template>
+			Komunikacja człowiek-komputer
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest komunikacja czlowiek komputer</pattern>
+		<template>
+			Dział informatyki zajmujący się projektowaniem interfejsów użytkownika oraz badaniem interakcji człowieka z komputerem
+		</template>
+	</category>
+
+	<category>
 		<pattern>Co to jest komputer</pattern>
 		<template>
 			Urządzenie, na którym mogę pykać w gry

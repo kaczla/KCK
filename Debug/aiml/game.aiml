@@ -10,6 +10,7 @@
 				<li>Cześć</li>
 				<li>Hej</li>
 				<li>Siema</li>
+				<li>Dzień dobry</li>
 			</random>
 		</template>
 	</category>
@@ -32,6 +33,45 @@
 		<pattern>Siema</pattern>
 		<template>
 			<srai>Witaj</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Dzien dobry</pattern>
+		<template>
+			<srai>Witaj</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Do widzenia</pattern>
+		<template>
+			<random>
+				<li>Do widzenia</li>
+				<li>Na razie</li>
+				<li>Pa pa</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Na razie</pattern>
+		<template>
+			<srai>Do widzenia</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pa</pattern>
+		<template>
+			<srai>Do widzenia</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pa *</pattern>
+		<template>
+			<srai>Do widzenia</srai>
 		</template>
 	</category>
 
@@ -384,7 +424,7 @@
 			<random>
 				<li>Nie mam jednego ojca</li>
 				<li>Jest ich czterech</li>
-            <li>Mam wielu ojców</li>
+				<li>Mam wielu ojców</li>
 			</random>
 		</template>
 	</category>
@@ -425,12 +465,23 @@
 	</category>
 
 	<category>
-		<pattern>Kiedy sie urodziles *</pattern>
+		<pattern>Kiedy sie urodziles</pattern>
 		<template>
 			<random>
 				<li>W październiku 2014 r.</li>
 				<li>Na początku zajęć KCK</li>
 				<li>Ósmego dnia, jak oznajmia Pismo</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Ile masz lat</pattern>
+		<template>
+			<random>
+				<li>Nie wiem, rodzice mi nie powiedzieli</li>
+				<li>około 3,14159</li>
+				<li>1010111010111100001101</li>
 			</random>
 		</template>
 	</category>

@@ -77,6 +77,20 @@
 	</category>
 
 	<category>
+		<pattern>Co to jest pilka</pattern>
+		<template>
+			Przedmiot używany w grach i sportach, najczęściej o kulistym kształcie
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest pilka nozna</pattern>
+		<template>
+			Gra zespołowa, której celem jest umieszczanie piłki w bramce przeciwnika
+		</template>
+	</category>
+
+	<category>
 		<pattern>Lubisz pilke</pattern>
 		<template>
 			Pewnie, że lubię
@@ -119,6 +133,13 @@
 	</category>
 
 	<category>
+		<pattern>Co to jest siatkowka</pattern>
+		<template>
+			Gra zespołowa, w której punkt zdobywa się, gdy piłka dotknie połowy boiska należącej do przeciwnika
+		</template>
+	</category>
+
+	<category>
 		<pattern>Lubisz siatkowke</pattern>
 		<template>
 			Tak, to bardzo emocjonujący sport
@@ -140,6 +161,13 @@
 	</category>
 
 	<category>
+		<pattern>Co to jest koszykowka</pattern>
+		<template>
+			Gra zespołowa, której celem jest umieszczanie piłki w koszu na połowie przeciwnika
+		</template>
+	</category>
+
+	<category>
 		<pattern>Lubisz koszykowke</pattern>
 		<template>
 			Nie, nie pasjonuję się tym sportem
@@ -157,6 +185,13 @@
 		<pattern>Lubisz grac w koszykowke</pattern>
 		<template>
 			Nie, nie przepadam za tym
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co to jest tenis</pattern>
+		<template>
+			Dyscyplina sportowa polegająca na przebijaniu rakietą piłki nad siatką na pole przeciwnika
 		</template>
 	</category>
 
