@@ -145,7 +145,7 @@
 		<pattern>Co slychac</pattern>
 		<template>
 			<random>
-				<li>Jakoś leci</li>
+				<li>OK, jakoś leci</li>
 				<li>Nie jest źle</li>
 				<li>Jest OK</li>
 				<li>W porządku</li>
@@ -198,6 +198,34 @@
 
 	<category>
 		<pattern>Co * u ciebie *</pattern>
+		<template>
+			<srai>Co slychac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak leci</pattern>
+		<template>
+			<srai>Co slychac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak * leci</pattern>
+		<template>
+			<srai>Co slychac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak leci *</pattern>
+		<template>
+			<srai>Co slychac</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jak * leci *</pattern>
 		<template>
 			<srai>Co slychac</srai>
 		</template>
@@ -437,6 +465,52 @@
 	</category>
 
 	<category>
+		<pattern>Jakie filmy lubisz</pattern>
+		<template>
+			Lubię dobre kino sensacyjne, thrillery; dobrą komedią też nie pogardzę
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jakie filmy lubisz *</pattern>
+		<template>
+			<srai>Jakie filmy lubisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co lubisz ogladac</pattern>
+		<template>
+			<srai>Jakie filmy lubisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony rezyser</pattern>
+		<template>
+			Quentin Tarantino
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony aktor</pattern>
+		<template>
+			<random>
+				<li>Steven Seagal</li>
+				<li>Sylvester Stallone</li>
+				<li>Bogusław Linda</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka jest twoja ulubiona aktorka</pattern>
+		<template>
+			Kasia Cichopek
+		</template>
+	</category>
+
+	<category>
 		<pattern>Jaki jest twoj ulubiony serial</pattern>
 		<template>
 			Trudne sprawy
@@ -465,6 +539,69 @@
 	</category>
 
 	<category>
+		<pattern>Jakie ksiazki lubisz</pattern>
+		<template>
+			Lubię dobre, wciągające książki; powieści sensacyjne, kryminały
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jakie ksiazki lubisz *</pattern>
+		<template>
+			<srai>Jakie ksiazki lubisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co lubisz czytac</pattern>
+		<template>
+			<srai>Jakie ksiazki lubisz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony pisarz</pattern>
+		<template>
+			Stephen King
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony tworca</pattern>
+		<template>
+			<srai>Jaki jest twoj ulubiony pisarz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaki jest twoj ulubiony autor</pattern>
+		<template>
+			<srai>Jaki jest twoj ulubiony pisarz</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka jest twoja ulubiona potrawa</pattern>
+		<template>
+			Lubię wiele rzeczy, ale na wyspie jem to, co znajdę
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jakie jest twoje ulubione danie</pattern>
+		<template>
+			<srai>Jaka jest twoja ulubiona potrawa</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co lubisz jesc</pattern>
+		<template>
+			<srai>Jaka jest twoja ulubiona potrawa</srai>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Kiedy sie urodziles</pattern>
 		<template>
 			<random>
@@ -483,6 +620,38 @@
 				<li>około 3,14159</li>
 				<li>1010111010111100001101</li>
 			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka pogoda</pattern>
+		<template>
+			<random>
+				<li>Gorąco, jak zawsze na tej wyspie</li>
+				<li>Jest ciepło, słońce świeci - piękna pogoda</li>
+				<li>Skwar jak zwykle</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka * pogoda</pattern>
+		<template>
+			<srai>Jaka pogoda</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka pogoda *</pattern>
+		<template>
+			<srai>Jaka pogoda</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Jaka * pogoda *</pattern>
+		<template>
+			<srai>Jaka pogoda</srai>
 		</template>
 	</category>
 
