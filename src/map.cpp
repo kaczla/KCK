@@ -665,7 +665,7 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 			if( not_found ){
 				for( j=0; j<this->Ognisko.size(); j++ ){
 					if( not_found && this->Ognisko[j].ReturnLocalName() == anim[i].ReturnName() ){
-						this->Ognisko[j].SetImageID( img.size()+i );
+						this->Ognisko[j].SetImageID( (unsigned int)img.size()+i );
 						not_found = false;
 						break;
 					}
@@ -674,7 +674,7 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 			if( not_found ){
 				for( j=0; j<this->Drzewo.size(); j++ ){
 					if( not_found && this->Drzewo[j].ReturnLocalName() == anim[i].ReturnName() ){
-						this->Drzewo[j].SetImageID( img.size()+i );
+						this->Drzewo[j].SetImageID( (unsigned int)img.size()+i );
 						not_found = false;
 						break;
 					}
