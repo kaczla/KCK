@@ -2,7 +2,7 @@
 <aiml>
 
 	<category>
-		<pattern>Lubisz bron ?</pattern>
+		<pattern>Lubisz bron</pattern>
 		<template>
 			Nie wiem czy lubię, bo tata mi nie chce dać.  
 		</template>
@@ -23,7 +23,7 @@
 	</category>
 	
 	<category>
-		<pattern>Kim jest komunista ?</pattern>
+		<pattern>Kim jest komunista</pattern>
 		<template>
 			Nie wiesz ? Zwolennikiem komunizmu. 
 		</template>
@@ -37,21 +37,21 @@
 	</category>
 	
 	<category>
-		<pattern>Czym jest rzad?</pattern>
+		<pattern>Czym jest rzad</pattern>
 		<template>
 			Dla bezpieczeństwa zgromadzonnych, nie powiem ci czym jest według mnie rząd. 
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Czym jest kapitalizm ?</pattern>
+		<pattern>Czym jest kapitalizm</pattern>
 		<template>
 			Jest to system  społeczno-gospodarczy oparty na prywatnej własności, wolnej konkurencji i roziwniętej gospodarce.  
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Czym jest Greenpeace ?</pattern>
+		<pattern>Czym jest Greenpeace</pattern>
 		<template>
 			<random>
 				<li>Duża organizacja ochrony środowiska.</li>
@@ -61,7 +61,7 @@
 	</category>
 	
 	<category>
-		<pattern>Czym jest immunitet ?</pattern>
+		<pattern>Czym jest immunitet</pattern>
 		<template>
 			<random>
 				<li>Przywilejem nietykalności.</li>
@@ -71,7 +71,7 @@
 	</category>
 
 	<category>
-		<pattern>Czym jest sejm ?</pattern>
+		<pattern>Czym jest sejm</pattern>
 		<template>
 			<random>
 				<li>Najwyższym organem władzy ustawodawczej w Polsce.</li>
@@ -81,7 +81,7 @@
 	</category>
 
 	<category>
-		<pattern>Gdzie * sejm ?</pattern>
+		<pattern>Gdzie * sejm</pattern>
 		<template>
 			W Warszawie przy ul. Wiejska 4/6/8.
 		</template>
@@ -89,14 +89,14 @@
 
 		
 	<category>
-		<pattern>Kto jest prezydentem Polski?</pattern>
+		<pattern>Kto jest prezydentem Polski</pattern>
 		<template>
 			Bronisław Komorowski.
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Kto jest prezydentem *?</pattern>
+		<pattern>Kto jest prezydentem *</pattern>
 		<template>
 			Jeśli pytasz o Polskę, to jest nim Bronisław Komorowski.
 		</template>
@@ -104,37 +104,37 @@
 	
 
 	<category>
-		<pattern>Kto jest premierem ?</pattern>
+		<pattern>Kto jest premierem </pattern>
 		<template>
 			Ewa Kopacz z PO.
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Kto jest premierem * ?</pattern>
+		<pattern>Kto jest premierem * </pattern>
 		<template>
 			W Polsce jest nim Ewa Kopacz z PO.
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Kto twoim ulubionym politykiem ?</pattern>
+		<pattern>Kto twoim ulubionym politykiem</pattern>
 		<template>
 			Odpowiadam stanowczo Janusz Korwin-Mikke.
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Czym jest socjalizm ?</pattern>
+		<pattern>Czym jest socjalizm</pattern>
 		<template>
 			Socjalizm to ideologia głosząca dążenie do ładu społecznego opartego na zasadach wspólnoty, równości i racjonalnego zarządzania gospodarką przez państwo.
 		</template>
 	</category>
 
 	<category>
-		<pattern>Lubisz wojne ?</pattern>
+		<pattern>Lubisz wojne</pattern>
 		<template>
-			Tylko w grasz.
+			Tylko w grach.
 		</template>
 	</category>
 </aiml>
