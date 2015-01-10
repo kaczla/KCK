@@ -7,6 +7,7 @@
 #include "log_game.hpp"
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 
 class Map{
 public:
@@ -61,6 +62,66 @@ private:
 		std::string LocalName;
 		int ImageID;
 	};
+	class Object{
+	public:
+		Object(){
+			this->X = 0;
+			this->Y = 0;
+			this->TMP = 0;
+		}
+		Object( int x, int y ){
+			this->X = x;
+			this->Y = y;
+			this->TMP = 0;
+		}
+		Object( unsigned int x, unsigned int y ){
+			this->X = (int)x;
+			this->Y = (int)y;
+			this->TMP = 0;
+		}
+		Object( int x, int y, int tmp ){
+			this->X = x;
+			this->Y = y;
+			this->TMP = abs( x ) + abs( y ) - abs( tmp );
+		}
+		Object( const Object & object ){
+			this->X = object.X;
+			this->Y = object.Y;
+			this->TMP = object.TMP;
+		}
+		Object operator=( const Object &object ){
+			this->X = object.X;
+			this->Y = object.Y;
+			this->TMP = object.TMP;
+			return *this;
+		}
+		int ReturnX(){
+			return this->X;
+		}
+		int ReturnY(){
+			return this->Y;
+		}
+		int ReturnTMP(){
+			return this->TMP;
+		}
+		void SetX( int x ){
+			this->X = x;
+		}
+		void SetY( int y ){
+			this->Y = y;
+		}
+		void SetTMP( int tmp ){
+			this->TMP = tmp;
+		}
+		void SetTMP( int x, int y ){
+			this->TMP = abs( this->X ) + abs( this->Y );
+			this->TMP -= abs( x ) + abs( y );
+			this->TMP = abs( this->TMP );
+		}
+	private:
+		int X, Y;
+		int TMP;
+	};
 	inline void SetVector();
 	//Koordynaty Gracza
 	int PlayerX, PlayerY;
@@ -100,6 +161,11 @@ private:
 	bool Builds;
 	inline void OperationBuildFire();
 	inline void OperationDelete();
+	inline void CutTree();
+	unsigned int MaxRange;
+	std::vector <std::string> Path;
+	inline void FindPath( std::vector < std::vector <char> > &In );
+	inline void StartPath();
 
 	//Zasoby gracza
 	unsigned int Food, Wood, Stone;
@@ -114,6 +180,7 @@ const std::string text_turn_up = "Obróciłem się w kierunku północnym";
 const std::string text_turn_down = "Obróciłem się w kierunku południowym";
 const std::string text_turn_left = "Obróciłem się w kierunku zachodnim";
 const std::string text_turn_right = "Obróciłem się w kierunku wschodnim";
+const std::string text_turn_ok = "No przeciesz stoję w tym kierunku!";
 const std::string text_on_place = "Jestem na miejscu";
 const std::string text_go_up = "Poruszam się w kierunku północnym";
 const std::string text_go_down = "Poruszam się w kierunku południowym";
@@ -129,6 +196,8 @@ const std::string text_non = "Jestem gotów do pracy";
 const std::string text_delete = "Niszczę obiekt znajdujący się przede mną";
 const std::string text_delete_not = "Nie ma nic przede mną do zniszczenia!";
 const std::string text_delete_end = "Zniszczyłem obiekt znajdujący się przede mną";
+const std::string text_path = "Jestem w drodze do celu";
+const std::string text_path_error = "Niemożliwe do wykonania!";
 
 const std::string text_stop = "Przerywam akcje!";
 const std::string text_cheats_on = "Nie ładnie oszukiwać! :<";

@@ -263,9 +263,11 @@ void Game::Start(){
 								}
 							}
 							else if( this->BotMessage[0] == '1' ){
+								/*
 								LogGame::Write("\"");
 								LogGame::Write(this->BotMessage);
 								LogGame::Write("\"\n");
+								*/
 								if( ! this->map2D.ReturnBusy() ){
 									this->map2D.Operation( this->BotMessage );
 									this->map2D.Update();

@@ -22,6 +22,8 @@ Map::Map(){
 	this->Wood = 0;
 	this-> Stone = 0;
 
+	this->MaxRange = 13;
+
 	this->Cheats = false;
 
 	this->Error_Map = "nie zainicjalizawano mapy ( void SetValue(int height, int width); )";
@@ -52,6 +54,8 @@ Map::Map(int height, int width){
 	this->Food = 0;
 	this->Wood = 0;
 	this-> Stone = 0;
+
+	this->MaxRange = 13;
 
 	this->Cheats = false;
 }
@@ -835,6 +839,7 @@ void Map::Update(){
 			this->OperationTurn();
 		}
 		else if( this->TextOperation[1] == 'b' ){
+			//BUILD FIRE
 			if( this->TextOperation[2] == 'f' ){
 				this->OperationBuildFire();
 			}
@@ -845,21 +850,49 @@ void Map::Update(){
 			}
 		}
 		else if( this->TextOperation == "1st" ){
+			//STOP
 			this->StopOperation();
 			this->Answer = text_non;
 			this->ToDeleteAnswer = true;
 			this->TextOperation.clear();
 		}
 		else if( this->TextOperation == "1del" ){
+			//DELETE
 			this->OperationDelete();
 		}
-		else if( this->TextOperation == "1cheatson" ){
-			this->Cheats = true;
-			this->Answer = text_cheats_on;
-			this->ToDeleteAnswer = true;
-			this->TextOperation.clear();
+		else if( this->TextOperation[1] == 'c' ){
+			//CUT TREE
+			if( this->TextOperation[2] == 't' ){
+				this->CutTree();
+			}
+			//CHEATS ON
+			else if( this->TextOperation == "1cheatson" ){
+				this->Cheats = true;
+				this->Answer = text_cheats_on;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+			else{
+				this->Answer = text_dont_know;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+		}
+		else if( this->TextOperation[1] == 'o' ){
+			//OPERATION FROM PATH
+			if( this->TextOperation[2] == 'd' ){
+				void StartPath();
+				this->Answer = text_path;
+				this->ToDeleteAnswer = true;
+			}
+			else{
+				this->Answer = text_dont_know;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
 		}
 		else if( this->Cheats ){
+			//CHEATS
 			if( this->TextOperation == "1allresources" ){
 				this->Food = 9;
 				this->Wood = 9;
@@ -1241,20 +1274,44 @@ void Map::OperationTurn(){
 	this->ToDeleteAnswer = true;
 	switch( this->TextOperation[2] ){
 		case 'u': //UP
-			this->PlayerDirection = 'u';
-			this->Answer = text_turn_up;
+			if( this->PlayerDirection == 'u' ){
+				this->NextOperation -= time_turn;
+				this->Answer = text_turn_ok;
+			}
+			else{
+				this->PlayerDirection = 'u';
+				this->Answer = text_turn_up;
+			}
 			break;
 		case 'd': //DOWN
-			this->PlayerDirection = 'd';
-			this->Answer = text_turn_down;
+			if( this->PlayerDirection == 'd' ){
+				this->NextOperation -= time_turn;
+				this->Answer = text_turn_ok;
+			}
+			else{
+				this->PlayerDirection = 'd';
+				this->Answer = text_turn_down;
+			}
 			break;
 		case 'l': //LEFT
-			this->PlayerDirection = 'l';
-			this->Answer = text_turn_left;
+			if( this->PlayerDirection == 'l' ){
+				this->NextOperation -= time_turn;
+				this->Answer = text_turn_ok;
+			}
+			else{
+				this->PlayerDirection = 'l';
+				this->Answer = text_turn_left;
+			}
 			break;
 		case 'r': //RIGHT
-			this->PlayerDirection = 'r';
-			this->Answer = text_turn_right;
+			if( this->PlayerDirection == 'r' ){
+				this->NextOperation -= time_turn;
+				this->Answer = text_turn_ok;
+			}
+			else{
+				this->PlayerDirection = 'r';
+				this->Answer = text_turn_right;
+			}
 			break;
 		default:
 			this->NextOperation -= time_turn;
@@ -1622,4 +1679,307 @@ void Map::OperationDelete(){
 		}
 
 	}
+}
+
+void Map::CutTree(){
+	std::vector < std::vector <char> > _map;
+	_map.resize( this->MaxRange );
+	for( unsigned int i=0; i<this->MaxRange; i++ ){
+		_map[i].resize( this->MaxRange );
+		for( unsigned int j=0; j<this->MaxRange; j++ ){
+			_map[i][j] = '0';
+		}
+	}
+	unsigned int _halfsize ;
+	int _tmp, _tmp_Player;
+	_halfsize = this->MaxRange/2;
+	_map[_halfsize][_halfsize] = 'S';
+	bool _exist = false;
+	std::vector <Object> _tree;
+	for( unsigned int i=0; i<this->MaxRange; i++ ){
+		for( unsigned int j=0; j<this->MaxRange; j++ ){
+			_tmp = this->ReturnValueMapObj( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i );
+			_tmp_Player = this->ReturnValueMap( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i );
+			if( _map[i][j] == '0' ){
+				if( _tmp == this->Drzewo[0].ReturnImageID() or _tmp == this->Drzewo[1].ReturnImageID() or _tmp == this->Drzewo[2].ReturnImageID() ){
+					//_map[i][j] = 'T';
+					_map[i][j] = 'x';
+					_tree.push_back( Object( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i, this->PlayerX+this->PlayerY ) );
+				}
+				else if( _tmp != 0 ){
+					_map[i][j] = 'x';
+				}
+				else if( _tmp_Player == this->Pelne[0].ReturnImageID() ){
+					//_map[i][j] = 'W';
+					_map[i][j] = 'x';
+				}
+			}
+		}
+	}
+	if( _tree.size() > 0 ){
+		std::vector <Object> _end;
+		_end.push_back( _tree[0] );
+		for( unsigned int i=1; i<_tree.size(); i++ ){
+			if( _tree[i].ReturnTMP() < _end[0].ReturnTMP() ){
+				_end[0] = _tree[i];
+			}
+		}
+		_map[_halfsize+_end[0].ReturnY()-this->PlayerY][_halfsize+_end[0].ReturnX()-this->PlayerX] = 'F';
+		_exist = true;
+	}
+
+	if( _exist ){
+		this->FindPath( _map );
+		if( this->Path.size() == 0  ){
+			this->Answer = text_path_error;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
+	}
+	else{
+		this->Answer = text_path_error;
+		this->ToDeleteAnswer = true;
+		this->TextOperation.clear();
+	}
+}
+
+void Map::FindPath( std::vector < std::vector <char> > &In ){
+	this->TextOperation.clear();
+
+	int _halfsize = this->MaxRange/2;
+	int _MaxRange = this->MaxRange;
+	int _curentX = _halfsize, _curentY = _halfsize;
+	Object _start( _curentY, _curentX );
+	unsigned int _value = 1, _number_start = 0, _number_end = 4, _number_counter = 0;
+	std::vector <Object> _list;
+	_list.push_back( Object( _curentX+1, _curentY ) );
+	_list.push_back( Object( _curentX-1, _curentY ) );
+	_list.push_back( Object( _curentX, _curentY+1 ) );
+	_list.push_back( Object( _curentX, _curentY-1 ) );
+
+	while( ! _list.empty() ){
+		_number_start++;
+		_curentY = _list[0].ReturnY();
+		_curentX = _list[0].ReturnX();
+		if( In[_curentY][_curentX] == '0' ){
+			In[_curentY][_curentX] = _value;
+			_curentY++;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( In[_curentY][_curentX] == '0' ){
+					_list.push_back( Object( _curentX, _curentY ) );
+					_number_counter++;
+				}
+				_curentY--;
+			}
+
+			_curentY--;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( In[_curentY][_curentX] == '0' ){
+					_list.push_back( Object( _curentX, _curentY ) );
+					_number_counter++;
+				}
+				_curentY++;
+			}
+
+			_curentX++;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( In[_curentY][_curentX] == '0' ){
+					_list.push_back( Object( _curentX, _curentY ) );
+					_number_counter++;
+				}
+				_curentX--;
+			}
+
+			_curentX--;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( In[_curentY][_curentX] == '0' ){
+					_list.push_back( Object( _curentX, _curentY ) );
+					_number_counter++;
+				}
+				_curentX++;
+			}
+		}
+		if( _list.size() > 0 ){
+			_list.erase( _list.begin() );
+		}
+		if( _number_start == _number_end ){
+			_number_start = 0;
+			_number_end = _number_counter;
+			_number_counter = 0;
+			_value++;
+		}
+	}
+
+	Object _Finish;
+	for( unsigned int i=0; i<this->MaxRange; i++ ){
+		for( unsigned int j=0; j<this->MaxRange; j++ ){
+			if( In[i][j] == '0' ){
+				In[i][j] = 'x';
+			}
+			else if( In[i][j] == 'F' ){
+				_Finish.SetX(j);
+				_Finish.SetY(i);
+			}
+		}
+	}
+
+	_list.clear();
+	_curentX = _Finish.ReturnX();
+	_curentY = _Finish.ReturnY();
+	_Finish.SetTMP( 100000 );
+	while( In[_curentY][_curentX] != 'S' ){
+		_curentY++;
+		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+				_Finish.SetX( _curentX );
+				_Finish.SetY( _curentY );
+				_Finish.SetTMP( (int)In[_curentY][_curentX] );
+			}
+			else if( In[_curentY][_curentX] == 'S' ){
+				break;
+			}
+			_curentY--;
+		}
+
+		_curentY--;
+		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+				_Finish.SetX( _curentX );
+				_Finish.SetY( _curentY );
+				_Finish.SetTMP( (int)In[_curentY][_curentX] );
+			}
+			else if( In[_curentY][_curentX] == 'S' ){
+				break;
+			}
+			_curentY++;
+		}
+
+		_curentX++;
+		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+				_Finish.SetX( _curentX );
+				_Finish.SetY( _curentY );
+				_Finish.SetTMP( (int)In[_curentY][_curentX] );
+			}
+			else if( In[_curentY][_curentX] == 'S' ){
+				break;
+			}
+			_curentX--;
+		}
+
+		_curentX--;
+		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+				_Finish.SetX( _curentX );
+				_Finish.SetY( _curentY );
+				_Finish.SetTMP( (int)In[_curentY][_curentX] );
+			}
+			else if( In[_curentY][_curentX] == 'S' ){
+				break;
+			}
+			_curentX++;
+		}
+		_curentX = _Finish.ReturnX();
+		_curentY = _Finish.ReturnY();
+		_list.push_back( Object( _curentX, _curentY ) );
+		In[_curentY][_curentX] = '@';
+	}
+
+	this->Path.clear();
+	//PATH
+	_curentX = _halfsize;
+	_curentY = _halfsize;
+	int _tmp;
+	for( std::vector <Object>::reverse_iterator it=_list.rbegin(); it!=_list.rend(); ++it ){
+		if( it->ReturnX() == _curentX ){
+			_tmp = it->ReturnY() - _curentY;
+			if( _tmp > 0 ){
+				if( this->PlayerDirection != 'd' ){
+					this->Path.push_back("td");
+				}
+				this->Path.push_back("gd1");
+			}
+			else{
+				if( this->PlayerDirection != 'u' ){
+					this->Path.push_back("tu");
+				}
+				this->Path.push_back("gu1");
+			}
+		}
+		else if( it->ReturnY() == _curentY ){
+			_tmp = it->ReturnX() - _curentX;
+			if( _tmp > 0 ){
+				if( this->PlayerDirection != 'r' ){
+					this->Path.push_back("tr");
+				}
+				this->Path.push_back("gr1");
+			}
+			else{
+				if( this->PlayerDirection != 'l' ){
+					this->Path.push_back("tl");
+				}
+				this->Path.push_back("gl1");
+			}
+		}
+		_curentX = it->ReturnX();
+		_curentY = it->ReturnY();
+	}
+
+	//TURN
+	_curentY++;
+	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+		if( In[_curentY][_curentX] == 'F' ){
+			this->Path.push_back( "td" );
+		}
+		_curentY--;
+	}
+
+	_curentY--;
+	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+		if( In[_curentY][_curentX] == 'F' ){
+			this->Path.push_back( "tu" );
+		}
+		_curentY++;
+	}
+
+	_curentX++;
+	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+		if( In[_curentY][_curentX] == 'F' ){
+			this->Path.push_back( "tr" );
+		}
+		_curentX--;
+	}
+
+	_curentX--;
+	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+		if( In[_curentY][_curentX] == 'F' ){
+			this->Path.push_back( "tl" );
+		}
+		_curentX++;
+	}
+	this->Path.push_back( "del" );
+	this->TextOperation = "1od";
+
+	/*
+	//LOG
+	LogGame::Write( "\n" );
+	for( std::vector<std::string>::iterator it=this->Path.begin(); it!=this->Path.end(); ++it ){
+		LogGame::Write( *it );
+		LogGame::Write( " " );
+	}
+	LogGame::Write( "\n" );
+	for( unsigned int i=0; i<this->MaxRange; i++ ){
+		for( unsigned int j=0; j<this->MaxRange; j++ ){
+			if( In[i][j] != '0' and In[i][j] != 'x' and In[i][j] != 'F' and In[i][j] != 'S' and  In[i][j] != '@' ){
+				LogGame::Write( (int)In[i][j] );
+				LogGame::Write( "\t" );
+			}
+			else{
+				LogGame::Write( In[i][j] );
+				LogGame::Write( "\t" );
+			}
+		}
+		LogGame::Write( "\n" );
+	}
+	*/
 }

@@ -4,7 +4,7 @@
 	<category>
 		<pattern>gu</pattern>
 		<template>
-			1gu5
+			1gu2
 		</template>
 	</category>
 	
@@ -68,6 +68,13 @@
 		<pattern>st</pattern>
 		<template>
 			1st
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ct</pattern>
+		<template>
+			1ct
 		</template>
 	</category>
 	

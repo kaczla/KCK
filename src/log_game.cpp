@@ -24,6 +24,10 @@ void LogGame::Write( std::string text ){
 	LogGame::file<<text;
 }
 
+void LogGame::Write( char text ){
+	LogGame::file<<text;
+}
+
 void LogGame::Write( int text ){
 	LogGame::file<<text;
 }

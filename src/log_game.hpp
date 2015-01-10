@@ -8,6 +8,7 @@ public:
 	LogGame();
 	~LogGame();
 	static void Write( std::string text );
+	static void Write( char text );
 	static void Write( int text );
 	static void Write( unsigned int text );
 	static void Write( double text );
