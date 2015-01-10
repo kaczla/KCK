@@ -4,7 +4,8 @@ std::fstream LogGame::file ("log.txt", std::fstream::out );
 bool LogGame::IsInit = true;
 
 LogGame::LogGame(){
-
+	LogGame::file.close();
+	LogGame::file.open("log.txt", std::fstream::out | std::fstream::app );
 }
 
 LogGame::~LogGame(){

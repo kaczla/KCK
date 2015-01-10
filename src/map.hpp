@@ -99,6 +99,7 @@ private:
 	//Budowanie
 	bool Builds;
 	inline void OperationBuildFire();
+	inline void OperationDelete();
 
 	//Zasoby gracza
 	unsigned int Food, Wood, Stone;
@@ -124,6 +125,10 @@ const std::string text_build_fire = "Zbudowałem ognisko";
 const std::string text_build_no_items = "Nie posiadam wystarczającą ilość przedmoiotów niezbędnych do budowy!";
 const std::string text_build_is_item = "Nie mogę zbudować, ponieważ przedmiot w miejscu docelowym istnieje!";
 const std::string text_build_wrong_place = "Nie mogę zbudować na takim terenie!";
+const std::string text_non = "Jestem gotów do pracy";
+const std::string text_delete = "Niszczę obiekt znajdujący się przede mną";
+const std::string text_delete_not = "Nie ma nic przede mną do zniszczenia!";
+const std::string text_delete_end = "Zniszczyłem obiekt znajdujący się przede mną";
 
 const std::string text_stop = "Przerywam akcje!";
 const std::string text_cheats_on = "Nie ładnie oszukiwać! :<";
@@ -131,5 +136,7 @@ const std::string text_cheats_on = "Nie ładnie oszukiwać! :<";
 //Czas wykonywanych akcji
 const unsigned int time_move = 750;
 const unsigned int time_turn = 500;
+const unsigned int time_build_fire = 6000;
+const unsigned int time_delete = 5000;
 
 #endif

@@ -4,7 +4,7 @@
 	<category>
 		<pattern>gu</pattern>
 		<template>
-			1gu2
+			1gu5
 		</template>
 	</category>
 	
@@ -95,5 +95,16 @@
 		</template>
 	</category>
 	
+	<category>
+		<pattern>res</pattern>
+		<template>
+			<srai>allres</srai>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>del</pattern>
+		<template>1del</template>
+	</category>
 	
 </aiml>

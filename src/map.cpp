@@ -60,7 +60,6 @@ bool Map::ReturnSuccess(){
 	return this->Success;
 }
 
-
 void Map::SetValue(int height, int width){
 	this->Width = width;
 	this->Height = height;
@@ -822,7 +821,7 @@ void Map::Update(){
 	if( this->ToDeleteAnswer ){
 		this->Answer.clear();
 		this->ToDeleteAnswer = false;
-		this->Busy = false;
+		//this->Busy = false;
 	}
 	this->LastOperation = SDL_GetTicks();
 	if( this->LastOperation >= this->NextOperation && ! this->TextOperation.empty() ){
@@ -844,6 +843,15 @@ void Map::Update(){
 				this->ToDeleteAnswer = true;
 				this->TextOperation.clear();
 			}
+		}
+		else if( this->TextOperation == "1st" ){
+			this->StopOperation();
+			this->Answer = text_non;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
+		else if( this->TextOperation == "1del" ){
+			this->OperationDelete();
 		}
 		else if( this->TextOperation == "1cheatson" ){
 			this->Cheats = true;
@@ -876,7 +884,7 @@ void Map::OperationGo(){
 	if( this->TextOperation[2] == 'u' ){
 		//UP
 		this->Answer = text_go_up;
-		this->NextOperation += time_move;
+		this->NextOperation = SDL_GetTicks() + time_move;
 		this->ToDeleteAnswer = true;
 		this->Busy = true;
 		switch( this->TextOperation[3] ){
@@ -1301,7 +1309,7 @@ void Map::OperationBuildFire(){
 								this->Builds = true;
 								this->Busy = true;
 								this->Answer = text_builds;
-								this->NextOperation = SDL_GetTicks() + 5000;
+								this->NextOperation = SDL_GetTicks() + time_build_fire;
 						}
 						else{
 							this->Answer = text_build_wrong_place;
@@ -1325,7 +1333,7 @@ void Map::OperationBuildFire(){
 								this->Builds = true;
 								this->Busy = true;
 								this->Answer = text_builds;
-								this->NextOperation = SDL_GetTicks() + 5000;
+								this->NextOperation = SDL_GetTicks() + time_build_fire;
 						}
 						else{
 							this->Answer = text_build_wrong_place;
@@ -1348,7 +1356,7 @@ void Map::OperationBuildFire(){
 								this->Builds = true;
 								this->Busy = true;
 								this->Answer = text_builds;
-								this->NextOperation = SDL_GetTicks() + 5000;
+								this->NextOperation = SDL_GetTicks() + time_build_fire;
 						}
 						else{
 							this->Answer = text_build_wrong_place;
@@ -1371,7 +1379,7 @@ void Map::OperationBuildFire(){
 								this->Builds = true;
 								this->Busy = true;
 								this->Answer = text_builds;
-								this->NextOperation = SDL_GetTicks() + 5000;
+								this->NextOperation = SDL_GetTicks() + time_build_fire;
 						}
 						else{
 							this->Answer = text_build_wrong_place;
@@ -1518,4 +1526,100 @@ unsigned int Map::ReturnStone(){
 		return 0;
 	}
 	return 0;
+}
+
+void Map::OperationDelete(){
+	if( this->LastOperation >= this->NextOperation ){
+		if( this->Builds ){
+			this->Builds = false;
+			this->Busy = false;
+			this->Answer = text_delete_end;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+			if( this->PlayerDirection == 'u' ){
+				this->Map2D_obj[this->PlayerY-1][this->PlayerX] = 0;
+			}
+			else if( this->PlayerDirection == 'd' ){
+				this->Map2D_obj[this->PlayerY+1][this->PlayerX] = 0;
+			}
+			else if( this->PlayerDirection == 'l' ){
+				this->Map2D_obj[this->PlayerY][this->PlayerX-1] = 0;
+			}
+			else if( this->PlayerDirection == 'r' ){
+				this->Map2D_obj[this->PlayerY][this->PlayerX+1] = 0;
+			}
+			else{
+				this->Answer = text_dont_know;
+			}
+		}
+		else{
+			int tmp = -1;
+			if( this->PlayerDirection == 'u' ){
+				tmp = this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 );
+				if( tmp != 0 ){
+					this->Builds = true;
+					this->Busy = true;
+					this->Answer = text_delete;
+					this->NextOperation = SDL_GetTicks() + time_delete;
+				}
+				else{
+					this->Answer = text_delete_not;
+					this->ToDeleteAnswer = true;
+					this->TextOperation.clear();
+				}
+
+			}
+			else if( this->PlayerDirection == 'd' ){
+				tmp = this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 );
+				if( tmp != 0 ){
+					this->Builds = true;
+					this->Busy = true;
+					this->Answer = text_delete;
+					this->NextOperation = SDL_GetTicks() + time_delete;
+				}
+				else{
+					this->Answer = text_delete_not;
+					this->ToDeleteAnswer = true;
+					this->TextOperation.clear();
+				}
+
+			}
+			else if( this->PlayerDirection == 'l' ){
+				tmp = this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY );
+				if( tmp != 0 ){
+					this->Builds = true;
+					this->Busy = true;
+					this->Answer = text_delete;
+					this->NextOperation = SDL_GetTicks() + time_delete;
+				}
+				else{
+					this->Answer = text_delete_not;
+					this->ToDeleteAnswer = true;
+					this->TextOperation.clear();
+				}
+
+			}
+			else if( this->PlayerDirection == 'r' ){
+				tmp = this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY );
+				if( tmp != 0 ){
+					this->Builds = true;
+					this->Busy = true;
+					this->Answer = text_delete;
+					this->NextOperation = SDL_GetTicks() + time_delete;
+				}
+				else{
+					this->Answer = text_delete_not;
+					this->ToDeleteAnswer = true;
+					this->TextOperation.clear();
+				}
+
+			}
+			else {
+				this->Answer = text_dont_know;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+		}
+
+	}
 }

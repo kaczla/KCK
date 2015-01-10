@@ -250,7 +250,9 @@ void Game::Start(){
 							this->BotMessage = this->bot.ReturnAnswer( this->Input );
 							if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
 								this->BotMessage.erase( this->BotMessage.begin() );
-
+								while( this->BotMessage[0] == ' ' ){
+									this->BotMessage.erase( this->BotMessage.begin() );
+								}
 							}
 							if( this->BotMessage[0] != '1' ){
 								if( this->Input.size() > 0 ){
@@ -260,15 +262,30 @@ void Game::Start(){
 									this->TextBotMessage.RenderText( this->BotMessage );
 								}
 							}
-							else if( this->BotMessage[0] == '1' and ! this->map2D.ReturnBusy() ){
-								this->map2D.Operation( this->BotMessage );
-								this->map2D.Update();
-								this->BotMessage = this->map2D.ReturnAnswer();
-								if( this->Input.size() > 0 ){
-									TextInput.RenderText( this->Input );
+							else if( this->BotMessage[0] == '1' ){
+								LogGame::Write("\"");
+								LogGame::Write(this->BotMessage);
+								LogGame::Write("\"\n");
+								if( ! this->map2D.ReturnBusy() ){
+									this->map2D.Operation( this->BotMessage );
+									this->map2D.Update();
+									this->BotMessage = this->map2D.ReturnAnswer();
+									if( this->Input.size() > 0 ){
+										TextInput.RenderText( this->Input );
+									}
+									if( this->BotMessage.size() > 0 ){
+										this->TextBotMessage.RenderText( this->BotMessage );
+									}
 								}
-								if( this->BotMessage.size() > 0 ){
-									this->TextBotMessage.RenderText( this->BotMessage );
+								else if( this->BotMessage[1] == 's' and this->BotMessage[2] == 't' ){
+									this->map2D.StopOperation();
+									this->BotMessage = this->map2D.ReturnAnswer();
+									if( this->Input.size() > 0 ){
+										TextInput.RenderText( this->Input );
+									}
+									if( this->BotMessage.size() > 0 ){
+										this->TextBotMessage.RenderText( this->BotMessage );
+									}
 								}
 							}
 							this->NextInput = this->LastInput + 1000;
@@ -463,6 +480,19 @@ void Game::ReadImages(){
 		else if( this->images[i].ReturnName() == "menu3" ){
 			this->MenuBar[3] = &this->images[i];
 		}
+	}
+	//Sprawdzenie
+	if( this->MenuWood == NULL or this->MenuStone == NULL or this->MenuFood == NULL ){
+		this->game_start = false;
+		LogGame::Write( "[ERR] " );
+		LogGame( SDL_GetTicks() );
+		LogGame::Write( ": Nie załadowano grafiki menu!\n" );
+	}
+	if( this->MenuBar[0] == NULL or this->MenuBar[1] == NULL or this->MenuBar[2] == NULL or this->MenuBar[3] == NULL ){
+		this->game_start = false;
+		LogGame::Write( "[ERR] " );
+		LogGame( SDL_GetTicks() );
+		LogGame::Write( ": Nie załadowano grafiki menu!\n" );
 	}
 }
 
