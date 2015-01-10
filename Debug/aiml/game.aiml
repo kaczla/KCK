@@ -665,9 +665,32 @@
 			</random>
 		</template>
 	</category>
-		
+	
+	<category>
+		<pattern>Pokonaj * krotki odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+	
 	<category>
 		<pattern>Pokonaj sredni odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pokonaj * sredni odcinek na polnoc</pattern>
 		<template>
 			1gu
 			<random>
@@ -690,7 +713,29 @@
 	</category>
 
 	<category>
+		<pattern>Pokonaj * dlugi odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj krotki odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pokonaj * krotki odcinek na poludnie</pattern>
 		<template>
 			1gd
 			<random>
@@ -713,6 +758,18 @@
 	</category>
 
 	<category>
+		<pattern>Pokonaj * sredni odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj dlugi odcinek na poludnie</pattern>
 		<template>
 			1gd
@@ -724,7 +781,29 @@
 	</category>
 
 	<category>
+		<pattern>Pokonaj * dlugi odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj krotki odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pokonaj * krotki odcinek na zachod</pattern>
 		<template>
 			1gl
 			<random>
@@ -747,6 +826,18 @@
 	</category>
 
 	<category>
+		<pattern>Pokonaj * sredni odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj dlugi odcinek na zachod</pattern>
 		<template>
 			1gl
@@ -758,7 +849,29 @@
 	</category>
 
 	<category>
+		<pattern>Pokonaj * dlugi odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj krotki odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pokonaj * krotki odcinek na wschod</pattern>
 		<template>
 			1gr
 			<random>
@@ -781,7 +894,30 @@
 	</category>
 
 	<category>
+		<pattern>Pokonaj * sredni odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj dlugi odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Pokonaj * dlugi odcinek na wschod</pattern>
 		<template>
 			1gr
 			<random>
@@ -799,9 +935,23 @@
 	</category>
 
 	<category>
+		<pattern>Obroc sie * w prawo</pattern>
+		<template>
+			1tr
+		</template>
+	</category>
+
+	<category>
 		<pattern>Obroc sie w lewo</pattern>
 		<template>
 			1tl	<!-- turn left -->
+		</template>
+	</category>
+
+	<category>
+		<pattern>Obroc sie * w lewo</pattern>
+		<template>
+			1tl
 		</template>
 	</category>
 
@@ -813,9 +963,30 @@
 	</category>
 
 	<category>
+		<pattern>Zbuduj * ognisko</pattern>
+		<template>
+			1bf
+		</template>
+	</category>
+
+	<category>
 		<pattern>Stop</pattern>
 		<template>
 			1st	<!-- stop -->
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przerwij</pattern>
+		<template>
+			1st
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przerwij *</pattern>
+		<template>
+			1st
 		</template>
 	</category>
 
@@ -827,9 +998,30 @@
 	</category>
 
 	<category>
+		<pattern>Zetnij * najblizsze drzewko</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+
+	<category>
 		<pattern>Co widzisz</pattern>
 		<template>
 			1ws	<!-- what see -->
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co * widzisz</pattern>
+		<template>
+			1ws
+		</template>
+	</category>
+
+	<category>
+		<pattern>Co widzisz *</pattern>
+		<template>
+			1ws
 		</template>
 	</category>
 
