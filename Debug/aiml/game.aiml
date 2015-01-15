@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
 <aiml>
 
@@ -422,8 +422,8 @@
 		<pattern>Kim jest Sergiusz Janczura</pattern>
 		<template>
 			<random>
-				<li>Synem Janusza Korwin-Mikke</li>
-				<li>Twórcą Pac-Mana</li>
+				<li>Fanem koszykowki</li>
+				<li>Twórcą Pac-Mana i SpaceInvaders</li>
 				<li>Moim ojcem</li>
 			</random>
 		</template>
