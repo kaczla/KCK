@@ -724,6 +724,142 @@
 	</category>
 
 	<category>
+		<pattern>Idz na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj krotki odcinek na poludnie</pattern>
 		<template>
 			1gd
@@ -784,6 +920,142 @@
 		<pattern>Pokonaj * dlugi odcinek na poludnie</pattern>
 		<template>
 			1gd
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+		<category>
+		<pattern>Idz na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * daleko na poludnie</pattern>
+		<template>
+			1gu
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -860,6 +1132,142 @@
 	</category>
 
 	<category>
+		<pattern>Idz na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Pokonaj krotki odcinek na wschod</pattern>
 		<template>
 			1gr
@@ -928,6 +1336,142 @@
 	</category>
 
 	<category>
+		<pattern>Idz na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Idz * daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Biegnij * daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Obroc sie w prawo</pattern>
 		<template>
 			1tr	<!-- turn right -->
@@ -985,6 +1529,20 @@
 
 	<category>
 		<pattern>Przerwij *</pattern>
+		<template>
+			1st
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przestan</pattern>
+		<template>
+			1st
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Przestan *</pattern>
 		<template>
 			1st
 		</template>
