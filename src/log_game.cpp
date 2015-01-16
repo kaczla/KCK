@@ -44,6 +44,8 @@ void LogGame::NewLine(){
 	LogGame::file<<"\n";
 }
 
-void LogGame::Write( std::vector<std::basic_string<char> >::size_type text ){
-	LogGame::file<<text;
-}
+#ifdef Vector_size_x64
+	void LogGame::Write( std::vector<std::basic_string<char> >::size_type text ){
+		LogGame::file<<text;
+	}
+#endif

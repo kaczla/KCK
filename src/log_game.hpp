@@ -12,7 +12,12 @@ public:
 	static void Write( int text );
 	static void Write( unsigned int text );
 	static void Write( double text );
-	static void Write( std::vector<std::basic_string<char> >::size_type text );
+#if __GNUC__
+	#if __x86_64__ || __ppc64__
+	#define Vector_size_x64
+		static void Write( std::vector<std::basic_string<char> >::size_type text );
+	#endif
+#endif
 	static void NewLine();
 	bool ReturnLogGame();
 	static void ClearLogGame();
