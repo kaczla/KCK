@@ -79,6 +79,41 @@
 	</category>
 	
 	<category>
+		<pattern>dt</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ds</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ft</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>fs</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ff</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
 		<pattern>su</pattern>
 		<template>1cheatson</template>
 	</category>

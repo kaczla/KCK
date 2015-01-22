@@ -33,9 +33,11 @@ private:
 	std::vector <Anim> anim;
 	std::vector <Img> error_img;
 	std::vector <Img> backgroud;
+	std::vector <Img> other;
 	inline void ReadImages();
 	inline void ReadAnim();
 	Img *MenuFood, *MenuWood, *MenuStone, *MenuBar[4];
+	Img *ScreenStart, *Working;
 	inline void DrawMenu();
 	//MAPA GRY
 	Map map2D;

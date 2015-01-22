@@ -28,7 +28,7 @@ Game::Game(){
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
 	LogGame::Write( ": Inicjalizowanie gry\n" );
-//Grafika
+//Wskazniki
 	this->MenuFood = NULL;
 	this->MenuWood = NULL;
 	this->MenuStone = NULL;
@@ -36,6 +36,9 @@ Game::Game(){
 	this->MenuBar[1] = NULL;
 	this->MenuBar[2] = NULL;
 	this->MenuBar[3] = NULL;
+	this->ScreenStart = NULL;
+	this->Working = NULL;
+//Grafika
 	this->ReadImages();
 //ANIMACJE
 	this->ReadAnim();
@@ -137,6 +140,8 @@ Game::~Game(){
 	this->MenuBar[1] = NULL;
 	this->MenuBar[2] = NULL;
 	this->MenuBar[3] = NULL;
+	this->ScreenStart = NULL;
+	this->Working = NULL;
 	Text::Clear();
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
@@ -171,6 +176,43 @@ void Game::ZoomOut(){
 }
 
 void Game::Start(){
+	if( this->game_start ){
+		//START
+		glClear( GL_COLOR_BUFFER_BIT );
+		glLoadIdentity();
+		glBindTexture( GL_TEXTURE_2D, this->ScreenStart->ReturnImageID() );
+		glBegin( GL_QUADS );
+			glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+			glTexCoord2f( 1.0, 0.0 ); glVertex2f( this->init.SCREEN_WIDTH, 0.0 );
+			glTexCoord2f( 1.0, 1.0 ); glVertex2f( this->init.SCREEN_WIDTH, this->init.SCREEN_HEIGHT );
+			glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, this->init.SCREEN_HEIGHT );
+		glEnd();
+		SDL_GL_SwapBuffers();
+		while( this->game_start ){
+			while( SDL_PollEvent( &this->event ) ){
+				if( this->event.type == SDL_QUIT ){
+					this->game_start = false;
+				}
+				else if( this->event.type == SDL_KEYDOWN ){
+					this->KeyEvent = event.key.keysym.sym;
+					switch( this->KeyEvent ){
+						case SDLK_ESCAPE: // ESC
+							this->game_start = false;
+							break;
+						case SDLK_SPACE: // SPACE
+							this->game_start = false;
+							break;
+						case SDLK_RETURN: // ENTER
+							this->game_start = false;
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		}
+		this->game_start = true;
+	}
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
 	LogGame::Write( ": Uruchamianie gry\n" );
@@ -259,6 +301,7 @@ void Game::Start(){
 									TextInput.RenderText( this->Input );
 								}
 								if( this->BotMessage.size() > 0 ){
+									//std::cout<<"+ "<<this->BotMessage<<"\n";
 									this->TextBotMessage.RenderText( this->BotMessage );
 								}
 							}
@@ -276,6 +319,7 @@ void Game::Start(){
 										TextInput.RenderText( this->Input );
 									}
 									if( this->BotMessage.size() > 0 ){
+										//std::cout<<"+ "<<this->BotMessage<<"\n";
 										this->TextBotMessage.RenderText( this->BotMessage );
 									}
 								}
@@ -286,6 +330,7 @@ void Game::Start(){
 										TextInput.RenderText( this->Input );
 									}
 									if( this->BotMessage.size() > 0 ){
+										//std::cout<<"+ "<<this->BotMessage<<"\n";
 										this->TextBotMessage.RenderText( this->BotMessage );
 									}
 								}
@@ -328,9 +373,10 @@ void Game::Update(){
 	this->map2D.Update();
 	if( !this->map2D.ReturnAnswer().empty() && this->BotMessage != this->map2D.ReturnAnswer() ){
 		this->BotMessage = this->map2D.ReturnAnswer();
+		//std::cout<<"+ "<<this->BotMessage<<"\n";
 		this->TextBotMessage.RenderText( this->BotMessage );
 	}
-	glClear( GL_COLOR_BUFFER_BIT );//| GL_DEPTH_BUFFER_BIT );
+	glClear( GL_COLOR_BUFFER_BIT );
 	glLoadIdentity();
 	for( int i=this->CurrentPlayerY-this->Square_length; i<=this->CurrentPlayerY+this->Square_length; i++ ){
 		for( int j=this->CurrentPlayerX-this->Square_length; j<=this->CurrentPlayerX+this->Square_length; j++ ){
@@ -373,6 +419,12 @@ void Game::Update(){
 				this->CurrentMapObj = this->map2D.ReturnPlayer();
 				glBindTexture( GL_TEXTURE_2D, this->images[this->CurrentMapObj].ReturnImageID() );
 				this->Draw_Square();
+				if( this->map2D.ReturnBusy() ){
+					glTranslatef( 0.0, -this->Square_size, 0.0 );
+					glBindTexture( GL_TEXTURE_2D, this->Working->ReturnImageID() );
+					this->Draw_Square();
+					glTranslatef( 0.0, this->Square_size, 0.0 );
+				}
 			}
 			glTranslatef( this->Square_size, 0.0, 0.0 );
 		}
@@ -495,6 +547,42 @@ void Game::ReadImages(){
 		LogGame::Write( "[ERR] " );
 		LogGame( SDL_GetTicks() );
 		LogGame::Write( ": Nie załadowano grafiki menu!\n" );
+	}
+
+	//Ekran startowy + inne grafiki
+	this->other.resize( 2 );
+	this->other.clear();
+	this->other.push_back( Img( 1001, "working", "bin/img/working.png" ) );
+	this->other.push_back( Img( 1000, "gamestart", "bin/img/gamestart.png" ) );
+	for( unsigned int i=0; i<this->other.size(); i++ ){
+		if( ! this->other[i].ReturnSuccess() ){
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( SDL_GetTicks() );
+			LogGame::Write( ": Brak pliku bin/img/" );
+			LogGame::Write( this->other[i].ReturnName() );
+			LogGame::Write( " !\n" );
+			this->game_start = false;
+		}
+	}
+	for( unsigned int i=0; i<this->other.size(); i++ ){
+		if( other[i].ReturnName() == "gamestart" ){
+			this->ScreenStart = &this->other[i];
+		}
+		else if( other[i].ReturnName() == "working" ){
+			this->Working = &this->other[i];
+		}
+	}
+	if( this->ScreenStart == NULL ){
+		this->game_start = false;
+		LogGame::Write( "[ERR] " );
+		LogGame( SDL_GetTicks() );
+		LogGame::Write( ": Nie załadowano grafiki: gamestart.png!\n" );
+	}
+	if( this->Working == NULL ){
+		this->game_start = false;
+		LogGame::Write( "[ERR] " );
+		LogGame( SDL_GetTicks() );
+		LogGame::Write( ": Nie załadowano grafiki: working.png!\n" );
 	}
 }
 

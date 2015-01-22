@@ -36,6 +36,7 @@ public:
 	unsigned int ReturnFood();
 	unsigned int ReturnWood();
 	unsigned int ReturnStone();
+	unsigned int ReturnHungry();
 private:
 	class Podloze{
 	public:
@@ -82,7 +83,17 @@ private:
 		Object( int x, int y, int tmp ){
 			this->X = x;
 			this->Y = y;
-			this->TMP = abs( x ) + abs( y ) - abs( tmp );
+			this->TMP = (double)tmp;
+		}
+		Object( int x, int y, float tmp ){
+			this->X = x;
+			this->Y = y;
+			this->TMP = (double)tmp;
+		}
+		Object( int x, int y, double tmp ){
+			this->X = x;
+			this->Y = y;
+			this->TMP = tmp;
 		}
 		Object( const Object & object ){
 			this->X = object.X;
@@ -101,7 +112,7 @@ private:
 		int ReturnY(){
 			return this->Y;
 		}
-		int ReturnTMP(){
+		double ReturnTMP(){
 			return this->TMP;
 		}
 		void SetX( int x ){
@@ -113,14 +124,15 @@ private:
 		void SetTMP( int tmp ){
 			this->TMP = tmp;
 		}
-		void SetTMP( int x, int y ){
-			this->TMP = abs( this->X ) + abs( this->Y );
-			this->TMP -= abs( x ) + abs( y );
-			this->TMP = abs( this->TMP );
+		void SetTMP( double tmp){
+			this->TMP = tmp;
+		}
+		void SetTMP( float tmp){
+			this->TMP = (double)tmp;
 		}
 	private:
 		int X, Y;
-		int TMP;
+		double TMP;
 	};
 	inline void SetVector();
 	//Koordynaty Gracza
@@ -141,6 +153,7 @@ private:
 	std::vector <Podloze> Drzewo;
 	std::vector <Podloze> Ognisko;
 	std::vector <Podloze> Kamien;
+	std::vector <Podloze> Jedzenie;
 	std::vector <Podloze> Przedmioty;
 	//Błędy
 	std::string Error_Map;
@@ -160,15 +173,27 @@ private:
 	//Budowanie
 	bool Builds;
 	inline void OperationBuildFire();
+	inline void StartFire();
+	inline void StopFire();
 	inline void OperationDelete();
+	inline void DeleteObject( int x, int y );
 	inline void CutTree();
+	inline void DestroyStone();
+	inline void DestoryFood();
+	inline void FindFire();
+	inline void FindTree();
+	inline void FindStone();
+	inline void FindFood();
 	unsigned int MaxRange;
+	//PATH
 	std::vector <std::string> Path;
+	inline void FindObject( std::vector <Podloze> &target );
 	inline void FindPath( std::vector < std::vector <char> > &In );
-	inline void StartPath();
+	bool PathBool, PathBoolEnd;
 
 	//Zasoby gracza
 	unsigned int Food, Wood, Stone;
+	unsigned int Hungry;
 
 	//CHEATS
 	bool Cheats;
@@ -198,6 +223,8 @@ const std::string text_delete_not = "Nie ma nic przede mną do zniszczenia!";
 const std::string text_delete_end = "Zniszczyłem obiekt znajdujący się przede mną";
 const std::string text_path = "Jestem w drodze do celu";
 const std::string text_path_error = "Niemożliwe do wykonania!";
+const std::string text_path_end = "Cel osiągnięty";
+const std::string text_path_working = "Pracuje nad tym";
 
 const std::string text_stop = "Przerywam akcje!";
 const std::string text_cheats_on = "Nie ładnie oszukiwać! :<";

@@ -20,9 +20,12 @@ Map::Map(){
 
 	this->Food = 0;
 	this->Wood = 0;
-	this-> Stone = 0;
+	this->Stone = 0;
+	this->Hungry = 9;
 
 	this->MaxRange = 13;
+	this->PathBool = false;
+	this->PathBoolEnd = false;
 
 	this->Cheats = false;
 
@@ -53,9 +56,12 @@ Map::Map(int height, int width){
 
 	this->Food = 0;
 	this->Wood = 0;
-	this-> Stone = 0;
+	this->Stone = 0;
+	this->Hungry = 9;
 
 	this->MaxRange = 13;
+	this->PathBool = false;
+	this->PathBoolEnd = false;
 
 	this->Cheats = false;
 }
@@ -341,9 +347,6 @@ void Map::SetValue(int height, int width){
 
 
 		//OBIEKTY
-		this->Map2D_obj[this->PlayerY][this->PlayerX+3] = this->Drzewo[0].ReturnImageID();
-		this->Map2D_obj[this->PlayerY+1][this->PlayerX+3] = this->Drzewo[1].ReturnImageID();
-		this->Map2D_obj[this->PlayerY+2][this->PlayerX+3] = this->Drzewo[2].ReturnImageID();
 
 		this->Error_Map = " ";
 		this->Success = true;
@@ -549,10 +552,11 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 	this->WodaTrawa[10].SetLocalName( "LP_trawawoda" );
 	this->WodaTrawa[11].SetLocalName( "LP_wodatrawa" );
 
-	this->Drzewo.resize( 3 );
+	this->Drzewo.resize( 4 );
 	this->Drzewo[0].SetLocalName( "tree1" );
 	this->Drzewo[1].SetLocalName( "tree2" );
 	this->Drzewo[2].SetLocalName( "tree3" );
+	this->Drzewo[3].SetLocalName( "pien" );
 
 	this->Ognisko.resize( 3 );
 	this->Ognisko[0].SetLocalName( "ognichoready" );
@@ -563,6 +567,11 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 	this->Kamien[0].SetLocalName( "stone1" );
 	this->Kamien[1].SetLocalName( "stone2" );
 	this->Kamien[2].SetLocalName( "stone3" );
+
+	this->Jedzenie.resize( 3 );
+	this->Jedzenie[0].SetLocalName( "grzyby1" );
+	this->Jedzenie[1].SetLocalName( "grzyby2" );
+	this->Jedzenie[2].SetLocalName( "grzyby3" );
 
 	bool equal_size = false;
 	if( this->TrawaPiach.size() == this->WodaPiach.size() and this->TrawaPiach.size() == this->WodaTrawa.size() ){
@@ -643,6 +652,13 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 				break;
 			}
 		}
+		for( j=0; j<this->Jedzenie.size(); j++ ){
+			if( not_found && this->Jedzenie[j].ReturnLocalName() == img[i].ReturnName() ){
+				this->Jedzenie[j].SetImageID( i );
+				not_found = false;
+				break;
+			}
+		}
 		if( not_found && ( ! this->Animation ) ){
 			for( j=1; j<this->Ognisko.size(); j++ ){
 				if( not_found && this->Ognisko[j].ReturnLocalName() == img[i].ReturnName() ){
@@ -684,6 +700,19 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 				}
 			}
 			not_found = true;
+		}
+		not_found = true;
+		for( i=0; i<img.size(); i++ ){
+			if( not_found ){
+				if( this->Drzewo[3].ReturnLocalName() == img[i].ReturnName() ){
+					this->Drzewo[3].SetImageID( i );
+					not_found = false;
+					break;
+				}
+			}
+			else{
+				break;
+			}
 		}
 	}
 
@@ -757,7 +786,15 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 			error_tmp+= this->Kamien[j].ReturnLocalName() + "; ";
 		}
 	}
-
+	for( j=0; j<this->Jedzenie.size(); j++ ){
+		if( this->Jedzenie[j].ReturnImageID() == -1 ){
+			ile++;
+			error_tmp+= this->Jedzenie[j].ReturnLocalName() + "; ";
+		}
+	}
+	this->Error_Map = "Problem z inicjalizacją zmiennych dla generowania mapy!";
+	this->Success = false;
+	this->SuccessVarMap = false;
 	if( ile != 0 ){
 		LogGame::Write( "[ERR] " );
 		LogGame::Write( SDL_GetTicks() );
@@ -771,8 +808,11 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 		LogGame::Write( error_tmp );
 		LogGame::NewLine();
 	}
-	this->SuccessVarMap = true;
-
+	else{
+		this->Success = true;
+		this->Error_Map.clear();
+		this->SuccessVarMap = true;
+	}
 }
 
 int Map::ReturnPlayerX(){
@@ -860,17 +900,23 @@ void Map::Update(){
 			//DELETE
 			this->OperationDelete();
 		}
-		else if( this->TextOperation[1] == 'c' ){
-			//CUT TREE
+		else if( this->TextOperation == "1end" ){
+			this->StopOperation();
+			this->Answer = text_path_end;
+		}
+		//FIND
+		else if( this->TextOperation[1] == 'f' ){
+			//TREE
 			if( this->TextOperation[2] == 't' ){
-				this->CutTree();
+				this->FindTree();
 			}
-			//CHEATS ON
-			else if( this->TextOperation == "1cheatson" ){
-				this->Cheats = true;
-				this->Answer = text_cheats_on;
-				this->ToDeleteAnswer = true;
-				this->TextOperation.clear();
+			//STONE
+			else if( this->TextOperation[2] == 's' ){
+				this->FindStone();
+			}
+			//FIRE
+			else if( this->TextOperation[2] == 'f' ){
+				this->FindFire();
 			}
 			else{
 				this->Answer = text_dont_know;
@@ -878,12 +924,21 @@ void Map::Update(){
 				this->TextOperation.clear();
 			}
 		}
-		else if( this->TextOperation[1] == 'o' ){
-			//OPERATION FROM PATH
-			if( this->TextOperation[2] == 'd' ){
-				void StartPath();
-				this->Answer = text_path;
+		else if( this->TextOperation[1] == 'c' ){
+			//CUT TREE
+			if( this->TextOperation[2] == 't' ){
+				this->CutTree();
+			}
+			//DESTROY STONE
+			else if( this->TextOperation[2] == 's' ){
+				this->DestroyStone();
+			}
+			//CHEATS ON
+			else if( this->TextOperation == "1cheatson" ){
+				this->Cheats = true;
+				this->Answer = text_cheats_on;
 				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
 			}
 			else{
 				this->Answer = text_dont_know;
@@ -909,6 +964,27 @@ void Map::Update(){
 			this->Answer = text_dont_know;
 			this->ToDeleteAnswer = true;
 			this->TextOperation.clear();
+		}
+
+		if( this->TextOperation.empty() && this->Path.size() > 0 ){
+				this->TextOperation = this->Path[0];
+				this->Path.erase( this->Path.begin() );
+				if( this->TextOperation == "1end" ){
+					this->PathBoolEnd = true;
+				}
+		}
+
+		if( this->PathBool ){
+			if( this->Builds ){
+				this->Answer = text_path_working;
+			}
+			else{
+				this->Answer = text_path;
+			}
+			if( PathBoolEnd ){
+				this->PathBoolEnd = false;
+				this->Answer = text_path_end;
+			}
 		}
 	}
 }
@@ -1506,6 +1582,8 @@ void Map::StopOperation(){
 	this->ToDeleteAnswer = true;
 	this->Builds = false;
 	this->Busy = false;
+	this->PathBool = false;
+	this->Path.clear();
 	this->LastOperation = SDL_GetTicks();
 	this->NextOperation = this->LastOperation;
 }
@@ -1594,16 +1672,16 @@ void Map::OperationDelete(){
 			this->ToDeleteAnswer = true;
 			this->TextOperation.clear();
 			if( this->PlayerDirection == 'u' ){
-				this->Map2D_obj[this->PlayerY-1][this->PlayerX] = 0;
+				this->DeleteObject( this->PlayerX, this->PlayerY-1 );
 			}
 			else if( this->PlayerDirection == 'd' ){
-				this->Map2D_obj[this->PlayerY+1][this->PlayerX] = 0;
+				this->DeleteObject( this->PlayerX, this->PlayerY+1 );
 			}
 			else if( this->PlayerDirection == 'l' ){
-				this->Map2D_obj[this->PlayerY][this->PlayerX-1] = 0;
+				this->DeleteObject( this->PlayerX-1, this->PlayerY );
 			}
 			else if( this->PlayerDirection == 'r' ){
-				this->Map2D_obj[this->PlayerY][this->PlayerX+1] = 0;
+				this->DeleteObject( this->PlayerX+1, this->PlayerY );
 			}
 			else{
 				this->Answer = text_dont_know;
@@ -1681,7 +1759,68 @@ void Map::OperationDelete(){
 	}
 }
 
+void Map::DeleteObject( int x, int y ){
+	int _tmp = this->Map2D_obj[y][x];
+	if( _tmp == this->Drzewo[0].ReturnImageID() or _tmp == this->Drzewo[1].ReturnImageID() or _tmp == this->Drzewo[2].ReturnImageID() ){
+		this->Map2D_obj[y][x] = this->Drzewo[3].ReturnImageID();
+		this->Wood += 3;
+	}
+	else if( _tmp == this->Drzewo[3].ReturnImageID() ){
+		this->Map2D_obj[y][x] = 0;
+		this->Wood++;
+	}
+	else if( _tmp == this->Kamien[0].ReturnImageID() or _tmp == this->Kamien[1].ReturnImageID() or _tmp == this->Kamien[2].ReturnImageID() ){
+		this->Map2D_obj[y][x] = 0;
+		this->Stone += 3;
+	}
+	else if( _tmp == this->Ognisko[0].ReturnImageID() or _tmp == this->Ognisko[1].ReturnImageID() or _tmp == this->Ognisko[2].ReturnImageID()  ){
+		this->Wood++;
+		this->Stone++;
+		this->Map2D_obj[y][x] = 0;
+	}
+	else{
+		this->Map2D_obj[y][x] = 0;
+	}
+}
+
 void Map::CutTree(){
+	this->FindObject( this->Drzewo );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1del" );
+		this->Path.push_back( "1end" );
+	}
+}
+
+void Map::DestroyStone(){
+	this->FindObject( this->Kamien );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1del" );
+		this->Path.push_back( "1end" );
+	}
+}
+
+void Map::FindFire(){
+	this->FindObject( this->Ognisko );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1end" );
+	}
+}
+
+void Map::FindTree(){
+	this->FindObject( this->Drzewo );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1end" );
+	}
+}
+
+void Map::FindStone(){
+	this->FindObject( this->Kamien );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1end" );
+	}
+}
+
+void Map::FindObject( std::vector <Podloze> &target ){
 	std::vector < std::vector <char> > _map;
 	_map.resize( this->MaxRange );
 	for( unsigned int i=0; i<this->MaxRange; i++ ){
@@ -1692,40 +1831,66 @@ void Map::CutTree(){
 	}
 	unsigned int _halfsize ;
 	int _tmp, _tmp_Player;
+	double _double;
 	_halfsize = this->MaxRange/2;
-	_map[_halfsize][_halfsize] = 'S';
+	int _int_halfsize = (int)_halfsize;
+	int  _int1, _int2;
+	_map[_halfsize][_halfsize] = 's';
 	bool _exist = false;
 	std::vector <Object> _tree;
+	_tree.clear();
 	for( unsigned int i=0; i<this->MaxRange; i++ ){
 		for( unsigned int j=0; j<this->MaxRange; j++ ){
 			_tmp = this->ReturnValueMapObj( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i );
 			_tmp_Player = this->ReturnValueMap( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i );
 			if( _map[i][j] == '0' ){
-				if( _tmp == this->Drzewo[0].ReturnImageID() or _tmp == this->Drzewo[1].ReturnImageID() or _tmp == this->Drzewo[2].ReturnImageID() ){
-					//_map[i][j] = 'T';
-					_map[i][j] = 'x';
-					_tree.push_back( Object( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i, this->PlayerX+this->PlayerY ) );
+				for( unsigned int k=0; k<target.size(); k++ ){
+					if(  _tmp == target[k].ReturnImageID() ){
+						//_tree.push_back( Object( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i, this->PlayerX+this->PlayerY ) );
+						_int1 = _int_halfsize - j;
+						_int1 *= _int1;
+						_int2 = _int_halfsize - i;
+						_int2 *= _int2;
+						_double = sqrt( _int1 + _int2 );
+						_tree.push_back( Object( this->PlayerX-_halfsize+j, this->PlayerY-_halfsize+i, _double ) );
+						break;
+					}
 				}
-				else if( _tmp != 0 ){
+				if( _tmp != 0 ){
 					_map[i][j] = 'x';
 				}
 				else if( _tmp_Player == this->Pelne[0].ReturnImageID() ){
-					//_map[i][j] = 'W';
 					_map[i][j] = 'x';
 				}
 			}
 		}
 	}
+
 	if( _tree.size() > 0 ){
 		std::vector <Object> _end;
 		_end.push_back( _tree[0] );
+		int _tmpX, _tmpY;
 		for( unsigned int i=1; i<_tree.size(); i++ ){
 			if( _tree[i].ReturnTMP() < _end[0].ReturnTMP() ){
-				_end[0] = _tree[i];
+				_tmpX = _halfsize+_tree[i].ReturnX()-this->PlayerX;
+				_tmpY = _halfsize+_tree[i].ReturnY()-this->PlayerY;
+				if( _map[_tmpY+1][_tmpX] != 'x' or _map[_tmpY-1][_tmpX] != 'x' or _map[_tmpY][_tmpX+1] != 'x' or _map[_tmpY][_tmpX-1] != 'x' ){
+					_end[0] = _tree[i];
+					_exist = true;
+				}
 			}
 		}
-		_map[_halfsize+_end[0].ReturnY()-this->PlayerY][_halfsize+_end[0].ReturnX()-this->PlayerX] = 'F';
-		_exist = true;
+		if( _exist ){
+			_map[_halfsize+_end[0].ReturnY()-this->PlayerY][_halfsize+_end[0].ReturnX()-this->PlayerX] = 'f';
+		}
+		else{
+			_tmpX = _halfsize+_end[0].ReturnX()-this->PlayerX;
+			_tmpY = _halfsize+_end[0].ReturnY()-this->PlayerY;
+			if( _map[_tmpY+1][_tmpX] != 'x' or _map[_tmpY-1][_tmpX] != 'x' or _map[_tmpY][_tmpX+1] != 'x' or _map[_tmpY][_tmpX-1] != 'x' ){
+				_map[_halfsize+_end[0].ReturnY()-this->PlayerY][_halfsize+_end[0].ReturnX()-this->PlayerX] = 'f';
+				_exist = true;
+			}
+		}
 	}
 
 	if( _exist ){
@@ -1735,6 +1900,7 @@ void Map::CutTree(){
 			this->ToDeleteAnswer = true;
 			this->TextOperation.clear();
 		}
+		this->PathBool = true;
 	}
 	else{
 		this->Answer = text_path_error;
@@ -1745,7 +1911,7 @@ void Map::CutTree(){
 
 void Map::FindPath( std::vector < std::vector <char> > &In ){
 	this->TextOperation.clear();
-
+	this->Path.clear();
 	int _halfsize = this->MaxRange/2;
 	int _MaxRange = this->MaxRange;
 	int _curentX = _halfsize, _curentY = _halfsize;
@@ -1799,9 +1965,11 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 				_curentX++;
 			}
 		}
+
 		if( _list.size() > 0 ){
 			_list.erase( _list.begin() );
 		}
+
 		if( _number_start == _number_end ){
 			_number_start = 0;
 			_number_end = _number_counter;
@@ -1811,157 +1979,164 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 	}
 
 	Object _Finish;
+	bool _exist_Finish = false;
 	for( unsigned int i=0; i<this->MaxRange; i++ ){
 		for( unsigned int j=0; j<this->MaxRange; j++ ){
 			if( In[i][j] == '0' ){
 				In[i][j] = 'x';
 			}
-			else if( In[i][j] == 'F' ){
+			else if( In[i][j] == 'f' ){
 				_Finish.SetX(j);
 				_Finish.SetY(i);
+				_exist_Finish = true;
 			}
 		}
 	}
 
-	_list.clear();
-	_curentX = _Finish.ReturnX();
-	_curentY = _Finish.ReturnY();
-	_Finish.SetTMP( 100000 );
-	while( In[_curentY][_curentX] != 'S' ){
+	if( _exist_Finish ){
+		if( In[_Finish.ReturnY()+1][_Finish.ReturnX()] == 'x' and In[_Finish.ReturnY()-1][_Finish.ReturnX()] == 'x' and In[_Finish.ReturnY()][_Finish.ReturnX()+1] == 'x' and In[_Finish.ReturnY()][_Finish.ReturnX()-1] == 'x' ){
+			_exist_Finish = false;
+		}
+	}
+
+	if( _exist_Finish ){
+		_list.clear();
+		_curentX = _Finish.ReturnX();
+		_curentY = _Finish.ReturnY();
+		_Finish.SetTMP( 10000 );
+		while( In[_curentY][_curentX] != 's' ){
+			_curentY++;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+					_Finish.SetX( _curentX );
+					_Finish.SetY( _curentY );
+					_Finish.SetTMP( (int)In[_curentY][_curentX] );
+				}
+				else if( In[_curentY][_curentX] == 's' ){
+					break;
+				}
+				_curentY--;
+			}
+
+			_curentY--;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+					_Finish.SetX( _curentX );
+					_Finish.SetY( _curentY );
+					_Finish.SetTMP( (int)In[_curentY][_curentX] );
+				}
+				else if( In[_curentY][_curentX] == 's' ){
+					break;
+				}
+				_curentY++;
+			}
+
+			_curentX++;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+					_Finish.SetX( _curentX );
+					_Finish.SetY( _curentY );
+					_Finish.SetTMP( (int)In[_curentY][_curentX] );
+				}
+				else if( In[_curentY][_curentX] == 's' ){
+					break;
+				}
+				_curentX--;
+			}
+
+			_curentX--;
+			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
+				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
+					_Finish.SetX( _curentX );
+					_Finish.SetY( _curentY );
+					_Finish.SetTMP( (int)In[_curentY][_curentX] );
+				}
+				else if( In[_curentY][_curentX] == 's' ){
+					break;
+				}
+				_curentX++;
+			}
+			_curentX = _Finish.ReturnX();
+			_curentY = _Finish.ReturnY();
+			_list.push_back( Object( _curentX, _curentY ) );
+			In[_curentY][_curentX] = 'o';
+		}
+
+		//PATH
+		_curentX = _halfsize;
+		_curentY = _halfsize;
+		int _tmp;
+		for( std::vector <Object>::reverse_iterator it=_list.rbegin(); it!=_list.rend(); ++it ){
+			if( it->ReturnX() == _curentX ){
+				_tmp = it->ReturnY() - _curentY;
+				if( _tmp > 0 ){
+					if( this->PlayerDirection != 'd' ){
+						this->Path.push_back("1td");
+					}
+					this->Path.push_back("1gd1");
+				}
+				else{
+					if( this->PlayerDirection != 'u' ){
+						this->Path.push_back("1tu");
+					}
+					this->Path.push_back("1gu1");
+				}
+			}
+			else if( it->ReturnY() == _curentY ){
+				_tmp = it->ReturnX() - _curentX;
+				if( _tmp > 0 ){
+					if( this->PlayerDirection != 'r' ){
+						this->Path.push_back("1tr");
+					}
+					this->Path.push_back("1gr1");
+				}
+				else{
+					if( this->PlayerDirection != 'l' ){
+						this->Path.push_back("1tl");
+					}
+					this->Path.push_back("1gl1");
+				}
+			}
+			_curentX = it->ReturnX();
+			_curentY = it->ReturnY();
+		}
+
+		//TURN
 		_curentY++;
 		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
-				_Finish.SetX( _curentX );
-				_Finish.SetY( _curentY );
-				_Finish.SetTMP( (int)In[_curentY][_curentX] );
-			}
-			else if( In[_curentY][_curentX] == 'S' ){
-				break;
+			if( In[_curentY][_curentX] == 'f' ){
+				this->Path.push_back( "1td" );
 			}
 			_curentY--;
 		}
 
 		_curentY--;
 		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
-				_Finish.SetX( _curentX );
-				_Finish.SetY( _curentY );
-				_Finish.SetTMP( (int)In[_curentY][_curentX] );
-			}
-			else if( In[_curentY][_curentX] == 'S' ){
-				break;
+			if( In[_curentY][_curentX] == 'f' ){
+				this->Path.push_back( "1tu" );
 			}
 			_curentY++;
 		}
 
 		_curentX++;
 		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
-				_Finish.SetX( _curentX );
-				_Finish.SetY( _curentY );
-				_Finish.SetTMP( (int)In[_curentY][_curentX] );
-			}
-			else if( In[_curentY][_curentX] == 'S' ){
-				break;
+			if( In[_curentY][_curentX] == 'f' ){
+				this->Path.push_back( "1tr" );
 			}
 			_curentX--;
 		}
 
 		_curentX--;
 		if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-			if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
-				_Finish.SetX( _curentX );
-				_Finish.SetY( _curentY );
-				_Finish.SetTMP( (int)In[_curentY][_curentX] );
-			}
-			else if( In[_curentY][_curentX] == 'S' ){
-				break;
+			if( In[_curentY][_curentX] == 'f' ){
+				this->Path.push_back( "1tl" );
 			}
 			_curentX++;
 		}
-		_curentX = _Finish.ReturnX();
-		_curentY = _Finish.ReturnY();
-		_list.push_back( Object( _curentX, _curentY ) );
-		In[_curentY][_curentX] = '@';
 	}
 
-	this->Path.clear();
-	//PATH
-	_curentX = _halfsize;
-	_curentY = _halfsize;
-	int _tmp;
-	for( std::vector <Object>::reverse_iterator it=_list.rbegin(); it!=_list.rend(); ++it ){
-		if( it->ReturnX() == _curentX ){
-			_tmp = it->ReturnY() - _curentY;
-			if( _tmp > 0 ){
-				if( this->PlayerDirection != 'd' ){
-					this->Path.push_back("td");
-				}
-				this->Path.push_back("gd1");
-			}
-			else{
-				if( this->PlayerDirection != 'u' ){
-					this->Path.push_back("tu");
-				}
-				this->Path.push_back("gu1");
-			}
-		}
-		else if( it->ReturnY() == _curentY ){
-			_tmp = it->ReturnX() - _curentX;
-			if( _tmp > 0 ){
-				if( this->PlayerDirection != 'r' ){
-					this->Path.push_back("tr");
-				}
-				this->Path.push_back("gr1");
-			}
-			else{
-				if( this->PlayerDirection != 'l' ){
-					this->Path.push_back("tl");
-				}
-				this->Path.push_back("gl1");
-			}
-		}
-		_curentX = it->ReturnX();
-		_curentY = it->ReturnY();
-	}
-
-	//TURN
-	_curentY++;
-	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-		if( In[_curentY][_curentX] == 'F' ){
-			this->Path.push_back( "td" );
-		}
-		_curentY--;
-	}
-
-	_curentY--;
-	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-		if( In[_curentY][_curentX] == 'F' ){
-			this->Path.push_back( "tu" );
-		}
-		_curentY++;
-	}
-
-	_curentX++;
-	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-		if( In[_curentY][_curentX] == 'F' ){
-			this->Path.push_back( "tr" );
-		}
-		_curentX--;
-	}
-
-	_curentX--;
-	if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
-		if( In[_curentY][_curentX] == 'F' ){
-			this->Path.push_back( "tl" );
-		}
-		_curentX++;
-	}
-	this->Path.push_back( "del" );
-	this->TextOperation = "1od";
-
-	/*
 	//LOG
+	/*
 	LogGame::Write( "\n" );
 	for( std::vector<std::string>::iterator it=this->Path.begin(); it!=this->Path.end(); ++it ){
 		LogGame::Write( *it );
@@ -1970,7 +2145,7 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 	LogGame::Write( "\n" );
 	for( unsigned int i=0; i<this->MaxRange; i++ ){
 		for( unsigned int j=0; j<this->MaxRange; j++ ){
-			if( In[i][j] != '0' and In[i][j] != 'x' and In[i][j] != 'F' and In[i][j] != 'S' and  In[i][j] != '@' ){
+			if( In[i][j] != '0' and In[i][j] != 'x' and In[i][j] != 'f' and In[i][j] != 's' and  In[i][j] != 'o' ){
 				LogGame::Write( (int)In[i][j] );
 				LogGame::Write( "\t" );
 			}
@@ -1983,3 +2158,52 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 	}
 	*/
 }
+
+unsigned int Map::ReturnHungry(){
+	if( this->Hungry == 0 ){
+		return 0;
+	}
+	else if( this->Hungry >= 1 and this->Hungry <= 3 ){
+		//1-3
+		return 1;
+	}
+	else if( this->Hungry >= 4 and this->Hungry <= 6 ){
+		//4-6
+		return 2;
+	}
+	else if( this->Hungry >= 7 and this->Hungry <= 9 ){
+		//7-9
+		return 3;
+	}
+	else{
+		if( this->Hungry > 9 or this->Hungry < 0 ){
+			this->Hungry = 9;
+		}
+		return 3;
+	}
+	return 0;
+}
+
+void Map::StartFire(){
+
+}
+
+void Map::StopFire(){
+
+}
+
+void Map::DestoryFood(){
+	this->FindObject( this->Jedzenie );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1del" );
+		this->Path.push_back( "1end" );
+	}
+}
+
+void Map::FindFood(){
+	this->FindObject( this->Jedzenie );
+	if( ! this->Path.empty() ){
+		this->Path.push_back( "1end" );
+	}
+}
+

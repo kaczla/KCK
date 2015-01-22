@@ -1,4 +1,4 @@
-59
+66
 1 fullwoda bin/img/pelne/fullwoda.png
 2 fulltrawa bin/img/pelne/fulltrawa.png
 3 fullpiach bin/img/pelne/fullpiach.png
@@ -58,3 +58,10 @@
 57 menu1 bin/img/menu1.png
 58 menu2 bin/img/menu2.png
 59 menu3 bin/img/menu3.png
+60 grzyby1 bin/img/grzyby/grzyby1.png
+61 grzyby2 bin/img/grzyby/grzyby2.png
+62 grzyby3 bin/img/grzyby/grzyby3.png
+63 stone1 bin/img/kamloty/stone1.png
+64 stone2 bin/img/kamloty/stone2.png
+65 stone3 bin/img/kamloty/stone3.png
+66 pien bin/img/drzewa/pien.png
