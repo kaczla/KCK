@@ -14,7 +14,12 @@
 			 Polska jest to kraj połóżony pomiędzy Morzem Bałtyckim na północy a Sudetami i Karpatami na południu, w dorzeczy Wisły, odry 
 		</template>
 	</category>
-	
+	<category>
+		<pattern>Gdzie * Polska</pattern>
+		<template>
+			 Polska jest to kraj połóżony pomiędzy Morzem Bałtyckim na północy a Sudetami i Karpatami na południu, w dorzeczy Wisły, odry 
+		</template>
+	</category>
 	<category>
 		<pattern>Jakie miasto jest stolica Polski</pattern>
 		<template>
@@ -24,6 +29,13 @@
 	
 	<category>
 		<pattern>Co jest stolica Polski</pattern>
+		<template>
+			 Warszawa
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Co * stolica Polski</pattern>
 		<template>
 			 Warszawa
 		</template>
@@ -157,7 +169,7 @@
 	<category>
 		<pattern>* Anglia </pattern>
 		<template>
-			 Wiem, że jest tam fajny mają zegar. Postawie sobie, kiedyś taki przy plaży.
+			 Wiem, że jest tam fajny mają . Postawie sobie, kiedyś taki przy plaży.
 		</template>
 	</category>
 	
