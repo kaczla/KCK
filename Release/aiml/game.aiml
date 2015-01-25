@@ -109,125 +109,105 @@
 	<category>
 		<pattern>Jak sie masz *</pattern>
 		<template>
-			<srai>Jak sie masz</srai>
+			Fajnie jest, ogólnie :)
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak sie czujesz</pattern>
 		<template>
-			<srai>Jak sie masz</srai>
+			Trochę mnie w krzyżu boli, ale ogólnie nie narzekam
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak sie * czujesz</pattern>
 		<template>
-			<srai>Jak sie masz</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jak sie czujesz *</pattern>
-		<template>
-			<srai>Jak sie masz</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Jak sie * czujesz *</pattern>
-		<template>
-			<srai>Jak sie masz</srai>
+			Trochę mnie w krzyżu boli, ale ogólnie nie narzekam.
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co slychac</pattern>
 		<template>
-			<random>
-				<li>OK, jakoś leci</li>
-				<li>Nie jest źle</li>
-				<li>Jest OK</li>
-				<li>W porządku</li>
-				<li>Nie pytaj</li>
-			</random>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 	
 	<category>
 		<pattern>Co * slychac</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co slychac *</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co * slychac *</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co u ciebie</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co * u ciebie</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co u ciebie *</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Co * u ciebie *</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak leci</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak * leci</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak leci *</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak * leci *</pattern>
 		<template>
-			<srai>Co slychac</srai>
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
@@ -1472,6 +1452,822 @@
 	</category>
 
 	<category>
+		<pattern>Przemierz krotki odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Przemierz * krotki odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Przemierz sredni odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * sredni odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz dlugi odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * dlugi odcinek na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * blisko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * daleko na polnoc</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz krotki odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * krotki odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz sredni odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * sredni odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz dlugi odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * dlugi odcinek na poludnie</pattern>
+		<template>
+			1gd
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+		<category>
+		<pattern>Udaj sie na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * blisko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * daleko na poludnie</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz krotki odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * krotki odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz sredni odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * sredni odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz dlugi odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * dlugi odcinek na zachod</pattern>
+		<template>
+			1gl
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * blisko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * daleko na zachod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz krotki odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * krotki odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz sredni odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * sredni odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz dlugi odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemierz * dlugi odcinek na wschod</pattern>
+		<template>
+			1gr
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Udaj sie * daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * blisko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>2</li>
+				<li>3</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
+		<pattern>Przemarszuj * daleko na wschod</pattern>
+		<template>
+			1gu
+			<random>
+				<li>5</li>
+				<li>6</li>
+			</random>
+		</template>
+	</category>
+
+	<category>
 		<pattern>Obroc sie w prawo</pattern>
 		<template>
 			1tr	<!-- turn right -->
@@ -1582,7 +2378,2570 @@
 			1ws
 		</template>
 	</category>
+	
+	<category>
+		<pattern>Rozbij kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * kamien *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * kamienie *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
 
+	<category>
+		<pattern>Roztlucz * kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz * kamienie * </pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz * kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz * kamien *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal * kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal * kamien *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Rozwal * kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal * kamienie *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * kamien *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * kamienie *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz * kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Zniszcz * kamienie *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Zniszcz kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz * kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz * kamien *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * glaz *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozbij * glazy *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Roztlucz * glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz * glazy * </pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz * glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztlucz * glaz *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal * glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal * glaz *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Rozwal * glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozwal * glazy *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * glaz *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Roztrzaskaj * glazy *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz * glazy</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Zniszcz * glazy *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Zniszcz glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz * glaz</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zniszcz * glaz *</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz zywnosc</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * zywnosc</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * zywnosc *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz pozywienie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * pozywienie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * pozywienie *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz grzyby</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * grzyby</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * grzyby *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz grzybki</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * grzybki</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * grzybki *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz jedzenie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * jedzenie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * jedzenie *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz pokarm</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * pokarm</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * pokarm *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz jadlo</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * jadlo</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * jadlo *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz zywnosc</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * zywnosc</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * zywnosc *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz pozywienie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * pozywienie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * pozywienie *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz grzyby</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * grzyby</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * grzyby *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz grzybki</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * grzybki</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * grzybki *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz jedzenie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * jedzenie</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * jedzenie *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz pokarm</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * pokarm</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * pokarm *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz jadlo</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * jadlo</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgromadz * jadlo *</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozpal ognisko</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozpal * ognisko </pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozpal * ognisko *</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wzniec ogien</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wzniec * ogien</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wzniec * ogien *</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wskrzes ogien</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wskrzes * ogien</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wskrzes * ogien *</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozniec ogien</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozniec * ogien</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Rozniec * ogien *</pattern>
+		<template>
+			1osf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgas ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgas * ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zgas * ognisko *</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Ugas ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Ugas * ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Ugas * ognisko *</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zagas ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zagas * ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zagas * ognisko *</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wygas ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wygas * ognisko</pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wygas * ognisko * </pattern>
+		<template>
+			1opf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+
+	<category>
+		<pattern>Znajdz lezace najblizej drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko drzewo</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko drzewo *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko drzewko</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko drzewko *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko pozywienie</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko pozywienie *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+<category>
+		<pattern>Znajdz najblizsza zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsza zywnosc *</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsza zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsza zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsza zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsza zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsza zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsza zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezaca najblizej zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezaca najblizej zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezaca najblizej zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezaca najblizej zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezaca najblizej zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezaca najblizej zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezaca najblizej zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezaca najblizej zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezaca blisko zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezaca blisko zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezaca blisko zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezaca blisko zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezaca blisko zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezaca blisko zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezaca blisko zywnosc</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezaca blisko zywnosc *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+
+	<category>
+		<pattern>Znajdz najblizsze grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+<category>
+		<pattern>Wyszukaj lezace blisko grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko grzybki</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko grzybki *</pattern>
+		<template>
+			1fm
+		</template>
+
+	<category>
+		<pattern>Znajdz najblizsze grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko grzyby</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko grzyby *</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko ognisko</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko ognisko *</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko skupisko kamieni</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko skupisko kamieni *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko glazy</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko glazy *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz najblizsze kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz najblizsze kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj najblizsze kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj najblizsze kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wykryj najblizsze kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj najblizsze kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace najblizej kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Odnajdz lezace najblizej kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace najblizej kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+
+	<category>
+		<pattern>Wyszukaj lezace najblizej kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace najblizej kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace najblizej kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Znajdz lezace blisko kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Odnajdz lezace blisko kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wyszukaj lezace blisko kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko kamienie</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Wykryj lezace blisko kamienie *</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	
 	<category>
 		<pattern>*</pattern>
 		<template>
@@ -1596,6 +4955,7 @@
 				<li>To trudny temat</li>
 				<li>Nie chce mi się o tym gadać</li>
 				<li>Nie mam o ochoty o tym mówić</li>
+				<li>Chyba nie mówisz po polsku</li>
 			</random>
 		</template>
 	</category> 
