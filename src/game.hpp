@@ -38,6 +38,7 @@ private:
 	inline void ReadAnim();
 	Img *MenuFood, *MenuWood, *MenuStone, *MenuBar[4];
 	Img *ScreenStart, *Working;
+	Img *Hungry[3];
 	inline void DrawMenu();
 	//MAPA GRY
 	Map map2D;

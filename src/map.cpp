@@ -918,6 +918,10 @@ void Map::Update(){
 			else if( this->TextOperation[2] == 'f' ){
 				this->FindFire();
 			}
+			//FOOD
+			else if( this->TextOperation[2] == 'm' ){
+				this->FindFood();
+			}
 			else{
 				this->Answer = text_dont_know;
 				this->ToDeleteAnswer = true;
@@ -933,11 +937,34 @@ void Map::Update(){
 			else if( this->TextOperation[2] == 's' ){
 				this->DestroyStone();
 			}
+			//FOOD
+			else if( this->TextOperation[2] == 'f' ){
+				this->DestoryFood();
+			}
 			//CHEATS ON
 			else if( this->TextOperation == "1cheatson" ){
 				this->Cheats = true;
 				this->Answer = text_cheats_on;
 				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+			else{
+				this->Answer = text_dont_know;
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+		}
+		else if( this->TextOperation[1] == 'o' ){
+			//FIRE START
+			if( this->TextOperation == "1osf" ){
+				this->StartFire();
+				this->ToDeleteAnswer = true;
+				this->TextOperation.clear();
+			}
+			//FIRE STOP
+			else if( this->TextOperation == "1opf" ){
+				this->StopFire();
+				this->Answer = text_done;
 				this->TextOperation.clear();
 			}
 			else{
@@ -975,6 +1002,7 @@ void Map::Update(){
 		}
 
 		if( this->PathBool ){
+			this->Busy = true;
 			if( this->Builds ){
 				this->Answer = text_path_working;
 			}
@@ -1773,9 +1801,13 @@ void Map::DeleteObject( int x, int y ){
 		this->Map2D_obj[y][x] = 0;
 		this->Stone += 3;
 	}
-	else if( _tmp == this->Ognisko[0].ReturnImageID() or _tmp == this->Ognisko[1].ReturnImageID() or _tmp == this->Ognisko[2].ReturnImageID()  ){
+	else if( _tmp == this->Ognisko[0].ReturnImageID() or _tmp == this->Ognisko[1].ReturnImageID() or _tmp == this->Ognisko[2].ReturnImageID() ){
 		this->Wood++;
 		this->Stone++;
+		this->Map2D_obj[y][x] = 0;
+	}
+	else if( _tmp == this->Jedzenie[0].ReturnImageID() or _tmp == this->Jedzenie[1].ReturnImageID() or _tmp == this->Jedzenie[2].ReturnImageID() ){
+		this->Food += 3;
 		this->Map2D_obj[y][x] = 0;
 	}
 	else{
@@ -1910,6 +1942,7 @@ void Map::FindObject( std::vector <Podloze> &target ){
 }
 
 void Map::FindPath( std::vector < std::vector <char> > &In ){
+	unsigned int _time = SDL_GetTicks() + 15000;
 	this->TextOperation.clear();
 	this->Path.clear();
 	int _halfsize = this->MaxRange/2;
@@ -2003,7 +2036,8 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 		_list.clear();
 		_curentX = _Finish.ReturnX();
 		_curentY = _Finish.ReturnY();
-		_Finish.SetTMP( 10000 );
+		//_Finish.SetTMP( 10000 );
+		_Finish.SetTMP( (int) 'f' );
 		while( In[_curentY][_curentX] != 's' ){
 			_curentY++;
 			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
@@ -2015,9 +2049,8 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 				else if( In[_curentY][_curentX] == 's' ){
 					break;
 				}
-				_curentY--;
 			}
-
+			_curentY--;
 			_curentY--;
 			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
 				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
@@ -2028,9 +2061,8 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 				else if( In[_curentY][_curentX] == 's' ){
 					break;
 				}
-				_curentY++;
 			}
-
+			_curentY++;
 			_curentX++;
 			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
 				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
@@ -2041,9 +2073,8 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 				else if( In[_curentY][_curentX] == 's' ){
 					break;
 				}
-				_curentX--;
 			}
-
+			_curentX--;
 			_curentX--;
 			if( _curentX >= 0 and _curentX < _MaxRange and _curentY >= 0 and _curentY < _MaxRange ){
 				if( (int)In[_curentY][_curentX] < _Finish.ReturnTMP() ){
@@ -2054,12 +2085,17 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 				else if( In[_curentY][_curentX] == 's' ){
 					break;
 				}
-				_curentX++;
 			}
+			_curentX++;
 			_curentX = _Finish.ReturnX();
 			_curentY = _Finish.ReturnY();
 			_list.push_back( Object( _curentX, _curentY ) );
 			In[_curentY][_curentX] = 'o';
+
+			if( SDL_GetTicks() > _time ){
+				this->Path.clear();
+				return;
+			}
 		}
 
 		//PATH
@@ -2099,6 +2135,10 @@ void Map::FindPath( std::vector < std::vector <char> > &In ){
 			}
 			_curentX = it->ReturnX();
 			_curentY = it->ReturnY();
+			if( SDL_GetTicks() > _time ){
+				this->Path.clear();
+				return;
+			}
 		}
 
 		//TURN
@@ -2165,31 +2205,67 @@ unsigned int Map::ReturnHungry(){
 	}
 	else if( this->Hungry >= 1 and this->Hungry <= 3 ){
 		//1-3
-		return 1;
+		return 0;
 	}
 	else if( this->Hungry >= 4 and this->Hungry <= 6 ){
 		//4-6
-		return 2;
+		return 1;
 	}
 	else if( this->Hungry >= 7 and this->Hungry <= 9 ){
 		//7-9
-		return 3;
+		return 2;
 	}
 	else{
 		if( this->Hungry > 9 or this->Hungry < 0 ){
 			this->Hungry = 9;
 		}
-		return 3;
+		return 2;
 	}
 	return 0;
 }
 
 void Map::StartFire(){
-
+	if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY][PlayerX+1] = this->Ognisko[1].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[1].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[2].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else if( this->ReturnValueMapObj(this->PlayerX, this->PlayerY+1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[2].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else{
+		this->Answer = text_dont_know;
+	}
 }
 
 void Map::StopFire(){
-
+	if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[2].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[2].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[1].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[1].ReturnImageID() ){
+		this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+		this->Answer = text_done;
+	}
+	else{
+		this->Answer = text_dont_know;
+	}
 }
 
 void Map::DestoryFood(){

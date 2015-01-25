@@ -35,11 +35,12 @@ bool Bot::InitBot(){
 	return true;
 }
 
-
 std::string Bot::ReturnAnswer( std::string text ){
-	if( ! interpreter->respond( text, "localhost", this->Answer ) ){
-		LogGame::Write( "[ERR] " );
-		LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
+	if( text.size() > 0 ){
+		if( ! interpreter->respond( text, "localhost", this->Answer ) ){
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
+		}
 	}
 	return this->Answer;
 }

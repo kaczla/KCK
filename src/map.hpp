@@ -225,7 +225,7 @@ const std::string text_path = "Jestem w drodze do celu";
 const std::string text_path_error = "Niemożliwe do wykonania!";
 const std::string text_path_end = "Cel osiągnięty";
 const std::string text_path_working = "Pracuje nad tym";
-
+const std::string text_done = "Zrobione";
 const std::string text_stop = "Przerywam akcje!";
 const std::string text_cheats_on = "Nie ładnie oszukiwać! :<";
 

@@ -93,6 +93,13 @@
 	</category>
 	
 	<category>
+		<pattern>df</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
 		<pattern>ft</pattern>
 		<template>
 			1ft
@@ -110,6 +117,13 @@
 		<pattern>ff</pattern>
 		<template>
 			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>fm</pattern>
+		<template>
+			1fm
 		</template>
 	</category>
 	
@@ -147,6 +161,16 @@
 	<category>
 		<pattern>del</pattern>
 		<template>1del</template>
+	</category>
+	
+	<category>
+		<pattern>osf</pattern>
+		<template>1osf</template>
+	</category>
+	
+	<category>
+		<pattern>opf</pattern>
+		<template>1opf</template>
 	</category>
 	
 </aiml>

@@ -38,6 +38,9 @@ Game::Game(){
 	this->MenuBar[3] = NULL;
 	this->ScreenStart = NULL;
 	this->Working = NULL;
+	this->Hungry[0] = NULL;
+	this->Hungry[1] = NULL;
+	this->Hungry[2] = NULL;
 //Grafika
 	this->ReadImages();
 //ANIMACJE
@@ -142,6 +145,9 @@ Game::~Game(){
 	this->MenuBar[3] = NULL;
 	this->ScreenStart = NULL;
 	this->Working = NULL;
+	this->Hungry[0] = NULL;
+	this->Hungry[1] = NULL;
+	this->Hungry[2] = NULL;
 	Text::Clear();
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
@@ -203,6 +209,9 @@ void Game::Start(){
 							this->game_start = false;
 							break;
 						case SDLK_RETURN: // ENTER
+							this->game_start = false;
+							break;
+						case SDLK_KP_ENTER: // ENTER
 							this->game_start = false;
 							break;
 						default:
@@ -534,6 +543,16 @@ void Game::ReadImages(){
 		else if( this->images[i].ReturnName() == "menu3" ){
 			this->MenuBar[3] = &this->images[i];
 		}
+		else if( this->images[i].ReturnName() == "menuglod3" ){
+			this->Hungry[0] = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menuglod2" ){
+			this->Hungry[1] = &this->images[i];
+		}
+		else if( this->images[i].ReturnName() == "menuglod1" ){
+			this->Hungry[2] = &this->images[i];
+		}
+
 	}
 	//Sprawdzenie
 	if( this->MenuWood == NULL or this->MenuStone == NULL or this->MenuFood == NULL ){
@@ -805,4 +824,14 @@ void Game::DrawMenu(){
 		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 75.0, 25.0 );
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 25.0 );
 	glEnd();
+//HUNGRY
+	glTranslatef( 100.0, -50.0, 0.0 );
+	glBindTexture( GL_TEXTURE_2D, this->Hungry[this->map2D.ReturnHungry()]->ReturnImageID() );
+	glBegin( GL_QUADS );
+		glTexCoord2f( 0.0, 0.0 ); glVertex2f( 0.0, 0.0 );
+		glTexCoord2f( 1.0, 0.0 ); glVertex2f( 50.0, 0.0 );
+		glTexCoord2f( 1.0, 1.0 ); glVertex2f( 50.0, 50.0 );
+		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 50.0 );
+	glEnd();
+
 }
