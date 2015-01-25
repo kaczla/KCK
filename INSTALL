@@ -1,1 +1,38 @@
-Polski
+Polsih / Polski
+
+Wymagania:
+
+1) SDL 1.2
+2) SDL_TTF
+3) GLUT
+4) DevIL
+5) FreeType
+6) zlib
+7) libxml2
+8) std_utils-0.7.5
+9) eSpeak
+
+Testowane na:
+- Ubuntu 14.04
+- Debian 7
+
+Budowane przy pomocy:
+- g++ 4.8.2
+
+Instalacja:
+apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libdevil-dev libxml2-dev freeglut3-dev espeak-dev
+Do uruchomienia wystarczą biblioteki bez końcówki dev!
+* W przypadku std_utils-0.7.5 zalecane jest zbudowanie przy pomocy archiwum znajdujące się w folderze install:
+ - wypakować
+ - zbudować przy pomocy polecenia ./configure i polecenia make
+ - wynik dodać do systemu lub wskazać lokalizację plików dla g++
+
+Linker Libraries (-l):
+SDL
+SDL_ttf
+glut
+GL
+GLU
+IL
+xml2
+std_utils
