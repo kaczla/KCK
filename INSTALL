@@ -26,6 +26,8 @@ Do uruchomienia wystarczą biblioteki bez końcówki dev!
  - wypakować
  - zbudować przy pomocy polecenia ./configure i polecenia make
  - wynik dodać do systemu lub wskazać lokalizację plików dla g++
+	- pliki cconfig.cpp, std_utils.cpp, cconfig.h, std_util.h skopiować do /usr/include
+	- plik libstd_utils.a skopiować do /usr/lib
 
 Linker Libraries (-l):
 SDL
