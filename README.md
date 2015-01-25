@@ -7,13 +7,13 @@
 ##Nazwa projektu: Rozbitek
 
 **Skład grupy:**
-* Sergiusz Jańczura
-* Karol Kaczmarek
-* Kamil Legierski
-* Adrian Małolepszy
+* [Sergiusz Jańczura](https://github.com/Serq0)
+* [Karol Kaczmarek](https://github.com/kaczla)
+* [Kamil Legierski](https://github.com/Mixer3394)
+* [Adrian Małolepszy](https://github.com/adrmal)
 
 **Lider:**
-* Karol Kaczmarek
+* [Karol Kaczmarek](https://github.com/kaczla)
 
 
 **Krótki opis projektu:**
@@ -31,8 +31,6 @@
 > "Obróć się w lewo" - rozbitek obróci się w lewo
 
 > "Zbuduj ognisko" - rozbitek wybuduje na bieżącym polu ognisko, jeżeli posiada potrzebne materiały
-
-> "Co słychać" - rozbitek odpowie jak wygląda otoczenie i jak się czuje
 
 > "Zetnij najbliższe drzewko" - rozbitek wyszuka najbliższe drzewo, po czym je zetnie
 
@@ -60,7 +58,10 @@
 
 > [std_utils-0.7.5](http://omicron.ig3.net/)
 
+>[eSpeak](http://espeak.sourceforge.net/)
+
 **Opcjonalnie:**
 
 > [SpiderMonkey](http://www.mozilla.org/js/spidermonkey/)
 
+**[Link do projektu](https://github.com/kaczla/KCK)**
