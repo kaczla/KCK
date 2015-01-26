@@ -4100,7 +4100,8 @@
 		<template>
 			1fm
 		</template>
-
+	</category>
+	
 	<category>
 		<pattern>Znajdz najblizsze grzyby</pattern>
 		<template>
