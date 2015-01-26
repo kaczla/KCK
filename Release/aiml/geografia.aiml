@@ -20,6 +20,14 @@
 			 Polska jest to kraj połóżony pomiędzy Morzem Bałtyckim na północy a Sudetami i Karpatami na południu, w dorzeczy Wisły, odry 
 		</template>
 	</category>
+	
+	<category>
+		<pattern>Gdzie Polska</pattern>
+		<template>
+			 Polska jest to kraj połóżony pomiędzy Morzem Bałtyckim na północy a Sudetami i Karpatami na południu, w dorzeczy Wisły, odry 
+		</template>
+	</category>
+	
 	<category>
 		<pattern>Jakie miasto jest stolica Polski</pattern>
 		<template>
@@ -176,7 +184,7 @@
 	<category>
 		<pattern>* Anglicy</pattern>
 		<template>
-			 Mogliby grać trochę lepiej w nogę. 
+			 Mogliby grać trochę lepiej w nogę - byli by mistrzami :)
 		</template>
 	</category>
 	
@@ -198,6 +206,13 @@
 		<pattern>* Afryka </pattern>
 		<template>
 			 Za ciepło dla mnie.
+		</template>
+	</category>
+
+	<category>
+		<pattern>Gdzie UAM</pattern>
+		<template>
+			 Oczywiście, że w Pozananiu
 		</template>
 	</category>
 	

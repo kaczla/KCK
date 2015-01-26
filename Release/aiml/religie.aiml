@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml>
+
 	<category>
-		<pattern></pattern>
+		<pattern>Czym * chrzescijanstwo</pattern>
 		<template>
-			 
-		</template>
-	</category>
-	
-	<category>
-		<pattern></pattern>
-		<template>
-			<random>
-				<li></li>
-				<li></li>
+		<random>
+				<li>Religia opierająca się na nauce Jezusa Chrystusa</li>
+				<li>Ogół chrześcijan</li>
 			</random>
 		</template>
 	</category>
 	
 	<category>
-		<pattern>Czym * chrzescijanstwo</pattern>
+		<pattern>Co* chrzescijanstwo</pattern>
 		<template>
 		<random>
 				<li>Religia opierająca się na nauce Jezusa Chrystusa</li>
@@ -38,7 +32,24 @@
 	</category>
 	
 	<category>
+		<pattern>Co * judaizm</pattern>
+		<template>
+			<random>
+				<li>Judaizm to monoteistyczna religia Żydów</li>
+				<li>To żydowskie obyczaje i tradycje</li>
+			</random>
+		</template>
+	</category>
+	
+	<category>
 		<pattern>Czym * islam</pattern>
+		<template>
+			Religia głosząca wiarę w jednego Boga (Allaha), rozpowszechniona głównie w krajach Azji i Afryk
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Co * islam</pattern>
 		<template>
 			Religia głosząca wiarę w jednego Boga (Allaha), rozpowszechniona głównie w krajach Azji i Afryk
 		</template>
@@ -52,7 +63,21 @@
 	</category>
 	
 	<category>
+		<pattern>Co * prawoslawie</pattern>
+		<template>
+			Wyznanie chrześcijańskie obrządku wschodniego
+		</template>
+	</category>
+	
+	<category>
 		<pattern>Czym * protestantyzm</pattern>
+		<template>
+			Ogół wyznań i ugrupowań chrześcijańskich, które oddzieliły się od Kościoła katolickiego w wyniku reformacji.
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Co * protestantyzm</pattern>
 		<template>
 			Ogół wyznań i ugrupowań chrześcijańskich, które oddzieliły się od Kościoła katolickiego w wyniku reformacji.
 		</template>
@@ -66,7 +91,21 @@
 	</category>
 	
 	<category>
+		<pattern>Co * buddyzm</pattern>
+		<template>
+			Jest to jedna z religii światowych, oparta na naukach Buddy.
+		</template>
+	</category>
+	
+	<category>
 		<pattern>Czym * hinduizm</pattern>
+		<template>
+			Jest to główna religia Indii.
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Co * hinduizm</pattern>
 		<template>
 			Jest to główna religia Indii.
 		</template>
