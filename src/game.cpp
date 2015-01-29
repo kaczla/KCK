@@ -132,6 +132,8 @@ Game::Game(){
 
 	this->KeyEvent = SDLK_UNKNOWN;
 	this->KeyEventState = KMOD_NONE;
+
+	this->Thread = 0;
 }
 
 Game::~Game(){
@@ -225,6 +227,7 @@ void Game::Start(){
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( SDL_GetTicks() );
 	LogGame::Write( ": Uruchamianie gry\n" );
+	this->StopEnd = SDL_GetTicks() + 120000;
 	if( this->game_start ){
 		while( this->game_start ){
 			//CLOCK////////////////
@@ -296,51 +299,56 @@ void Game::Start(){
 						break;
 					case SDLK_RETURN:
 						this->LastInput = SDL_GetTicks();
-
 						if( this->LastInput >= this->NextInput ){
-							this->BotMessage = this->bot.ReturnAnswer( this->Input );
-							if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
-								this->BotMessage.erase( this->BotMessage.begin() );
-								while( this->BotMessage[0] == ' ' ){
+							if( ! this->Input.empty() ){
+								this->BotMessage = this->bot.ReturnAnswer( this->Input );
+								if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
 									this->BotMessage.erase( this->BotMessage.begin() );
+									while( this->BotMessage[0] == ' ' ){
+										this->BotMessage.erase( this->BotMessage.begin() );
+									}
 								}
-							}
-							if( this->BotMessage[0] != '1' ){
-								if( this->Input.size() > 0 ){
-									TextInput.RenderText( this->Input );
-								}
-								if( this->BotMessage.size() > 0 ){
-									//std::cout<<"+ "<<this->BotMessage<<"\n";
-									this->TextBotMessage.RenderText( this->BotMessage );
-								}
-							}
-							else if( this->BotMessage[0] == '1' ){
-								/*
-								LogGame::Write("\"");
-								LogGame::Write(this->BotMessage);
-								LogGame::Write("\"\n");
-								*/
-								if( ! this->map2D.ReturnBusy() ){
-									this->map2D.Operation( this->BotMessage );
-									this->map2D.Update();
-									this->BotMessage = this->map2D.ReturnAnswer();
+								if( this->BotMessage[0] != '1' ){
 									if( this->Input.size() > 0 ){
 										TextInput.RenderText( this->Input );
 									}
 									if( this->BotMessage.size() > 0 ){
 										//std::cout<<"+ "<<this->BotMessage<<"\n";
 										this->TextBotMessage.RenderText( this->BotMessage );
+										this->BotMessage = this->map2D.ReturnAnswer();
+										this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 									}
 								}
-								else if( this->BotMessage[1] == 's' and this->BotMessage[2] == 't' ){
-									this->map2D.StopOperation();
-									this->BotMessage = this->map2D.ReturnAnswer();
-									if( this->Input.size() > 0 ){
-										TextInput.RenderText( this->Input );
+								else if( this->BotMessage[0] == '1' ){
+									/*
+									LogGame::Write("\"");
+									LogGame::Write(this->BotMessage);
+									LogGame::Write("\"\n");
+									*/
+									if( ! this->map2D.ReturnBusy() ){
+										this->map2D.Operation( this->BotMessage );
+										this->map2D.Update();
+										this->BotMessage = this->map2D.ReturnAnswer();
+										if( this->Input.size() > 0 ){
+											TextInput.RenderText( this->Input );
+										}
+										if( this->BotMessage.size() > 0 ){
+											//std::cout<<"+ "<<this->BotMessage<<"\n";
+											this->TextBotMessage.RenderText( this->BotMessage );
+											this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
+										}
 									}
-									if( this->BotMessage.size() > 0 ){
-										//std::cout<<"+ "<<this->BotMessage<<"\n";
-										this->TextBotMessage.RenderText( this->BotMessage );
+									else if( this->BotMessage[1] == 's' and this->BotMessage[2] == 't' ){
+										this->map2D.StopOperation();
+										this->BotMessage = this->map2D.ReturnAnswer();
+										if( this->Input.size() > 0 ){
+											TextInput.RenderText( this->Input );
+										}
+										if( this->BotMessage.size() > 0 ){
+											//std::cout<<"+ "<<this->BotMessage<<"\n";
+											this->TextBotMessage.RenderText( this->BotMessage );
+											this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
+										}
 									}
 								}
 							}
@@ -383,7 +391,13 @@ void Game::Update(){
 	if( !this->map2D.ReturnAnswer().empty() && this->BotMessage != this->map2D.ReturnAnswer() ){
 		this->BotMessage = this->map2D.ReturnAnswer();
 		//std::cout<<"+ "<<this->BotMessage<<"\n";
+		this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 		this->TextBotMessage.RenderText( this->BotMessage );
+	}
+	this->StartTime = SDL_GetTicks();
+	if( this->StartTime >= this->StopEnd ){
+		this->StopEnd = SDL_GetTicks() + 120000;
+		this->map2D.MinusHungry();
 	}
 	glClear( GL_COLOR_BUFFER_BIT );
 	glLoadIdentity();
@@ -463,6 +477,12 @@ void Game::Update(){
 	this->DrawBotMessage();
 //INPUT
 	this->DrawInput();
+//SPEAK
+	if( ! this->Speak.empty() ){
+		this->SpeakThread = this->Speak;
+		pthread_create( &this->Thread, NULL, SpeakText, (void*)this->SpeakThread.c_str() );
+		this->Speak.clear();
+	}
 }
 
 void Game::Load(){
@@ -834,4 +854,12 @@ void Game::DrawMenu(){
 		glTexCoord2f( 0.0, 1.0 ); glVertex2f( 0.0, 50.0 );
 	glEnd();
 
+}
+
+void *SpeakText( void * In ){
+	char *text = (char *) In;
+	if( system( text ) ){
+
+	}
+	pthread_exit(NULL);
 }

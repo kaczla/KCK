@@ -38,3 +38,7 @@ GLU
 IL
 xml2
 std_utils
+pthread
+
+Budowa
+polecenie: mafile w folderze Release

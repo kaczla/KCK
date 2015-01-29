@@ -1,6 +1,0 @@
-SDL.dll
-SDL_ttf.dll
-DevIL.dll
-OPENGL (update graphic)
-libfreetype-6.dll
-zlib1.dll

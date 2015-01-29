@@ -21,7 +21,7 @@ Map::Map(){
 	this->Food = 0;
 	this->Wood = 0;
 	this->Stone = 0;
-	this->Hungry = 9;
+	this->Hungry = 5;
 
 	this->MaxRange = 13;
 	this->PathBool = false;
@@ -30,7 +30,6 @@ Map::Map(){
 	this->Cheats = false;
 
 	this->Error_Map = "nie zainicjalizawano mapy ( void SetValue(int height, int width); )";
-
 }
 
 Map::Map(int height, int width){
@@ -41,7 +40,6 @@ Map::Map(int height, int width){
 	this->Animation = true;
 	this->SetVector();
 
-	//INNA LOSOWA!!!
 	this->PlayerX = 1;
 	this->PlayerY = width / 2;
 
@@ -57,7 +55,7 @@ Map::Map(int height, int width){
 	this->Food = 0;
 	this->Wood = 0;
 	this->Stone = 0;
-	this->Hungry = 9;
+	this->Hungry = 5;
 
 	this->MaxRange = 13;
 	this->PathBool = false;
@@ -1447,6 +1445,12 @@ void Map::Update(){
 			this->StopOperation();
 			this->Answer = text_path_end;
 		}
+		//EAT
+		else if( this->TextOperation == "1eat" ){
+			this->Eat();
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
 		//FIND
 		else if( this->TextOperation[1] == 'f' ){
 			//TREE
@@ -2176,7 +2180,11 @@ unsigned int Map::ReturnFood(){
 		return 3;
 	}
 	else{
-		if( this->Food > 9 or this->Food < 0 ){
+		if( this->Food > 9){
+			this->Food = 9;
+			return 3;
+		}
+		else if( this->Food < 0 ){
 			this->Food = 0;
 		}
 		return 0;
@@ -2201,7 +2209,11 @@ unsigned int Map::ReturnWood(){
 		return 3;
 	}
 	else{
-		if( this->Wood > 9 or this->Wood < 0 ){
+		if( this->Wood > 9 ){
+			this->Wood = 9;
+			return 3;
+		}
+		else if (this->Wood < 0 ){
 			this->Wood = 0;
 		}
 		return 0;
@@ -2226,7 +2238,11 @@ unsigned int Map::ReturnStone(){
 		return 3;
 	}
 	else{
-		if( this->Stone > 9 or this->Stone < 0 ){
+		if( this->Stone > 9 ){
+			this->Stone = 9;
+			return 3;
+		}
+		else if( this->Stone < 0 ){
 			this->Stone = 0;
 		}
 		return 0;
@@ -2768,43 +2784,212 @@ unsigned int Map::ReturnHungry(){
 }
 
 void Map::StartFire(){
-	if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY][PlayerX+1] = this->Ognisko[1].ReturnImageID();
-		this->Answer = text_done;
+	if( this->PlayerDirection == 'r' ){
+		if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][PlayerX+1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj(this->PlayerX, this->PlayerY+1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
-	else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[1].ReturnImageID();
-		this->Answer = text_done;
+	else if( this->PlayerDirection == 'l' ){
+		if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][PlayerX+1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj(this->PlayerX, this->PlayerY+1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
-	else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[2].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
-		this->Answer = text_done;
+	else if( this->PlayerDirection == 'u' ){
+		if( this->ReturnValueMapObj(this->PlayerX, this->PlayerY+1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][PlayerX+1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
-	else if( this->ReturnValueMapObj(this->PlayerX, this->PlayerY+1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[2].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
-		this->Answer = text_done;
+	else if( this->PlayerDirection == 'd' ){
+		if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj(this->PlayerX, this->PlayerY+1 ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[0].ReturnImageID() or this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[2].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][PlayerX+1] = this->Ognisko[1].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
 	else{
 		this->Answer = text_dont_know;
 	}
+
 }
 
 void Map::StopFire(){
-	if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[2].ReturnImageID();
-		this->Answer = text_done;
+	if( this->PlayerDirection == 'r' ){
+		if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
-	else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[2].ReturnImageID();
-		this->Answer = text_done;
+	else if( this->PlayerDirection == 'l' ){
+		if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
-	else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[1].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
-		this->Answer = text_done;
+	else if( this->PlayerDirection == 'u' ){
+		if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
-	else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[1].ReturnImageID() ){
-		this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
-		this->Answer = text_done;
+	else if( this->PlayerDirection == 'd' ){
+		if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY-1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY-1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'd';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX, this->PlayerY+1 ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY+1][this->PlayerX] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'u';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX+1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX+1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'r';
+			this->Answer = text_done;
+		}
+		else if( this->ReturnValueMapObj( this->PlayerX-1, this->PlayerY ) == this->Ognisko[1].ReturnImageID() ){
+			this->Map2D_obj[this->PlayerY][this->PlayerX-1] = this->Ognisko[2].ReturnImageID();
+			this->PlayerDirection = 'l';
+			this->Answer = text_done;
+		}
+		else{
+			this->Answer = text_dont_know;
+		}
 	}
 	else{
 		this->Answer = text_dont_know;
@@ -2826,3 +3011,29 @@ void Map::FindFood(){
 	}
 }
 
+void Map::Eat(){
+	if( this->Food > 0 ){
+		if( this->Hungry == 9 ){
+			this->Answer = text_hungry_full;
+		}
+		else if( ( 9 - this->Hungry ) <= this->Food ){
+			this->Food = 9 - this->Hungry;
+			this->Hungry = 9;
+			this->Answer = text_hungry_eat;
+		}
+		else{
+			this->Hungry += this->Food;
+			this->Food = 0;
+			this->Answer = text_hungry_eat;
+		}
+	}
+	else{
+		this->Answer = text_hungry_not;
+	}
+}
+
+void Map::MinusHungry(){
+	if( this->Hungry > 0 ){
+		this->Hungry--;
+	}
+}

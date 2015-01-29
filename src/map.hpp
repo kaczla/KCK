@@ -9,34 +9,138 @@
 #include <cmath>
 #include <iostream>
 
+/**
+ * Mapa gry, na której przetwarzane są wszystkie operacje.
+ */
 class Map{
 public:
 	Map();
+	/**
+	 * Generuje i zmienia ustawienia dotyczące mapy
+	 * @param height - wysokość mapy
+	 * @param width - szerokość mapy
+	 */
 	Map(int height, int width);
-	~Map();
-	void SetValue(int height, int width);
-	void SetVarMap( std::vector <Img> img, std::vector <Anim> anim);
-	int ReturnValueMap(int x, int y);
-	int ReturnValueMapObj(int x, int y);
-	int ReturnPlayer();
-	std::string ReturnError();
-	void SaveToFile();
-	bool ReturnSuccess();
-	int ReturnWidth();
-	int ReturnHeight();
-	int ReturnPlayerX();
-	int ReturnPlayerY();
-	void Operation( std::string text );
-	void TurnOnAnimation( bool value );
-	void Update();
-	std::string ReturnAnswer();
-	bool ReturnBusy();
-	void StopOperation();
 
+	~Map();
+	/**
+	 * Ustawia wartości dla mapy i ustawień gry
+	 * @param height - wysokość mapy
+	 * @param width - szerokość mapy
+	 */
+	void SetValue(int height, int width);
+	/**
+	 * Ustawia wartości zmiennych odpowiedzialnych za wyświetlanie, generowanie mapy.
+	 * @param img - wektor wszystkich grafik
+	 * @param anim - wektor wszystkich animacji
+	 */
+	void SetVarMap( std::vector <Img> img, std::vector <Anim> anim);
+	/**
+	 * @param x - współrzędne x
+	 * @param y - współrzędne y
+	 * @return wartość mapy dla podanego x,y
+	 */
+	int ReturnValueMap(int x, int y);
+	/**
+	 * @param x - współrzędne x
+	 * @param y - współrzędne y
+	 * @return wartość objektu mapy dla podanego x,y
+	 */
+	int ReturnValueMapObj(int x, int y);
+	/**
+	 * @return kierunek, w którym jest aktualnie obrócony gracz
+	 * - u - północ
+	 * - d - południe
+	 * - l - zachód
+	 * - r - wschód
+	 */
+	int ReturnPlayer();
+	/**
+	 *
+	 * @return teskt błędu
+	 */
+	std::string ReturnError();
+	/**
+	 * Zapis do pliku
+	 */
+	void SaveToFile();
+	/**
+	 *
+	 * @return wartość poprawności wykonania operacji
+	 */
+	bool ReturnSuccess();
+	/**
+	 *
+	 * @return szerokość aktualnej mapy
+	 */
+	int ReturnWidth();
+	/**
+	 *
+	 * @return wysokość aktualnej mapy
+	 */
+	int ReturnHeight();
+	/**
+	 *
+	 * @return współrzędne X położenia gracza
+	 */
+	int ReturnPlayerX();
+	/**
+	 *
+	 * @return współrzędne Y położenia gracza
+	 */
+	int ReturnPlayerY();
+	/**
+	 * Dodaje operacje do wykonania
+	 * @param text - tekst komendy do wykonania
+	 */
+	void Operation( std::string text );
+	/**
+	 * Włącza lub wyłącza animacje
+	 * @param value - wartość uruchomienia animacji
+	 */
+	void TurnOnAnimation( bool value );
+	/**
+	 * Aktualizacja operacji, gracza, mapy
+	 */
+	void Update();
+	/**
+	 *
+	 * @return tekst odpowiedzi
+	 */
+	std::string ReturnAnswer();
+	/**
+	 *
+	 * @return wartość zajętości gracza
+	 */
+	bool ReturnBusy();
+	/**
+	 * Zatrzymuje aktualnie przetwarzaną operacji
+	 */
+	void StopOperation();
+	/**
+	 *
+	 * @return wartość posiadanej żywności
+	 */
 	unsigned int ReturnFood();
+	/**
+	 *
+	 * @return wartość posiadanego drewna
+	 */
 	unsigned int ReturnWood();
+	/**
+	 *
+	 * @return wartość posiadanego kamienia
+	 */
 	unsigned int ReturnStone();
+	/**
+	 *
+	 * @return wartość głodu
+	 */
 	unsigned int ReturnHungry();
+	/**
+	 * Zmniejsza poziom głodu gracza
+	 */
+	void MinusHungry();
 private:
 	class Podloze{
 	public:
@@ -194,6 +298,7 @@ private:
 	//Zasoby gracza
 	unsigned int Food, Wood, Stone;
 	unsigned int Hungry;
+	void Eat();
 
 	//CHEATS
 	bool Cheats;
@@ -228,9 +333,12 @@ const std::string text_path_working = "Pracuje nad tym";
 const std::string text_done = "Zrobione";
 const std::string text_stop = "Przerywam akcje!";
 const std::string text_cheats_on = "Nie ładnie oszukiwać! :<";
+const std::string text_hungry_full = "Nie jestem głody";
+const std::string text_hungry_eat = "Od razu lepiej";
+const std::string text_hungry_not = "Nie mam co zjeść";
 
 //Czas wykonywanych akcji
-const unsigned int time_move = 750;
+const unsigned int time_move = 1000;
 const unsigned int time_turn = 500;
 const unsigned int time_build_fire = 6000;
 const unsigned int time_delete = 5000;

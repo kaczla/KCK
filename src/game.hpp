@@ -10,13 +10,21 @@
 #include "text.hpp"
 #include "log_game.hpp"
 #include "bot.hpp"
+#include <cstdlib>
+#include <pthread.h>
 
 typedef std::basic_string<Uint16, std::char_traits<Uint16>, std::allocator<Uint16> > u16string;
 
+/**
+ * Główna klasa gry, która zarządza wszystkimi elementami.
+ */
 class Game{
 public:
 	Game();
 	~Game();
+	/**
+	 * Uruchomienie gry
+	 */
 	void Start();
 private:
 	void Update();
@@ -74,8 +82,13 @@ private:
 	GLfloat BotMessagePositionX, BotMessagePositionY;
 	GLfloat BotMessagePositionLengthMax;
 	void DrawBotMessage();
+	std::string Speak, SpeakThread;
 	//AIML
 	Bot bot;
+	//thread
+	pthread_t Thread;
 };
+
+void *SpeakText( void * In );
 
 #endif

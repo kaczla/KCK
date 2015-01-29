@@ -18,15 +18,40 @@
 #endif
 */
 
+/**
+ * Ładowanie ustawień gry i inicjalizowanie podstawowych bibliotek.
+ */
 class Init{
 public:
+	/**
+	 * Szerokość ekranu
+	 */
 	int SCREEN_WIDTH;
+	/**
+	 * Wysokość ekranu
+	 */
 	int SCREEN_HEIGHT;
+	/**
+	 * Bity na pixel
+	 */
 	int SCREEN_BPP;
 	Init();
 	~Init();
+	/**
+	 * Inicjalizuje podstawowe biblioteki
+	 * @return kod błędu
+	 */
 	bool init();
+	/**
+	 * Ustawia wielkość okna gry
+	 * @param Height - wysokość
+	 * @param Width - szerokość
+	 * @param BPP - bity na pixel
+	 */
 	void set_Screen(int Height, int Width, int BPP);
+	/**
+	 * Zwalnia pamięć
+	 */
 	void clean_up();
 private:
 	bool init_SDL();

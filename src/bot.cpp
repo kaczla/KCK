@@ -26,6 +26,7 @@ bool Bot::InitBot(){
 	if ( ! interpreter->initialize( "libaiml.xml" ) ){
 		LogGame::Write( "[ERR] " );
 		LogGame::Write( "AIML - Brak plików potrzebych do inicjalizacji!\n" );
+		return false;
 	}
 	else{
 		LogGame::Write( "[LOG] " );
