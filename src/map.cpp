@@ -132,55 +132,17 @@ void Map::SetValue(int height, int width){
 		//BIOMY
 		srand( time( NULL ));
 		int randombiomcount;
-		bool range = true;
-		randombiomcount=(std::rand() % 8) +26; //od 26 do 34
+		randombiomcount=(std::rand() % 10) +16; //od 36 do 46
 		for(int i=0;i<randombiomcount; i++){
 			//range = false;
-			int bioms[50][50];
 			int x = (std::rand() % (this->Width-11)) + 5; // <5;44>
 			int y = (std::rand() % (this->Height-11)) + 5;
 
-			//zerowanie tablicy
-			for(int p=0;p<50;p++)
-			{
-				for(int l=0;l<50;l++)
-				{
-					bioms[p][l]=0;
-				}
-			}
-			//sprawdzenie odleglosci wylosowanych juz biomow
-////////////////////////////////// NIESKONCZONE
-			/*for(int q=0;q<50;q++)
-			{
-				for(int w=0;w<50;w++)
-				{
-					if( sqrt( (x-q) * (x-q) + (y-w) * (y-w)  ) < 8 && bioms[q][w]==1)
-						{
-							i--;
-						}
-							else
-						{
-							bioms[x][y]=1;
-							range=true;
-						}
-				}
-				if(range==true)
-				{
-					break;
-				}
 
-			}*/
-////////////////////////////////
-			if(range==true)
-			{
+
 				int randombiom = (std::rand() % 3) + 0;
 				int randomshape;
 				this->Map2D[x][y] = this->Pelne[randombiom].ReturnImageID(); //punkt bezwzgledny (czerwona kropka)
-					//trzeba tutaj wstawic cos co na chwile zatrzyma program
-				for(int lol=0;lol<10000;lol++)
-				{
-					;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-				}
 					randomshape = (std::rand() % 12) + 0;
 					//randomshape = 11; //do testowania
 					/*
@@ -197,6 +159,7 @@ void Map::SetValue(int height, int width){
 					 * 10 pacman w gore
 					 * 11 pacman w dol
 					 */
+					
 					switch (randomshape)
 					{
 					default: break;
@@ -210,6 +173,48 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-2][y+1] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-3][y-1] = this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y] = this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y-0]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-3][y-1] = this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y] = this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y-0]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 1:
 						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
@@ -220,27 +225,163 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2) //piach
+						{
+							this->Map2D[x-2][y-2] = this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y-1] = this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y] = this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y+1] = this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y+2] = this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-2] = this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-1][y+2] = this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x][y-2] = this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2] = this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2] = this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+2] = this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-2] = this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1] = this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y] = this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+1] = this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+2] = this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0) //woda
+						{
+							this->Map2D[x-2][y-2] = this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y-1] = this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y] = this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y+1] = this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y+2] = this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-2] = this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-1][y+2] = this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x][y-2] = this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2] = this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2] = this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+2] = this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-2] = this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1] = this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y] = this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+1] = this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+2] = this->WodaTrawa[6].ReturnImageID();
+						}
+
 						break;
 					case 2:
-						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
-						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-2][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-2][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 3:
 						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
-						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
-						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x][y+1] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2){
+							this->Map2D[x-2][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+1][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+1][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+1][y+1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0){
+							this->Map2D[x-2][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+1][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+1][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+1][y+1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 4:
 						this->Map2D[x][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-1][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-1][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+1]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+1]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-1][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y-1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-1][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+1]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+1]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 5:
 						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
@@ -252,6 +393,46 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x-2][y-1] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2){
+							this->Map2D[x-3][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y-1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-2][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0){
+							this->Map2D[x-3][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y-1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-2][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 6:
 						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
@@ -266,6 +447,60 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x][y-2] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x][y+2] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-3][y-1]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-2][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+3][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-3][y-1]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-2][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+3][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 7:
 						this->Map2D[x-1][y] = this->Pelne[randombiom].ReturnImageID();
@@ -279,6 +514,52 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-2][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-3]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x+3][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-2][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-1][y+1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-3]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x+3][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 8:
 						this->Map2D[x-2][y] = this->Pelne[randombiom].ReturnImageID();
@@ -294,6 +575,60 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y+1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y+2] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-3][y-1]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+2]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+3]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-2][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-2][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+1]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x+2][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+3][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+2]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+3]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-3][y-1]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+2]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+3]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-2][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-2][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+1]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x+2][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+3][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+2]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+3]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 9:
 						this->Map2D[x-2][y-2] = this->Pelne[randombiom].ReturnImageID();
@@ -309,6 +644,60 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x+2][y-2] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-3][y-3]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y-2]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y-1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-2][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x][y-1]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x+3][y-3]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+3][y-2]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-3][y-3]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y-2]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y-1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-2][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x][y-1]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x+3][y-3]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+3][y-2]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 10:
 						this->Map2D[x-2][y-2] = this->Pelne[randombiom].ReturnImageID();
@@ -324,6 +713,60 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x+1][y-1] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+1][y] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+1][y+1] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-3][y-3]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y-2]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y-1]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-3][y+2]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-3][y+3]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-2][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-2][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x-1][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-3][y-3]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y-2]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y-1]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-3][y+1]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-3][y+2]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-3][y+3]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-2][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-2][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x-1][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+1][y-2]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x+1][y+2]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x+2][y-2]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+2][y+2]=this->WodaTrawa[6].ReturnImageID();
+						}
 						break;
 					case 11:
 						this->Map2D[x-1][y-1] = this->Pelne[randombiom].ReturnImageID();
@@ -339,11 +782,111 @@ void Map::SetValue(int height, int width){
 						this->Map2D[x+1][y+2] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y-2] = this->Pelne[randombiom].ReturnImageID();
 						this->Map2D[x+2][y+2] = this->Pelne[randombiom].ReturnImageID();
+						if(randombiom==2)
+						{
+							this->Map2D[x-2][y-2]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->TrawaPiach[1].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->TrawaPiach[9].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->TrawaPiach[7].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->TrawaPiach[4].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->TrawaPiach[2].ReturnImageID();
+							this->Map2D[x][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+1][y]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+2][y-3]=this->TrawaPiach[11].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->TrawaPiach[8].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->TrawaPiach[3].ReturnImageID();
+							this->Map2D[x+2][y+3]=this->TrawaPiach[10].ReturnImageID();
+							this->Map2D[x+3][y-3]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+3][y-2]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->TrawaPiach[6].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->TrawaPiach[5].ReturnImageID();
+							this->Map2D[x+3][y+2]=this->TrawaPiach[0].ReturnImageID();
+							this->Map2D[x+3][y+3]=this->TrawaPiach[6].ReturnImageID();
+						}
 						break;
+				}
+		}
+
+		//losowanie obiektow
+		for(int j=0;j<50;j++)
+		{
+			for(int h=0;h<50;h++)
+			{
+				int objectrandom = (std::rand() % 100) +0;
+				if(this->Map2D[h][j] == this->Pelne[1].ReturnImageID())
+				{
+					if (objectrandom<=10) //drzewa na trawie
+					{
+						if(objectrandom%3==0)
+						{
+							this->Map2D_obj[h][j]=Drzewo[0].ReturnImageID();
+						}
+						if(objectrandom%3==1)
+						{
+							this->Map2D_obj[h][j]=Drzewo[1].ReturnImageID();
+						}
+						if(objectrandom%3==2)
+						{
+							this->Map2D_obj[h][j]=Drzewo[2].ReturnImageID();
+						}
+					}
+					if (objectrandom<=5) //grzyby na trawie
+					{
+						if(objectrandom%3==0)
+						{
+							this->Map2D_obj[h][j]=Jedzenie[0].ReturnImageID();
+						}
+						if(objectrandom%3==1)
+						{
+							this->Map2D_obj[h][j]=Jedzenie[1].ReturnImageID();
+						}
+						if(objectrandom%3==2)
+						{
+							this->Map2D_obj[h][j]=Jedzenie[2].ReturnImageID();
+						}
+					}
+					if (objectrandom==0) //kamienie na trawie
+					{
+						if(objectrandom%3==0)
+						{
+							this->Map2D_obj[h][j]=Kamien[0].ReturnImageID();
+						}
+						if(objectrandom%3==1)
+						{
+							this->Map2D_obj[h][j]=Kamien[1].ReturnImageID();
+						}
+						if(objectrandom%3==2)
+						{
+							this->Map2D_obj[h][j]=Kamien[2].ReturnImageID();
+						}
+					}
+				}
+				if(this->Map2D[h][j] == this->Pelne[2].ReturnImageID())
+				{
+					if (objectrandom<=10)
+					{
+						if(objectrandom%3==0)
+						{
+							this->Map2D_obj[h][j]=Kamien[0].ReturnImageID();
+						}
+						if(objectrandom%3==1)
+						{
+							this->Map2D_obj[h][j]=Kamien[1].ReturnImageID();
+						}
+						if(objectrandom%3==2)
+						{
+							this->Map2D_obj[h][j]=Kamien[2].ReturnImageID();
+						}
+					}
 				}
 			}
 		}
-
 
 
 		//OBIEKTY
@@ -539,18 +1082,18 @@ void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
 	this->WodaPiach[11].SetLocalName( "LP_wodapiach" );
 
 	this->WodaTrawa.resize( 12 );
-	this->WodaTrawa[0].SetLocalName( "GD_trawawoda" );
-	this->WodaTrawa[1].SetLocalName( "GD_wodatrawa" );
-	this->WodaTrawa[2].SetLocalName( "LD1_PG3_trawawoda" );
-	this->WodaTrawa[3].SetLocalName( "LD1_PG3_wodatrawa" );
-	this->WodaTrawa[4].SetLocalName( "LD3_PG1_trawawoda" );
-	this->WodaTrawa[5].SetLocalName( "LD3_PG1_wodatrawa" );
+	this->WodaTrawa[1].SetLocalName( "GD_trawawoda" );
+	this->WodaTrawa[0].SetLocalName( "GD_wodatrawa" );
+	this->WodaTrawa[3].SetLocalName( "LD1_PG3_trawawoda" );
+	this->WodaTrawa[2].SetLocalName( "LD1_PG3_wodatrawa" );
+	this->WodaTrawa[5].SetLocalName( "LD3_PG1_trawawoda" );
+	this->WodaTrawa[4].SetLocalName( "LD3_PG1_wodatrawa" );
 	this->WodaTrawa[6].SetLocalName( "LG1_PD3_wodatrawa" );
 	this->WodaTrawa[7].SetLocalName( "LG1_PD3_trawawoda" );
-	this->WodaTrawa[8].SetLocalName( "LG3_PD1_trawawoda" );
-	this->WodaTrawa[9].SetLocalName( "LG3_PD1_wodatrawa" );
-	this->WodaTrawa[10].SetLocalName( "LP_trawawoda" );
-	this->WodaTrawa[11].SetLocalName( "LP_wodatrawa" );
+	this->WodaTrawa[9].SetLocalName( "LG3_PD1_trawawoda" );
+	this->WodaTrawa[8].SetLocalName( "LG3_PD1_wodatrawa" );
+	this->WodaTrawa[11].SetLocalName( "LP_trawawoda" );
+	this->WodaTrawa[10].SetLocalName( "LP_wodatrawa" );
 
 	this->Drzewo.resize( 4 );
 	this->Drzewo[0].SetLocalName( "tree1" );
