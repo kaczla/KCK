@@ -69,6 +69,7 @@ bool Map::ReturnSuccess(){
 }
 
 void Map::SetValue(int height, int width){
+	remap:
 	this->Width = width;
 	this->Height = height;
 	if( this->Pelne.size() == 0 or this->TrawaPiach.size() == 0 or this->WodaPiach.size() == 0 or this->WodaTrawa.size() == 0 ){
@@ -129,20 +130,45 @@ void Map::SetValue(int height, int width){
 
 		//BIOMY
 		srand( time( NULL ));
+		int randomcount=0;
 		int randombiomcount;
-		randombiomcount=(std::rand() % 10) +16; //od 36 do 46
+		randombiomcount=(std::rand() % 8) +12; //od 36 do 46
 		for(int i=0;i<randombiomcount; i++){
-			//range = false;
+			drawxyagain:  //ponowne losowanie x i y punktu do ksztaltow
+			randomcount++; //ilosc losowan x i y
+			if(randomcount>100)
+			{
+				goto remap; //ponowne wygenerowanie mapy
+			}
+
 			int x = (std::rand() % (this->Width-11)) + 5; // <5;44>
 			int y = (std::rand() % (this->Height-11)) + 5;
 
 
 
+			//@@@@@@@@@@@@@@@@@@
+				drawrandombiomagain: //pozbycie sie jedynki z losowan
 				int randombiom = (std::rand() % 3) + 0;
-				int randomshape;
-				this->Map2D[x][y] = this->Pelne[randombiom].ReturnImageID(); //punkt bezwzgledny (czerwona kropka)
+				if(randombiom==1)
+				{
+					goto drawrandombiomagain;
+				}
+			//@@@@@@@@@@@@@@@@@@
+
+
+					for(int xx = x-4 ;xx<=x+4 ;xx++){ //wolne pole wokol punktu
+						for(int yy = y-4 ;yy<=y+4 ;yy++)
+						{
+							if(this->Map2D[xx][yy] != this->Pelne[1].ReturnImageID())
+							{
+								goto drawxyagain; //ponownie losuj jezeli zajete
+							}
+						}
+					}
+
+					int randomshape;
+					this->Map2D[x][y] = this->Pelne[randombiom].ReturnImageID(); //punkt bezwzgledny (czerwona kropka)
 					randomshape = (std::rand() % 12) + 0;
-					//randomshape = 11; //do testowania
 					/*
 					 * 0 niepelny prostokat
 					 * 1 kwadrat
@@ -806,6 +832,33 @@ void Map::SetValue(int height, int width){
 							this->Map2D[x+3][y+1]=this->TrawaPiach[5].ReturnImageID();
 							this->Map2D[x+3][y+2]=this->TrawaPiach[0].ReturnImageID();
 							this->Map2D[x+3][y+3]=this->TrawaPiach[6].ReturnImageID();
+						}
+						if(randombiom==0)
+						{
+							this->Map2D[x-2][y-2]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-2][y-1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y+1]=this->WodaTrawa[1].ReturnImageID();
+							this->Map2D[x-2][y+2]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x-1][y-3]=this->WodaTrawa[9].ReturnImageID();
+							this->Map2D[x-1][y-2]=this->WodaTrawa[7].ReturnImageID();
+							this->Map2D[x-1][y+2]=this->WodaTrawa[4].ReturnImageID();
+							this->Map2D[x-1][y+3]=this->WodaTrawa[2].ReturnImageID();
+							this->Map2D[x][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+1][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+1][y]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+1][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+2][y-3]=this->WodaTrawa[11].ReturnImageID();
+							this->Map2D[x+2][y-1]=this->WodaTrawa[8].ReturnImageID();
+							this->Map2D[x+2][y+1]=this->WodaTrawa[3].ReturnImageID();
+							this->Map2D[x+2][y+3]=this->WodaTrawa[10].ReturnImageID();
+							this->Map2D[x+3][y-3]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+3][y-2]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y-1]=this->WodaTrawa[6].ReturnImageID();
+							this->Map2D[x+3][y+1]=this->WodaTrawa[5].ReturnImageID();
+							this->Map2D[x+3][y+2]=this->WodaTrawa[0].ReturnImageID();
+							this->Map2D[x+3][y+3]=this->WodaTrawa[6].ReturnImageID();
 						}
 						break;
 				}
