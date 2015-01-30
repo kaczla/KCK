@@ -315,7 +315,6 @@ void Game::Start(){
 									if( this->BotMessage.size() > 0 ){
 										//std::cout<<"+ "<<this->BotMessage<<"\n";
 										this->TextBotMessage.RenderText( this->BotMessage );
-										this->BotMessage = this->map2D.ReturnAnswer();
 										this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 									}
 								}
