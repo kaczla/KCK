@@ -910,7 +910,7 @@
 		<category>
 		<pattern>Idz na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -922,7 +922,7 @@
 	<category>
 		<pattern>Idz * na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -934,7 +934,7 @@
 	<category>
 		<pattern>Idz blisko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -945,7 +945,7 @@
 	<category>
 		<pattern>Idz * blisko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -956,7 +956,7 @@
 	<category>
 		<pattern>Idz daleko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -967,7 +967,7 @@
 	<category>
 		<pattern>Idz * daleko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -978,7 +978,7 @@
 	<category>
 		<pattern>Biegnij na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -990,7 +990,7 @@
 	<category>
 		<pattern>Biegnij * na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1002,7 +1002,7 @@
 	<category>
 		<pattern>Biegnij blisko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1013,7 +1013,7 @@
 	<category>
 		<pattern>Biegnij * blisko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1035,7 +1035,7 @@
 	<category>
 		<pattern>Biegnij * daleko na poludnie</pattern>
 		<template>
-			1gu
+			1gd
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1114,7 +1114,7 @@
 	<category>
 		<pattern>Idz na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1126,7 +1126,7 @@
 	<category>
 		<pattern>Idz * na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1138,7 +1138,7 @@
 	<category>
 		<pattern>Idz blisko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1149,7 +1149,7 @@
 	<category>
 		<pattern>Idz * blisko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1160,7 +1160,7 @@
 	<category>
 		<pattern>Idz daleko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1171,7 +1171,7 @@
 	<category>
 		<pattern>Idz * daleko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1182,7 +1182,7 @@
 	<category>
 		<pattern>Biegnij na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1194,7 +1194,7 @@
 	<category>
 		<pattern>Biegnij * na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1206,7 +1206,7 @@
 	<category>
 		<pattern>Biegnij blisko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1217,7 +1217,7 @@
 	<category>
 		<pattern>Biegnij * blisko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1228,7 +1228,7 @@
 	<category>
 		<pattern>Biegnij daleko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1239,7 +1239,7 @@
 	<category>
 		<pattern>Biegnij * daleko na zachod</pattern>
 		<template>
-			1gu
+			1gl
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1318,7 +1318,7 @@
 	<category>
 		<pattern>Idz na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1330,7 +1330,7 @@
 	<category>
 		<pattern>Idz * na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1342,7 +1342,7 @@
 	<category>
 		<pattern>Idz blisko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1353,7 +1353,7 @@
 	<category>
 		<pattern>Idz * blisko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1364,7 +1364,7 @@
 	<category>
 		<pattern>Idz daleko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1375,7 +1375,7 @@
 	<category>
 		<pattern>Idz * daleko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1386,7 +1386,7 @@
 	<category>
 		<pattern>Biegnij na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1398,7 +1398,7 @@
 	<category>
 		<pattern>Biegnij * na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>3</li>
 				<li>4</li>
@@ -1410,7 +1410,7 @@
 	<category>
 		<pattern>Biegnij blisko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1421,7 +1421,7 @@
 	<category>
 		<pattern>Biegnij * blisko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>2</li>
 				<li>3</li>
@@ -1432,7 +1432,7 @@
 	<category>
 		<pattern>Biegnij daleko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1443,7 +1443,7 @@
 	<category>
 		<pattern>Biegnij * daleko na wschod</pattern>
 		<template>
-			1gu
+			1gr
 			<random>
 				<li>5</li>
 				<li>6</li>
@@ -1600,7 +1600,7 @@
 	</category>
 
 	<category>
-		<pattern>Przemarszuj * na polnoc</pattern>
+		<pattern>Przemaszeruj * na polnoc</pattern>
 		<template>
 			1gu
 			<random>
@@ -1612,7 +1612,7 @@
 	</category>
 
 	<category>
-		<pattern>Przemarszuj blisko na polnoc</pattern>
+		<pattern>Przemaszeruj blisko na polnoc</pattern>
 		<template>
 			1gu
 			<random>
@@ -1623,7 +1623,7 @@
 	</category>
 
 	<category>
-		<pattern>Przemarszuj * blisko na polnoc</pattern>
+		<pattern>Przemaszeruj * blisko na polnoc</pattern>
 		<template>
 			1gu
 			<random>
@@ -1634,7 +1634,7 @@
 	</category>
 
 	<category>
-		<pattern>Przemarszuj daleko na polnoc</pattern>
+		<pattern>Przemaszeruj daleko na polnoc</pattern>
 		<template>
 			1gu
 			<random>
@@ -1645,7 +1645,7 @@
 	</category>
 
 	<category>
-		<pattern>Przemarszuj * daleko na polnoc</pattern>
+		<pattern>Przemaszeruj * daleko na polnoc</pattern>
 		<template>
 			1gu
 			<random>
@@ -2358,6 +2358,34 @@
 		</template>
 	</category>
 
+	<category>
+		<pattern>Zetnij najblizsze drzewo</pattern>
+		<template>
+			1ct	<!-- cut tree -->
+		</template>
+	</category>
+
+	<category>
+		<pattern>Zetnij * najblizsze drzewo</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+
+	<category>
+		<pattern>Zetnij drzewko</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zetnij drzewo</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+	
 	<category>
 		<pattern>Co widzisz</pattern>
 		<template>
