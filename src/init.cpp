@@ -20,7 +20,7 @@ bool Init::init(){
 
 bool Init::init_SDL(){
 	LogGame::Write( "[LOG] " );
-	LogGame::Write( SDL_GetTicks() );
+	LogGame::Write( 0 );
 	LogGame::Write( ": SDL - Inicjalizowanie\n" );
 	if( SDL_Init( SDL_INIT_EVERYTHING ) < 0 ){
 		LogGame::Write( "[ERR] " );

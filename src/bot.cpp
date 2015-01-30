@@ -14,7 +14,7 @@ Bot::Bot(){
 }
 
 Bot::~Bot(){
-	delete interpreter;
+	delete this->interpreter;
 }
 
 bool Bot::InitBot(){
@@ -23,7 +23,7 @@ bool Bot::InitBot(){
 	this->interpreter->registerCallbacks( &myCallbacks );
 	LogGame::Write( "[LOG] " );
 	LogGame::Write( "AIML - Inicjalizowanie\n" );
-	if ( ! interpreter->initialize( "libaiml.xml" ) ){
+	if ( ! this->interpreter->initialize( "libaiml.xml" ) ){
 		LogGame::Write( "[ERR] " );
 		LogGame::Write( "AIML - Brak plików potrzebych do inicjalizacji!\n" );
 		return false;
@@ -31,14 +31,17 @@ bool Bot::InitBot(){
 	else{
 		LogGame::Write( "[LOG] " );
 		LogGame::Write( "AIML - Inicjalizacja przebiegła pomyślnie\n" );
-		Init = true;
+		this->Init = true;
 	}
+	/*
+	this->Init = this->InitSynonym();
+	*/
 	return true;
 }
 
 std::string Bot::ReturnAnswer( std::string text ){
 	if( text.size() > 0 ){
-		if( ! interpreter->respond( text, "localhost", this->Answer ) ){
+		if( ! this->interpreter->respond( text, "localhost", this->Answer ) ){
 			LogGame::Write( "[ERR] " );
 			LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
 		}
@@ -110,4 +113,84 @@ std::string Bot::ReturnAnswer( u16string text ){
 	std::string tmp_text ( text.begin(), text.end() );
 	return this->ReturnAnswer( tmp_text );
 }
+
+/*
+//SYNONIMS
+bool Bot::InitSynonym(){
+	xmlDoc *file = NULL;
+	file = xmlParseFile( "synonim.xml" );
+	if( file == NULL ){
+		LogGame::Write( "[ERR] " );
+		LogGame::Write( "AIML - Problem z plikiem synonim.xml\n" );
+		return false;
+	}
+	else{
+		xmlNode *Root = NULL;
+		Root = xmlDocGetRootElement( file );
+		if( Root == NULL ){
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "AIML - Brak korzenia dla pliku synonim.xml\n" );
+			return false;
+		}
+		unsigned int check = 0;
+		std::string value1, value2;
+		const xmlChar *var1 = (unsigned char*)"nazwa", *var2 = (unsigned char*)"synonim";
+		for( xmlNode *Node = Root->children; Node; Node = Node->next ){
+			if( Node->type == XML_ELEMENT_NODE ){
+				check = 0;
+				for( xmlNode *NodeChildren = Node->children; NodeChildren; NodeChildren = NodeChildren->next ){
+					if( NodeChildren->type == XML_ELEMENT_NODE ){
+						if( xmlStrEqual(NodeChildren->name,  var1 ) == 1 ){
+							value1 = (char*) NodeChildren->children->content;
+							check++;
+						}
+						else if( xmlStrEqual( NodeChildren->name, var2 ) == 1 ){
+							value2 = (char*)NodeChildren->children->content;
+							check++;
+						}
+					}
+				}
+				if( check == 2 ){
+					this->Synonym[value1] = value2;
+				}
+			}
+		}
+		LogGame::Write( "[LOG] " );
+		LogGame::Write( "AIML - Wczytano synonimy z pliku synonim.xml\n[LOG] AIML - Ilość wczytanych synonimów: " );
+		LogGame::Write( this->Synonym.size() );
+		LogGame::NewLine();
+		xmlFreeDoc( file );
+	}
+	xmlCleanupParser();
+	return true;
+}
+
+void Bot::LogSynonym(){
+	for( std::map< std::string, std::string >::iterator it = this->Synonym.begin(); it != this->Synonym.end(); it++ ){
+		//std::cout<<it->first<<" = "<<it->second<<"\n";
+		LogGame::Write( it->first );
+		LogGame::Write( " = " );
+		LogGame::Write( it->second );
+		LogGame::NewLine();
+	}
+}
+
+FILE SYNONIM.XML
+<root>
+	<wyraz>
+		<nazwa>drzewko</nazwa>
+		<synonim>drzewo</synonim>
+	</wyraz>
+	<wyraz>
+		<nazwa>tree</nazwa>
+		<synonim>drzewo</synonim>
+	</wyraz>
+	<wyraz>
+		<nazwa>drzew</nazwa>
+		<synonim>drzewo</synonim>
+	</wyraz>
+</root>
+
+*/
+
 

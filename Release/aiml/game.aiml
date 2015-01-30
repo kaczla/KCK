@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-
 <aiml>
-
 	<category>
 		<pattern>Witaj</pattern>
 		<template>
@@ -16,28 +14,7 @@
 	</category>
 
 	<category>
-		<pattern>Czesc</pattern>
-		<template>
-			<srai>Witaj</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Hej</pattern>
-		<template>
-			<srai>Witaj</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Siema</pattern>
-		<template>
-			<srai>Witaj</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Dzien dobry</pattern>
+		<pattern>Witaj *</pattern>
 		<template>
 			<srai>Witaj</srai>
 		</template>
@@ -53,23 +30,9 @@
 			</random>
 		</template>
 	</category>
-
+	
 	<category>
-		<pattern>Na razie</pattern>
-		<template>
-			<srai>Do widzenia</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Pa</pattern>
-		<template>
-			<srai>Do widzenia</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Pa *</pattern>
+		<pattern>Do widzenia *</pattern>
 		<template>
 			<srai>Do widzenia</srai>
 		</template>
@@ -102,6 +65,8 @@
 				<li>Całkiem dobrze</li>
 				<li>W porządku</li>
 				<li>Bywało lepiej</li>
+				<li>Fajnie jest, ogólnie</li>
+				<li>Trochę mnie w krzyżu boli, ale ogólnie nie narzekam</li>
 			</random>
 		</template>
 	</category>
@@ -109,21 +74,21 @@
 	<category>
 		<pattern>Jak sie masz *</pattern>
 		<template>
-			Fajnie jest, ogólnie :)
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak sie czujesz</pattern>
 		<template>
-			Trochę mnie w krzyżu boli, ale ogólnie nie narzekam
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
 	<category>
 		<pattern>Jak sie * czujesz</pattern>
 		<template>
-			Trochę mnie w krzyżu boli, ale ogólnie nie narzekam.
+			<srai>Jak sie masz</srai>
 		</template>
 	</category>
 
@@ -278,34 +243,6 @@
 	</category>
 
 	<category>
-		<pattern>Co porabiasz</pattern>
-		<template>
-			<srai>Co robisz</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Co * porabiasz</pattern>
-		<template>
-			<srai>Co robisz</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Co porabiasz *</pattern>
-		<template>
-			<srai>Co robisz</srai>
-		</template>
-	</category>
-
-	<category>
-		<pattern>Co * porabiasz *</pattern>
-		<template>
-			<srai>Co robisz</srai>
-		</template>
-	</category>
-
-	<category>
 		<pattern>Co lubisz</pattern>
 		<template>
 			<random>
@@ -427,7 +364,7 @@
 	</category>
 
 	<category>
-		<pattern>Kto jest twoim ojcem</pattern>
+		<pattern>Kto jest twoim tata</pattern>
 		<template>
 			<random>
 				<li>Nie mam jednego ojca</li>
@@ -2409,6 +2346,20 @@
 	
 	<category>
 		<pattern>Rozbij kamienie</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz kamien</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>Zbierz * kamien</pattern>
 		<template>
 			1cs
 		</template>

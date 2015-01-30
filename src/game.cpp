@@ -313,7 +313,7 @@ void Game::Start(){
 										TextInput.RenderText( this->Input );
 									}
 									if( this->BotMessage.size() > 0 ){
-										//std::cout<<"+ "<<this->BotMessage<<"\n";
+										std::cout<<"+ "<<this->BotMessage<<"\n";
 										this->TextBotMessage.RenderText( this->BotMessage );
 										this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 									}
@@ -332,7 +332,7 @@ void Game::Start(){
 											TextInput.RenderText( this->Input );
 										}
 										if( this->BotMessage.size() > 0 ){
-											//std::cout<<"+ "<<this->BotMessage<<"\n";
+											std::cout<<"+ "<<this->BotMessage<<"\n";
 											this->TextBotMessage.RenderText( this->BotMessage );
 											this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 										}
@@ -344,7 +344,7 @@ void Game::Start(){
 											TextInput.RenderText( this->Input );
 										}
 										if( this->BotMessage.size() > 0 ){
-											//std::cout<<"+ "<<this->BotMessage<<"\n";
+											std::cout<<"+ "<<this->BotMessage<<"\n";
 											this->TextBotMessage.RenderText( this->BotMessage );
 											this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 										}
@@ -389,7 +389,7 @@ void Game::Update(){
 	this->map2D.Update();
 	if( !this->map2D.ReturnAnswer().empty() && this->BotMessage != this->map2D.ReturnAnswer() ){
 		this->BotMessage = this->map2D.ReturnAnswer();
-		//std::cout<<"+ "<<this->BotMessage<<"\n";
+		std::cout<<"+ "<<this->BotMessage<<"\n";
 		this->Speak = "espeak -v pl \"" + this->BotMessage + "\"";
 		this->TextBotMessage.RenderText( this->BotMessage );
 	}

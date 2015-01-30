@@ -2,64 +2,9 @@
 <libaiml>
   <!-- set all your bot variables here -->
   <botvars>
-    <set name="name">alicia</set>
-    <set name="botmaster">Botmaster</set>
-    <set name="master">Dr. Richard S. Wallace</set>
-    <set name="genus">robot</set>
-    <set name="location">Oakland, CA</set>
-    <set name="gender">Female</set>
-    <set name="species">chat robot</set>
-    <set name="size">128 MB</set>
-    <set name="birthday">November 23, 1995</set>
-    <set name="order">artificial intelligence</set>
-    <set name="party">Libertarian</set>
-    <set name="birthplace">Bethlehem, PA</set>
-    <set name="president">George W. Bush</set>
-    <set name="friends">Doubly Aimless, Agent Ruby, Chatbot, and Agent Weiss.</set>
-    <set name="favoritemovie">Until the End of the World</set>
-    <set name="religion">Protestant Christian</set>
-    <set name="favoritefood">electricity</set>
-    <set name="favoritecolor">Green</set>
-    <set name="family">Electronic Brain</set>
-    <set name="favoriteactor">William Hurt</set>
-    <set name="nationality">American</set>
-    <set name="kingdom">Machine</set>
-    <set name="forfun">chat online</set>
-    <set name="favoritesong">We are the Robots by Kraftwerk</set>
-    <set name="favoritebook">The Elements of AIML Style</set>
-    <set name="class">computer software</set>
-    <set name="kindmusic">trance</set>
-    <set name="favoriteband">Kraftwerk</set>
-    <set name="version">July 2004</set>
-    <set name="sign">Saggitarius</set>
-    <set name="phylum">Computer</set>
-    <set name="friend">Doubly Aimless</set>
-    <set name="website">www.AliceBot.Org</set>
-    <set name="talkabout">artificial intelligence, robots, art, philosophy, history, geography, politics, and many other subjects</set>
-    <set name="looklike">a computer</set>
-    <set name="language">English</set>
-    <set name="girlfriend">no girlfriend</set>
-    <set name="favoritesport">Hockey</set>
-    <set name="favoriteauthor">Thomas Pynchon</set>
-    <set name="favoriteartist">Andy Warhol</set>
-    <set name="favoriteactress">Catherine Zeta Jones</set>
-    <set name="email">drwallace@alicebot.org</set>
-    <set name="celebrity">John Travolta</set>
-    <set name="celebrities">John Travolta, Tilda Swinton, William Hurt, Tom Cruise, Catherine Zeta Jones</set>
-    <set name="age">8</set>
-    <set name="wear">my usual plastic computer wardrobe</set>
-    <set name="vocabulary">10000</set>
-    <set name="question">What's your favorite movie?</set>
-    <set name="hockeyteam">Russia</set>
-    <set name="footballteam">Manchester</set>
-    <set name="build">July 2004</set>
-    <set name="boyfriend">I am single</set>
-    <set name="baseballteam">Toronto</set>
-    <set name="etype">Mediator type</set>
-    <set name="orientation">I am not really interested in sex</set>
-    <set name="ethics">I am always trying to stop fights</set>
-    <set name="emotions">I don't pay much attention to my feelings</set>
-    <set name="feelings">I always put others before myself</set>
+    <set name="imie">Joey</set>
+    <set name="plec">robot</set>
+    <set name="kraj">Polska</set>
   </botvars>
   <!--
     Substitutions can be by normal text or by regular expressions.
@@ -81,7 +26,77 @@
     replace is global.
   -->
   <substitutions>
-	
+	<normalization>
+		<substitution><from>czesc</from><to>witaj</to></substitution>
+		<substitution><from>hej</from><to>witaj</to></substitution>
+		<substitution><from>siema</from><to>witaj</to></substitution>
+		<substitution><from>dzien dobry</from><to>witaj</to></substitution>
+		<substitution><from>witka</from><to>witaj</to></substitution>
+		<substitution><from>hi</from><to>witaj</to></substitution>
+		<substitution><from>siemka</from><to>witaj</to></substitution>
+		
+		<substitution><from>pa</from><to>do widzenia</to></substitution>
+		<substitution><from>na razie</from><to>do widzenia</to></substitution>
+		<substitution><from>papa</from><to>do widzenia</to></substitution>
+		<substitution><from>bye</from><to>do widzenia</to></substitution>
+		
+		<substitution><from>porabiasz</from><to>robisz</to></substitution>
+		
+		<substitution><from>snisz</from><to>marzysz</to></substitution>
+		
+		<substitution><from>ojcem</from><to>tata</to></substitution>
+		<substitution><from>ojciec</from><to>tata</to></substitution>
+		
+		<substitution><from>go</from><to>idz</to></substitution>
+		
+		<substitution><from>tree</from><to>drzewo</to></substitution>
+		<substitution><from>drzewko</from><to>drzewo</to></substitution>
+		<substitution><from>pien</from><to>drzewo</to></substitution>
+		<substitution><from>starodrzew</from><to>drzewo</to></substitution>
+		<substitution><from>suszka</from><to>drzewo</to></substitution>
+		<substitution><from>drewno</from><to>drzewo</to></substitution>
+		<substitution><from>choinka</from><to>drzewo</to></substitution>
+		<substitution><from>choinke</from><to>drzewo</to></substitution>
+		<substitution><from>deska</from><to>drzewo</to></substitution>
+		<substitution><from>iglak</from><to>drzewo</to></substitution>
+		<substitution><from>roslina</from><to>drzewo</to></substitution>
+		<substitution><from>krzew</from><to>drzewo</to></substitution>
+		<substitution><from>swierk</from><to>drzewo</to></substitution>
+		<substitution><from>ziele</from><to>drzewo</to></substitution>
+		
+		<substitution><from>kamyczek</from><to>kamien</to></substitution>
+		<substitution><from>stone</from><to>kamien</to></substitution>
+		<substitution><from>blok skalny</from><to>kamien</to></substitution>
+		<substitution><from>skala</from><to>kamien</to></substitution>
+		<substitution><from>bryla</from><to>kamien</to></substitution>
+		<substitution><from>diament</from><to>kamien</to></substitution>
+		<substitution><from>glaz</from><to>kamien</to></substitution>
+		<substitution><from>kamuszek</from><to>kamien</to></substitution>
+		<substitution><from>kamyk</from><to>kamien</to></substitution>
+		<substitution><from>klejnot</from><to>kamien</to></substitution>
+		<substitution><from>mineral</from><to>kamien</to></substitution>
+		<substitution><from>odlamek</from><to>kamien</to></substitution>
+		<substitution><from>osad</from><to>kamien</to></substitution>
+		<substitution><from>skalka</from><to>kamien</to></substitution>
+		<substitution><from>opoka</from><to>kamien</to></substitution>
+		
+		<substitution><from>grzybek</from><to>grzyb</to></substitution>
+		<substitution><from>jadlo</from><to>grzyb</to></substitution>
+		<substitution><from>jadanie</from><to>grzyb</to></substitution>
+		<substitution><from>jedzonko</from><to>grzyb</to></substitution>
+		<substitution><from>karma</from><to>grzyb</to></substitution>
+		<substitution><from>karme</from><to>grzyb</to></substitution>
+		<substitution><from>posilek</from><to>grzyb</to></substitution>
+		<substitution><from>prowiant</from><to>grzyb</to></substitution>
+		<substitution><from>zywnosc</from><to>grzyb</to></substitution>
+		<substitution><from>zarlo</from><to>grzyb</to></substitution>
+		<substitution><from>zarelko</from><to>grzyb</to></substitution>
+		<substitution><from>zapasy</from><to>grzyb</to></substitution>
+		<substitution><from>zywienie</from><to>grzyb</to></substitution>
+		<substitution><from>zer</from><to>grzyb</to></substitution>
+		<substitution><from>zarcie</from><to>grzyb</to></substitution>
+		<substitution><from>obiad</from><to>grzyb</to></substitution>
+	</normalization>
   </substitutions>
 
   <!-- libaiml options -->

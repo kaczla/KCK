@@ -8,7 +8,11 @@
 #include "include_SDL_ttf.hpp"
 using std_util::strip;
 using namespace aiml;
-
+/*
+#include <map>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+*/
 // Uint16 text
 typedef std::basic_string<Uint16, std::char_traits<Uint16>, std::allocator<Uint16> > u16string;
 
@@ -62,10 +66,21 @@ public:
 	 * @return odpowiedź na pytanie
 	 */
 	std::string ReturnAnswer( u16string text );
+	/*
+	/ **
+	 * Wczytanie synonimów z pliku synonim.xml
+	 * @return kod błędu
+	* /
+	bool InitSynonym();
+	*/
 private:
 	bool Init;
 	cInterpreter *interpreter;
 	std::string Answer;
+	/*
+	std::map< std::string, std::string > Synonym;
+	void LogSynonym();
+	*/
 };
 
 
