@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+	<category>
+		<pattern>gu</pattern>
+		<template>
+			1gu2
+		</template>
+	</category>
+	
+	<category>
+		<pattern>gd</pattern>
+		<template>
+			1gd2
+		</template>
+	</category>
+	
+	<category>
+		<pattern>gl</pattern>
+		<template>
+			1gl2
+		</template>
+	</category>
+	
+	<category>
+		<pattern>gr</pattern>
+		<template>
+			1gr2
+		</template>
+	</category>
+		
+	<category>
+		<pattern>tr</pattern>
+		<template>
+			1tr
+		</template>
+	</category>
+
+	<category>
+		<pattern>tl</pattern>
+		<template>
+			1tl
+		</template>
+	</category>
+	
+	<category>
+		<pattern>tu</pattern>
+		<template>
+			1tu
+		</template>
+	</category>
+
+	<category>
+		<pattern>td</pattern>
+		<template>
+			1td
+		</template>
+	</category>
+
+	<category>
+		<pattern>bf</pattern>
+		<template>
+			1bf
+		</template>
+	</category>
+
+	<category>
+		<pattern>st</pattern>
+		<template>
+			1st
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ct</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+	
+	<category>
+		<pattern>dt</pattern>
+		<template>
+			1ct
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ds</pattern>
+		<template>
+			1cs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>df</pattern>
+		<template>
+			1cf
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ft</pattern>
+		<template>
+			1ft
+		</template>
+	</category>
+	
+	<category>
+		<pattern>fs</pattern>
+		<template>
+			1fs
+		</template>
+	</category>
+	
+	<category>
+		<pattern>ff</pattern>
+		<template>
+			1ff
+		</template>
+	</category>
+	
+	<category>
+		<pattern>fm</pattern>
+		<template>
+			1fm
+		</template>
+	</category>
+	
+	<category>
+		<pattern>su</pattern>
+		<template>1cheatson</template>
+	</category>
+	
+	<category>
+		<pattern>cheats</pattern>
+		<template>
+			<srai>su</srai>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>allres</pattern>
+		<template>1allresources</template>
+	</category>
+	
+	<category>
+		<pattern>allresources</pattern>
+		<template>
+			<srai>allres</srai>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>res</pattern>
+		<template>
+			<srai>allres</srai>
+		</template>
+	</category>
+	
+	<category>
+		<pattern>del</pattern>
+		<template>1del</template>
+	</category>
+	
+	<category>
+		<pattern>osf</pattern>
+		<template>1osf</template>
+	</category>
+	
+	<category>
+		<pattern>opf</pattern>
+		<template>1opf</template>
+	</category>
+	
+</aiml>

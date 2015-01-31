@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<libaiml>
+  <!-- set all your bot variables here -->
+  <botvars>
+    <set name="imie">Joey</set>
+    <set name="plec">robot</set>
+    <set name="kraj">Polska</set>
+  </botvars>
+  <!--
+    Substitutions can be by normal text or by regular expressions.
+    To use normal text use <from type="normal"> or <from>.
+    To use regular expressions use <from type="regex">.
+      
+    Normal text: the match is case insensitive. The match is only accepted if
+    the characters before and after (if any) the input's matching text
+    are non-alphanumeric and not apostrophes "'" (ie: [^A-Za-z0-9']).
+      
+    Regular Expressions: the match is case sensitive and capturing (this
+    means you can refer to parethezides parts of the regular expression by
+    using \0 (all match) \1-\9 (the rest of the captured matches).
+    The regular expressions used are Perl Compatible, so you should read the
+    special extensions to POSIX regular expressions this syntax has (man pcre).
+      
+    When the substitutions are to be applied to an input, every <substitution>
+    is applied (in the order they were defined here). If there's match the
+    replace is global.
+  -->
+  <substitutions>
+	<normalization>
+		<substitution><from>czesc</from><to>witaj</to></substitution>
+		<substitution><from>hej</from><to>witaj</to></substitution>
+		<substitution><from>siema</from><to>witaj</to></substitution>
+		<substitution><from>dzien dobry</from><to>witaj</to></substitution>
+		<substitution><from>witka</from><to>witaj</to></substitution>
+		<substitution><from>hi</from><to>witaj</to></substitution>
+		<substitution><from>siemka</from><to>witaj</to></substitution>
+		
+		<substitution><from>pa</from><to>do widzenia</to></substitution>
+		<substitution><from>na razie</from><to>do widzenia</to></substitution>
+		<substitution><from>papa</from><to>do widzenia</to></substitution>
+		<substitution><from>bye</from><to>do widzenia</to></substitution>
+		
+		<substitution><from>porabiasz</from><to>robisz</to></substitution>
+		
+		<substitution><from>snisz</from><to>marzysz</to></substitution>
+		
+		<substitution><from>ojcem</from><to>tata</to></substitution>
+		<substitution><from>ojciec</from><to>tata</to></substitution>
+		
+		<substitution><from>go</from><to>idz</to></substitution>
+		
+		<substitution><from>tree</from><to>drzewo</to></substitution>
+		<substitution><from>drzewko</from><to>drzewo</to></substitution>
+		<substitution><from>pien</from><to>drzewo</to></substitution>
+		<substitution><from>starodrzew</from><to>drzewo</to></substitution>
+		<substitution><from>suszka</from><to>drzewo</to></substitution>
+		<substitution><from>drewno</from><to>drzewo</to></substitution>
+		<substitution><from>choinka</from><to>drzewo</to></substitution>
+		<substitution><from>choinke</from><to>drzewo</to></substitution>
+		<substitution><from>deska</from><to>drzewo</to></substitution>
+		<substitution><from>iglak</from><to>drzewo</to></substitution>
+		<substitution><from>roslina</from><to>drzewo</to></substitution>
+		<substitution><from>krzew</from><to>drzewo</to></substitution>
+		<substitution><from>swierk</from><to>drzewo</to></substitution>
+		<substitution><from>ziele</from><to>drzewo</to></substitution>
+		
+		<substitution><from>kamyczek</from><to>kamien</to></substitution>
+		<substitution><from>stone</from><to>kamien</to></substitution>
+		<substitution><from>blok skalny</from><to>kamien</to></substitution>
+		<substitution><from>skala</from><to>kamien</to></substitution>
+		<substitution><from>bryla</from><to>kamien</to></substitution>
+		<substitution><from>diament</from><to>kamien</to></substitution>
+		<substitution><from>glaz</from><to>kamien</to></substitution>
+		<substitution><from>kamuszek</from><to>kamien</to></substitution>
+		<substitution><from>kamyk</from><to>kamien</to></substitution>
+		<substitution><from>klejnot</from><to>kamien</to></substitution>
+		<substitution><from>mineral</from><to>kamien</to></substitution>
+		<substitution><from>odlamek</from><to>kamien</to></substitution>
+		<substitution><from>osad</from><to>kamien</to></substitution>
+		<substitution><from>skalka</from><to>kamien</to></substitution>
+		<substitution><from>opoka</from><to>kamien</to></substitution>
+		
+		<substitution><from>grzybek</from><to>grzyb</to></substitution>
+		<substitution><from>jadlo</from><to>grzyb</to></substitution>
+		<substitution><from>jadanie</from><to>grzyb</to></substitution>
+		<substitution><from>jedzonko</from><to>grzyb</to></substitution>
+		<substitution><from>karma</from><to>grzyb</to></substitution>
+		<substitution><from>karme</from><to>grzyb</to></substitution>
+		<substitution><from>posilek</from><to>grzyb</to></substitution>
+		<substitution><from>prowiant</from><to>grzyb</to></substitution>
+		<substitution><from>zywnosc</from><to>grzyb</to></substitution>
+		<substitution><from>zarlo</from><to>grzyb</to></substitution>
+		<substitution><from>zarelko</from><to>grzyb</to></substitution>
+		<substitution><from>zapasy</from><to>grzyb</to></substitution>
+		<substitution><from>zywienie</from><to>grzyb</to></substitution>
+		<substitution><from>zer</from><to>grzyb</to></substitution>
+		<substitution><from>zarcie</from><to>grzyb</to></substitution>
+		<substitution><from>obiad</from><to>grzyb</to></substitution>
+	</normalization>
+  </substitutions>
+
+  <!-- libaiml options -->
+  <options>
+    <!-- space delimited list of file patterns to load as aiml files. If you
+         need to use a space as part of a pattern escape it with '\' -->
+    <file_patterns>aiml/*.aiml</file_patterns>
+    
+    <!-- file used to store data passed to <gossip> tags (defaults to
+        "gossip.txt" if not specified -->    
+    <file_gossip>gossip.txt</file_gossip>
+    
+    <!-- file used to mantain the list of registered users and their variables
+     (must be readable+writable) (defaults to "userlist.xml" if not specified) -->
+    <user_file>userlist.xml</user_file>
+    
+    <!-- if this tag is present all combinations of space, tab, carriage
+      return and linefeed are replace by a single space (HTML-like behavior) -->
+    <trim_blanks/>
+    
+    <!-- the characters used to separate sentences (every character counts
+        here!) (defaults to "?!.;" if not specified) -->
+    <sentence_limit>?!.;</sentence_limit>
+    
+    <!-- the <allow> tags specifies some boolean options -->
+    <allow>
+      <!-- interpret <javascript> tags (libaiml should have been compiled with
+      javascrip support --> 
+      <javascript/>
+      
+      <!-- interpret <system> tags -->      
+      <system/>
+      
+      <!-- allow usage of the "format" attribute on <date/> tag -->
+      <dateformat/>
+    </allow>
+  </options>
+</libaiml>
