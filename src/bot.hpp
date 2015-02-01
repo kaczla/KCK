@@ -59,13 +59,13 @@ public:
 	 * @param text - tekst pytania
 	 * @return odpowiedź na pytanie
 	 */
-	std::string ReturnAnswer( std::string text );
+	std::string ReturnAnswer( std::string &text );
 	/**
 	 * Przetwarza zadane pytanie jako argument do postaci odpowiedzi
 	 * @param text - tekst pytania (utf16)
 	 * @return odpowiedź na pytanie
 	 */
-	std::string ReturnAnswer( u16string text );
+	std::string ReturnAnswer( u16string &text );
 	/*
 	/ **
 	 * Wczytanie synonimów z pliku synonim.xml
@@ -77,6 +77,11 @@ private:
 	bool Init;
 	cInterpreter *interpreter;
 	std::string Answer;
+	inline void Part( std::string &text );
+	std::string TmpString;
+	std::vector < std::string > Word;
+	std::vector < std::string > Sentence;
+	std::vector <std::string>::iterator It;
 	/*
 	std::map< std::string, std::string > Synonym;
 	void LogSynonym();

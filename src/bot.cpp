@@ -39,17 +39,48 @@ bool Bot::InitBot(){
 	return true;
 }
 
-std::string Bot::ReturnAnswer( std::string text ){
+std::string Bot::ReturnAnswer( std::string &text ){
+	this->Part( text );
+	this->Answer.clear();
+	for( this->It = this->Sentence.begin(); this->It != this->Sentence.end(); this->It++ ){
+		if( ! this->interpreter->respond( *this->It, "localhost", this->TmpString ) ){
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
+			LogGame::Write( "[ERR] AIML - this->Answer = \'" + this->TmpString + "\'\n" );
+		}
+		if( this->TmpString[0] != '0' and this->TmpString[1] != '0' ){
+			this->Answer += this->TmpString + ' ';
+		}
+	}
+
+	if( this->Answer.empty() ){
+		if( this->TmpString.empty() ){
+			this->Answer = "Nie wiem";
+		}
+		else{
+			if( this->TmpString[0] == '0' ){
+				this->TmpString[0] = ' ';
+			}
+			if( this->TmpString[1] == '0' ){
+				this->TmpString[1] = ' ';
+			}
+			this->Answer = this->TmpString;
+		}
+	}
+
+	/*
 	if( text.size() > 0 ){
 		if( ! this->interpreter->respond( text, "localhost", this->Answer ) ){
 			LogGame::Write( "[ERR] " );
 			LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
+			LogGame::Write( "[ERR] AIML - this->Answer = \'" + this->Answer + "\'\n" );
 		}
 	}
+	*/
 	return this->Answer;
 }
 
-std::string Bot::ReturnAnswer( u16string text ){
+std::string Bot::ReturnAnswer( u16string &text ){
 	for( unsigned int i=0; i<text.size(); i++ ){
 		switch( text[i] ){
 		case 0x104:
@@ -112,6 +143,65 @@ std::string Bot::ReturnAnswer( u16string text ){
 	}
 	std::string tmp_text ( text.begin(), text.end() );
 	return this->ReturnAnswer( tmp_text );
+}
+
+void Bot::Part( std::string &text ){
+//WORD
+	this->Sentence.clear();
+	this->Word.clear();
+	this->TmpString.clear();
+	for( unsigned int i=0; i<text.size(); i++ ){
+		if( text[i] != ' ' ){
+			this->TmpString += text[i];
+		}
+		else{
+			if( this->TmpString.empty() != true and this->TmpString != " " ){
+				this->Word.push_back( this->TmpString );
+			}
+			this->TmpString.clear();
+		}
+	}
+	if( this->TmpString.empty() != true and this->TmpString != " " ){
+		this->Word.push_back( this->TmpString );
+	}
+	this->TmpString.clear();
+
+//SENTENCE
+	for( this->It = this->Word.begin(); this->It != this->Word.end(); this->It++ ){
+		if( *this->It == "i" or *this->It == "oraz" ){
+			if( this->TmpString.empty() != true and this->TmpString != " " ){
+				this->Sentence.push_back( this->TmpString );
+			}
+			this->TmpString.clear();
+		}
+		else{
+			this->TmpString += *this->It + ' ';
+		}
+	}
+	if( this->TmpString.empty() != true and this->TmpString != " " ){
+		this->Sentence.push_back( this->TmpString );
+	}
+	this->TmpString.clear();
+
+//ADD IF EMPTY
+	if( this->Sentence.empty() ){
+		this->Sentence.push_back( text );
+	}
+	else if( this->Sentence.size() == 1 and this->Sentence[0] != text ){
+		this->Sentence.clear();
+		this->Sentence.push_back( text );
+	}
+
+//PRINT
+	std::cout<<"WORD: ";
+	for( this->It = this->Word.begin(); this->It != this->Word.end(); this->It++ ){
+		std::cout<<"\'"<<*this->It<<"\' ";
+	}
+	std::cout<<"\nSENTENCE: ";
+	for( this->It = this->Sentence.begin(); this->It != this->Sentence.end(); this->It++ ){
+		std::cout<<"\'"<<*this->It<<"\' ";
+	}
+	std::cout<<"\n";
 }
 
 /*

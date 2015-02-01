@@ -73,6 +73,7 @@ private:
 	bool CheckAddChar;
 	Text TextInput;
 	u16string Input;
+	u16string InputBackUp;
 	GLfloat InputPositionX, InputPositionY;
 	GLfloat InputPositionLengthMax;
 	void DrawInput();

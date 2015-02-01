@@ -27,6 +27,7 @@
   -->
   <substitutions>
 	<normalization>
+		<!-- POWITANIE -->
 		<substitution><from>czesc</from><to>witaj</to></substitution>
 		<substitution><from>hej</from><to>witaj</to></substitution>
 		<substitution><from>siema</from><to>witaj</to></substitution>
@@ -34,7 +35,7 @@
 		<substitution><from>witka</from><to>witaj</to></substitution>
 		<substitution><from>hi</from><to>witaj</to></substitution>
 		<substitution><from>siemka</from><to>witaj</to></substitution>
-		
+		<!-- POZEGNANIE -->
 		<substitution><from>pa</from><to>do widzenia</to></substitution>
 		<substitution><from>na razie</from><to>do widzenia</to></substitution>
 		<substitution><from>papa</from><to>do widzenia</to></substitution>
@@ -46,11 +47,16 @@
 		
 		<substitution><from>ojcem</from><to>tata</to></substitution>
 		<substitution><from>ojciec</from><to>tata</to></substitution>
-		
-		<substitution><from>go</from><to>idz</to></substitution>
-		
+		<!-- OGNISKO -->
+		<substitution><from>ogniska</from><to>ognisko</to></substitution>
+		<substitution><from>ogien</from><to>ognisko</to></substitution>
+		<substitution><from>plomien</from><to>ognisko</to></substitution>
+		<substitution><from>ogniska</from><to>ognisko</to></substitution>
+		<!-- DRZEWO -->
 		<substitution><from>tree</from><to>drzewo</to></substitution>
 		<substitution><from>drzewko</from><to>drzewo</to></substitution>
+		<substitution><from>drzewka</from><to>drzewo</to></substitution>
+		<substitution><from>drzewa</from><to>drzewo</to></substitution>
 		<substitution><from>pien</from><to>drzewo</to></substitution>
 		<substitution><from>starodrzew</from><to>drzewo</to></substitution>
 		<substitution><from>suszka</from><to>drzewo</to></substitution>
@@ -63,8 +69,9 @@
 		<substitution><from>krzew</from><to>drzewo</to></substitution>
 		<substitution><from>swierk</from><to>drzewo</to></substitution>
 		<substitution><from>ziele</from><to>drzewo</to></substitution>
-		
+		<!-- KAMIEN -->
 		<substitution><from>kamyczek</from><to>kamien</to></substitution>
+		<substitution><from>kamyczki</from><to>kamien</to></substitution>
 		<substitution><from>stone</from><to>kamien</to></substitution>
 		<substitution><from>blok skalny</from><to>kamien</to></substitution>
 		<substitution><from>skala</from><to>kamien</to></substitution>
@@ -79,23 +86,90 @@
 		<substitution><from>osad</from><to>kamien</to></substitution>
 		<substitution><from>skalka</from><to>kamien</to></substitution>
 		<substitution><from>opoka</from><to>kamien</to></substitution>
+		<substitution><from>kamienie</from><to>kamien</to></substitution>
+		<substitution><from>kamieni</from><to>kamien</to></substitution>
+		<substitution><from>kamyki</from><to>kamien</to></substitution>
+		<substitution><from>glazy</from><to>kamien</to></substitution>
+		<!-- JEDZENIE -->
+		<substitution><from>grzyb</from><to>zywnosc</to></substitution>
+		<substitution><from>grzybek</from><to>zywnosc</to></substitution>
+		<substitution><from>grzybki</from><to>zywnosc</to></substitution>
+		<substitution><from>grzyby</from><to>zywnosc</to></substitution>
+		<substitution><from>jadlo</from><to>zywnosc</to></substitution>
+		<substitution><from>jadanie</from><to>zywnosc</to></substitution>
+		<substitution><from>jedzonko</from><to>zywnosc</to></substitution>
+		<substitution><from>jedzenie</from><to>zywnosc</to></substitution>
+		<substitution><from>karma</from><to>zywnosc</to></substitution>
+		<substitution><from>karme</from><to>zywnosc</to></substitution>
+		<substitution><from>posilek</from><to>zywnosc</to></substitution>
+		<substitution><from>prowiant</from><to>zywnosc</to></substitution>
+		<substitution><from>zarlo</from><to>zywnosc</to></substitution>
+		<substitution><from>zarelko</from><to>zywnosc</to></substitution>
+		<substitution><from>zapasy</from><to>zywnosc</to></substitution>
+		<substitution><from>zywienie</from><to>zywnosc</to></substitution>
+		<substitution><from>pokarm</from><to>zywnosc</to></substitution>
+		<substitution><from>pozywienie</from><to>zywnosc</to></substitution>
+		<substitution><from>zer</from><to>zywnosc</to></substitution>
+		<substitution><from>zarcie</from><to>zywnosc</to></substitution>
+		<substitution><from>obiad</from><to>zywnosc</to></substitution>
+		<!-- OPERACJE -->
+		<substitution><from>rozbij</from><to>zniszcz</to></substitution>
+		<substitution><from>roztlucz</from><to>zniszcz</to></substitution>
+		<substitution><from>rozwal</from><to>zniszcz</to></substitution>
+		<substitution><from>roztrzaskaj</from><to>zniszcz</to></substitution>
 		
-		<substitution><from>grzybek</from><to>grzyb</to></substitution>
-		<substitution><from>jadlo</from><to>grzyb</to></substitution>
-		<substitution><from>jadanie</from><to>grzyb</to></substitution>
-		<substitution><from>jedzonko</from><to>grzyb</to></substitution>
-		<substitution><from>karma</from><to>grzyb</to></substitution>
-		<substitution><from>karme</from><to>grzyb</to></substitution>
-		<substitution><from>posilek</from><to>grzyb</to></substitution>
-		<substitution><from>prowiant</from><to>grzyb</to></substitution>
-		<substitution><from>zywnosc</from><to>grzyb</to></substitution>
-		<substitution><from>zarlo</from><to>grzyb</to></substitution>
-		<substitution><from>zarelko</from><to>grzyb</to></substitution>
-		<substitution><from>zapasy</from><to>grzyb</to></substitution>
-		<substitution><from>zywienie</from><to>grzyb</to></substitution>
-		<substitution><from>zer</from><to>grzyb</to></substitution>
-		<substitution><from>zarcie</from><to>grzyb</to></substitution>
-		<substitution><from>obiad</from><to>grzyb</to></substitution>
+		<substitution><from>zgromadz</from><to>zbierz</to></substitution>
+		<substitution><from>podnies</from><to>zbierz</to></substitution>
+		
+		<substitution><from>wzniec</from><to>rozpal</to></substitution>
+		<substitution><from>wskrzes</from><to>rozpal</to></substitution>
+		<substitution><from>ugas</from><to>zgas</to></substitution>
+		<substitution><from>zagas</from><to>zgas</to></substitution>
+		<substitution><from>wygas</from><to>zgas</to></substitution>
+		
+		<substitution><from>odnajdz</from><to>znajdz</to></substitution>
+		<substitution><from>wyszukaj</from><to>znajdz</to></substitution>
+		<substitution><from>wykryj</from><to>znajdz</to></substitution>
+		<substitution><from>odnajdz</from><to>znajdz</to></substitution>
+		<!-- BUDOWANIE -->
+		<substitution><from>stworz</from><to>zbuduj</to></substitution>
+		<substitution><from>utworz</from><to>zbuduj</to></substitution>
+		<substitution><from>buduj</from><to>zbuduj</to></substitution>
+		<substitution><from>wybuduj</from><to>zbuduj</to></substitution>
+		<!-- PORUSZANIE SIE -->
+		<substitution><from>biegnij</from><to>idz</to></substitution>
+		<substitution><from>przemarszuj</from><to>idz</to></substitution>
+		<substitution><from>przemaszeruj</from><to>idz</to></substitution>
+		<substitution><from>przemierz</from><to>idz</to></substitution>
+		<substitution><from>przemiesz</from><to>idz</to></substitution>
+		<substitution><from>pokonaj</from><to>idz</to></substitution>	
+		<substitution><from>udaj</from><to>idz</to></substitution>
+		<substitution><from>go</from><to>idz</to></substitution>
+		<!-- STOP -->
+		<substitution><from>przerwij</from><to>stop</to></substitution>
+		<substitution><from>przestan</from><to>stop</to></substitution>
+		<!-- OBROT -->
+		<substitution><from>turn</from><to>obroc</to></substitution>
+		<substitution><from>zobacz</from><to>obroc</to></substitution>
+		<!-- KIERUNKI -->
+		<substitution><from>wschodni</from><to>wschod</to></substitution>
+		<substitution><from>prawo</from><to>wschod</to></substitution>
+		<substitution><from>prawa</from><to>wschod</to></substitution>
+		<substitution><from>zachodni</from><to>zachod</to></substitution>
+		<substitution><from>lewo</from><to>zachod</to></substitution>
+		<substitution><from>lewa</from><to>zachod</to></substitution>
+		<substitution><from>polnocny</from><to>polnoc</to></substitution>
+		<substitution><from>gore</from><to>polnoc</to></substitution>
+		<substitution><from>gora</from><to>polnoc</to></substitution>
+		<substitution><from>poludniowy</from><to>poludnie</to></substitution>
+		<substitution><from>dol</from><to>poludnie</to></substitution>
+		<!-- DYSTANS-->
+		<substitution><from>dlugi</from><to>daleko</to></substitution>
+		<substitution><from>dlugo</from><to>daleko</to></substitution>
+		<substitution><from>krotki</from><to>blisko</to></substitution>
+		<substitution><from>krotko</from><to>blisko</to></substitution>	
+		<substitution><from>srednio</from><to>sredni</to></substitution>	
+		
 	</normalization>
   </substitutions>
 

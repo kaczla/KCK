@@ -70,7 +70,6 @@ void Text::SetColor( Uint8 r, Uint8 g, Uint8 b){
 	this->TextColor.b = b;
 }
 
-
 void Text::RenderText( std::string text ){
 	if( ! Text::IsInit ){
 		TTF_CloseFont( Text::Font );

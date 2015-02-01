@@ -297,12 +297,26 @@ void Game::Start(){
 							}
 						}
 						break;
+					case SDLK_UP:
+						if( this->Input.empty() ){
+							this->Input = this->InputBackUp;
+							if( this->Input.size() > 0 ){
+								TextInput.RenderText( this->Input );
+							}
+						}
+						break;
+					case SDLK_DOWN:
+						if( ! this->Input.empty() ){
+							this->Input.clear();
+						}
+						break;
 					case SDLK_RETURN:
 						this->LastInput = SDL_GetTicks();
 						if( this->LastInput >= this->NextInput ){
 							if( ! this->Input.empty() ){
+								this->InputBackUp = this->Input;
 								this->BotMessage = this->bot.ReturnAnswer( this->Input );
-								if( this->BotMessage[0] == ' ' ){//Znak spacji powstaje przy losowaniu odpowiedzi
+								if( this->BotMessage[0] == ' ' or this->BotMessage[0] == '0'  ){//Znak spacji powstaje przy losowaniu odpowiedzi
 									this->BotMessage.erase( this->BotMessage.begin() );
 									while( this->BotMessage[0] == ' ' ){
 										this->BotMessage.erase( this->BotMessage.begin() );
@@ -352,6 +366,7 @@ void Game::Start(){
 								}
 							}
 							this->NextInput = this->LastInput + 1000;
+							this->Input.clear();
 						}
 						break;
 					default:
