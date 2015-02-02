@@ -122,16 +122,18 @@ void Text::RenderText( std::string text ){
 	this->ImageID.resize( NumberString+1 );
 	this->Height.resize( NumberString+1 );
 	this->Width.resize( NumberString+1 );
-
 	for( unsigned int i=0; i<=NumberString; i++ ){
-		SDL_Surface *Message = TTF_RenderUTF8_Blended( Text::Font, Word2[i].c_str(), Text::TextColorBlack );
-		this->Width[i] = Message->w;
-		this->Height[i] = Message->h;
-		glGenTextures( 1, &this->ImageID[i] );
-		glBindTexture( GL_TEXTURE_2D, this->ImageID[i] );
-		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
+		SDL_Surface *Message = NULL;
+		Message = TTF_RenderUTF8_Blended( Text::Font, Word2[i].c_str(), Text::TextColorBlack );
+		if( Message != NULL ){
+			this->Width[i] = Message->w;
+			this->Height[i] = Message->h;
+			glGenTextures( 1, &this->ImageID[i] );
+			glBindTexture( GL_TEXTURE_2D, this->ImageID[i] );
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+			glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
+		}
 		SDL_FreeSurface(Message);
 	}
 }
@@ -191,14 +193,17 @@ void Text::RenderText( u16string text ){
 	this->Width.resize( NumberString+1 );
 
 	for( unsigned int i=0; i<=NumberString; i++ ){
-		SDL_Surface *Message = TTF_RenderUNICODE_Blended( Text::Font, Word2[i].c_str(), Text::TextColorBlack );
-		this->Width[i] = Message->w;
-		this->Height[i] = Message->h;
-		glGenTextures( 1, &this->ImageID[i] );
-		glBindTexture( GL_TEXTURE_2D, this->ImageID[i] );
-		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-		glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-		glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
+		SDL_Surface *Message = NULL;
+		Message = TTF_RenderUNICODE_Blended( Text::Font, Word2[i].c_str(), Text::TextColorBlack );
+		if( Message != NULL ){
+			this->Width[i] = Message->w;
+			this->Height[i] = Message->h;
+			glGenTextures( 1, &this->ImageID[i] );
+			glBindTexture( GL_TEXTURE_2D, this->ImageID[i] );
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+			glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+			glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, Message->w, Message->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, Message->pixels );
+		}
 		SDL_FreeSurface(Message);
 	}
 }

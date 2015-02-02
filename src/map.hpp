@@ -20,7 +20,7 @@ public:
 	 * @param height - wysokość mapy
 	 * @param width - szerokość mapy
 	 */
-	Map(int height, int width);
+	Map( int height, int width );
 
 	~Map();
 	/**
@@ -28,7 +28,7 @@ public:
 	 * @param height - wysokość mapy
 	 * @param width - szerokość mapy
 	 */
-	void SetValue(int height, int width);
+	void SetValue( int height, int width );
 	/**
 	 * Ustawia wartości zmiennych odpowiedzialnych za wyświetlanie, generowanie mapy.
 	 * @param img - wektor wszystkich grafik
@@ -40,13 +40,13 @@ public:
 	 * @param y - współrzędne y
 	 * @return wartość mapy dla podanego x,y
 	 */
-	int ReturnValueMap(int x, int y);
+	int ReturnValueMap( int x, int y );
 	/**
 	 * @param x - współrzędne x
 	 * @param y - współrzędne y
 	 * @return wartość objektu mapy dla podanego x,y
 	 */
-	int ReturnValueMapObj(int x, int y);
+	int ReturnValueMapObj( int x, int y );
 	/**
 	 * @return kierunek, w którym jest aktualnie obrócony gracz
 	 * - u - północ

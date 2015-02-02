@@ -70,7 +70,7 @@ bool Map::ReturnSuccess(){
 	return this->Success;
 }
 
-void Map::SetValue(int height, int width){
+void Map::SetValue( int height, int width ){
 	remap:
 	this->Width = width;
 	this->Height = height;
@@ -949,7 +949,7 @@ void Map::SetValue(int height, int width){
 	}
 }
 
-int Map::ReturnValueMap(int x, int y){
+int Map::ReturnValueMap( int x, int y ){
 	if( x<0 or x>=this->Width ){
 		return this->Pelne[0].ReturnImageID();
 	}
@@ -961,7 +961,7 @@ int Map::ReturnValueMap(int x, int y){
 	}
 }
 
-int Map::ReturnValueMapObj(int x, int y){
+int Map::ReturnValueMapObj( int x, int y ){
 	if( x<0 or x>=this->Width ){
 		return 0;
 	}
@@ -1448,7 +1448,7 @@ void Map::Operation( std::string &text ){
 			text += tmp[i];
 		}
 	}
-	std::cout<<"POLECENIA: \'"<<text<<"\'\n";
+	//std::cout<<"POLECENIA: \'"<<text<<"\'\n";
 	this->Other.clear();
 	this->OtherBool = false;
 	if( text.size() > 5 ){
@@ -1646,6 +1646,7 @@ void Map::Update(){
 	if( this->OtherBool ){
 		this->Answer = text_path_working;
 		if( this->Other.empty() ){
+			//if( this->Other.empty() and this->Path.empty() and this->TextOperation.empty() ){
 			this->OtherBool = false;
 		}
 		if(  this->PathBool == false and this->TextOperation.empty() ){

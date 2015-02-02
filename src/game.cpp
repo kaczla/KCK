@@ -240,7 +240,6 @@ void Game::Start(){
 				fps=0;
 			}
 			*/
-			/////////////////////
 			while( SDL_PollEvent( &this->event ) ){
 				if( this->event.type == SDL_QUIT ){
 					this->game_start = false;

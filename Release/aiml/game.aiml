@@ -1123,8 +1123,10 @@
 	</category>
 	
 <!-- OTHER -->
+
+
 	<category>
-		<pattern>*</pattern>
+		<pattern>null</pattern>
 		<template>
 			<random>
 				<li>0Nie znam odpowiedzi</li>
@@ -1138,6 +1140,13 @@
 				<li>0Nie mam ochoty o tym mówić</li>
 				<li>0Chyba nie mówisz po polsku</li>
 			</random>
+		</template>
+	</category> 
+	
+	<category>
+		<pattern>*</pattern>
+		<template>
+			<srai>null</srai>
 		</template>
 	</category> 
 	

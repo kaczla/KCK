@@ -55,12 +55,31 @@ std::string Bot::ReturnAnswer( std::string &text ){
 			this->TmpString.erase( this->TmpString.begin() );
 		}
 		//std::cout<<"ANSWER:\'"<<this->TmpString<<"\'\n";
-		if( this->TmpString[0] != '0' and this->TmpString[1] != '0' ){
-			this->Answer += this->TmpString + ". ";
+		if( this->Answer.empty() ){
+			if( this->TmpString[0] != '0' and this->TmpString[1] != '0' ){
+				this->Answer += this->TmpString + ". ";
+			}
+		}
+		else{
+			if( this->TmpString[0] != '0' and this->TmpString[1] != '0' ){
+				if( this->TmpString[0] == '1' ){
+					if( this->Answer[0] == '1' ){
+						this->Answer += this->TmpString + ". ";
+					}
+				}
+				else if( this->Answer[0] != '1' ){
+					this->Answer += this->TmpString + ". ";
+				}
+			}
 		}
 	}
 
 	if( this->Answer.empty() ){
+		if( ! this->interpreter->respond( "null", "localhost", this->TmpString ) ){
+			LogGame::Write( "[ERR] " );
+			LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
+			LogGame::Write( "[ERR] AIML - this->Answer = \'" + this->TmpString + "\'\n" );
+		}
 		if( this->TmpString.empty() ){
 			this->Answer = "Nie wiem";
 		}
@@ -84,6 +103,7 @@ std::string Bot::ReturnAnswer( std::string &text ){
 		}
 	}
 	*/
+	//std::cout<<"ANSWER:\'"<<this->Answer<<"\'\n";
 	return this->Answer;
 }
 
@@ -200,6 +220,7 @@ void Bot::Part( std::string &text ){
 	}
 
 //PRINT
+	/*
 	std::cout<<"WORD: ";
 	for( this->It = this->Word.begin(); this->It != this->Word.end(); this->It++ ){
 		std::cout<<"\'"<<*this->It<<"\' ";
@@ -209,6 +230,7 @@ void Bot::Part( std::string &text ){
 		std::cout<<"\'"<<*this->It<<"\' ";
 	}
 	std::cout<<"\n";
+	*/
 }
 
 /*
