@@ -4,28 +4,28 @@
 	<category>
 		<pattern>gu</pattern>
 		<template>
-			1gu2
+			1gu1
 		</template>
 	</category>
 	
 	<category>
 		<pattern>gd</pattern>
 		<template>
-			1gd2
+			1gd1
 		</template>
 	</category>
 	
 	<category>
 		<pattern>gl</pattern>
 		<template>
-			1gl2
+			1gl1
 		</template>
 	</category>
 	
 	<category>
 		<pattern>gr</pattern>
 		<template>
-			1gr2
+			1gr1
 		</template>
 	</category>
 		

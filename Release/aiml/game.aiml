@@ -991,6 +991,19 @@
 	</category>
 	
 	<category>
+		<pattern>Zbierz drzewo</pattern>
+		<template>
+			<srai>Zetnij drzewo</srai>
+		</template>
+	</category>
+	<category>
+		<pattern>Zbierz * drzewo</pattern>
+		<template>
+			<srai>Zetnij drzewo</srai>
+		</template>
+	</category>
+	
+	<category>
 		<pattern>Znajdz drzewo</pattern>
 		<template>
 			1ft

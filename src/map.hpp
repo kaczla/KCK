@@ -34,7 +34,7 @@ public:
 	 * @param img - wektor wszystkich grafik
 	 * @param anim - wektor wszystkich animacji
 	 */
-	void SetVarMap( std::vector <Img> img, std::vector <Anim> anim);
+	void SetVarMap( std::vector <Img> &img, std::vector <Anim> &anim);
 	/**
 	 * @param x - współrzędne x
 	 * @param y - współrzędne y
@@ -93,7 +93,7 @@ public:
 	 * Dodaje operacje do wykonania
 	 * @param text - tekst komendy do wykonania
 	 */
-	void Operation( std::string text );
+	void Operation( std::string &text );
 	/**
 	 * Włącza lub wyłącza animacje
 	 * @param value - wartość uruchomienia animacji
@@ -117,6 +117,10 @@ public:
 	 * Zatrzymuje aktualnie przetwarzaną operacji
 	 */
 	void StopOperation();
+	/**
+	 * Zatrzymuje aktualnie przetwarzane operacje
+	 */
+	void StopOperationAll();
 	/**
 	 *
 	 * @return wartość posiadanej żywności
@@ -267,6 +271,8 @@ private:
 	unsigned int LastOperation,NextOperation;
 	//Tekst
 	std::string TextOperation, Answer;
+	std::vector < std::string > Other;
+	bool OtherBool;
 	//Sprawdzanie akcji
 	bool ToDeleteAnswer, Busy;
 	//Poruszanie się

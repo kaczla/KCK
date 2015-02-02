@@ -48,8 +48,15 @@ std::string Bot::ReturnAnswer( std::string &text ){
 			LogGame::Write( "AIML - Błąd: interpreter->respond( text, \"localhost\", this->Answer )\n" );
 			LogGame::Write( "[ERR] AIML - this->Answer = \'" + this->TmpString + "\'\n" );
 		}
+		while( this->TmpString[this->TmpString.size()-1] == ' ' and this->TmpString.size() > 0 ){
+			this->TmpString.erase( this->TmpString.size()-1 );
+		}
+		while( this->TmpString[0] == ' ' and this->TmpString.size() > 0 ){
+			this->TmpString.erase( this->TmpString.begin() );
+		}
+		//std::cout<<"ANSWER:\'"<<this->TmpString<<"\'\n";
 		if( this->TmpString[0] != '0' and this->TmpString[1] != '0' ){
-			this->Answer += this->TmpString + ' ';
+			this->Answer += this->TmpString + ". ";
 		}
 	}
 

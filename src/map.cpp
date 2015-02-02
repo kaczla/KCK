@@ -26,6 +26,7 @@ Map::Map(){
 	this->MaxRange = 13;
 	this->PathBool = false;
 	this->PathBoolEnd = false;
+	this->OtherBool = false;
 
 	this->Cheats = false;
 
@@ -60,6 +61,7 @@ Map::Map(int height, int width){
 	this->MaxRange = 13;
 	this->PathBool = false;
 	this->PathBoolEnd = false;
+	this->OtherBool = false;
 
 	this->Cheats = false;
 }
@@ -1088,7 +1090,7 @@ Map::~Map(){
 
 }
 
-void Map::SetVarMap( std::vector <Img> img, std::vector <Anim> anim){
+void Map::SetVarMap( std::vector <Img> &img, std::vector <Anim> &anim){
 	if( anim.size() == 0 ){
 		this->Animation = false;
 	}
@@ -1437,7 +1439,7 @@ int Map::ReturnPlayer(){
 	return this->Player[0].ReturnImageID();
 }
 
-void Map::Operation( std::string text ){
+void Map::Operation( std::string &text ){
 	//REMOVE SPACE CHAR
 	std::string tmp = text;
 	text.clear();
@@ -1446,8 +1448,34 @@ void Map::Operation( std::string text ){
 			text += tmp[i];
 		}
 	}
-
-	if( text[0] == '1' ){
+	std::cout<<"POLECENIA: \'"<<text<<"\'\n";
+	this->Other.clear();
+	this->OtherBool = false;
+	if( text.size() > 5 ){
+		this->Other.clear();
+		tmp.clear();
+		for( unsigned int i=0; i<text.size(); i++ ){
+			if( text[i] != '.' ){
+				tmp += text[i];
+			}
+			else{
+				this->Other.push_back( tmp );
+				tmp.clear();
+			}
+		}
+		/*
+		for( std::vector <std::string>::iterator it = this->Other.begin(); it != this->Other.end(); it++ ){
+			std::cout<<*it<<" ";
+		}
+		std::cout<<"\n";
+		*/
+		if( this->Other.size() > 0 ){
+			this->TextOperation = this->Other[0];
+			this->Other.erase( this->Other.begin() );
+			this->OtherBool = true;
+		}
+	}
+	else if( text[0] == '1' ){
 		this->TextOperation = text;
 	}
 	else{
@@ -1609,9 +1637,21 @@ void Map::Update(){
 			else{
 				this->Answer = text_path;
 			}
-			if( PathBoolEnd ){
+			if( this->PathBoolEnd ){
 				this->PathBoolEnd = false;
 				this->Answer = text_path_end;
+			}
+		}
+	}
+	if( this->OtherBool ){
+		this->Answer = text_path_working;
+		if( this->Other.empty() ){
+			this->OtherBool = false;
+		}
+		if(  this->PathBool == false and this->TextOperation.empty() ){
+			if( this->Other.size() > 0 ){
+				this->TextOperation = this->Other[0];
+				this->Other.erase( this->Other.begin() );
 			}
 		}
 	}
@@ -2214,6 +2254,12 @@ void Map::StopOperation(){
 	this->Path.clear();
 	this->LastOperation = SDL_GetTicks();
 	this->NextOperation = this->LastOperation;
+}
+
+void Map::StopOperationAll(){
+	this->StopOperation();
+	this->Other.clear();
+	this->OtherBool = false;
 }
 
 unsigned int Map::ReturnFood(){

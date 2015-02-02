@@ -318,7 +318,7 @@ void Game::Start(){
 								this->BotMessage = this->bot.ReturnAnswer( this->Input );
 								if( this->BotMessage[0] == ' ' or this->BotMessage[0] == '0'  ){//Znak spacji powstaje przy losowaniu odpowiedzi
 									this->BotMessage.erase( this->BotMessage.begin() );
-									while( this->BotMessage[0] == ' ' ){
+									while( this->BotMessage[0] == ' ' and this->BotMessage.size() > 0 ){
 										this->BotMessage.erase( this->BotMessage.begin() );
 									}
 								}
@@ -352,7 +352,7 @@ void Game::Start(){
 										}
 									}
 									else if( this->BotMessage[1] == 's' and this->BotMessage[2] == 't' ){
-										this->map2D.StopOperation();
+										this->map2D.StopOperationAll();
 										this->BotMessage = this->map2D.ReturnAnswer();
 										if( this->Input.size() > 0 ){
 											TextInput.RenderText( this->Input );

@@ -163,7 +163,7 @@
 		<substitution><from>gora</from><to>polnoc</to></substitution>
 		<substitution><from>poludniowy</from><to>poludnie</to></substitution>
 		<substitution><from>dol</from><to>poludnie</to></substitution>
-		<!-- DYSTANS-->
+		<!-- DYSTANS-->		
 		<substitution><from>dlugi</from><to>daleko</to></substitution>
 		<substitution><from>dlugo</from><to>daleko</to></substitution>
 		<substitution><from>krotki</from><to>blisko</to></substitution>
