@@ -1153,11 +1153,5 @@
 	<category>
 		<pattern>Zjedz cos</pattern>
 		<template>1eat</template>
-	</category>
-	
-	<category>
-		<pattern>cheats on</pattern>
-		<template>1cheatson</template>
-	</category>
-	     
+	</category>	     
 </aiml>

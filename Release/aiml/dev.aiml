@@ -127,9 +127,17 @@
 		</template>
 	</category>
 	
+	
 	<category>
 		<pattern>su</pattern>
-		<template>1cheatson</template>
+		<template>1su</template>
+	</category>
+	
+	<category>
+		<pattern>cheats on</pattern>
+		<template>
+			<srai>su</srai>
+		</template>
 	</category>
 	
 	<category>
@@ -141,7 +149,7 @@
 	
 	<category>
 		<pattern>allres</pattern>
-		<template>1allresources</template>
+		<template>1res</template>
 	</category>
 	
 	<category>

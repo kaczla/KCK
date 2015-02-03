@@ -1476,7 +1476,12 @@ void Map::Operation( std::string &text ){
 		}
 	}
 	else if( text[0] == '1' ){
-		this->TextOperation = text;
+		this->TextOperation.clear();
+		for( unsigned int i=0; i<text.size(); i++ ){
+			if( text[i] != '.' ){
+				this->TextOperation += text[i];
+			}
+		}
 	}
 	else{
 		this->TextOperation.clear();
@@ -1527,7 +1532,7 @@ void Map::Update(){
 			this->Answer = text_path_end;
 		}
 		//EAT
-		else if( this->TextOperation == "1eat" ){
+		else if( this->TextOperation[1] == 'e' and this->TextOperation[2] == 'a' and this->TextOperation[3] == 't' ){
 			this->Eat();
 			this->ToDeleteAnswer = true;
 			this->TextOperation.clear();
@@ -1569,13 +1574,6 @@ void Map::Update(){
 			else if( this->TextOperation[2] == 'f' ){
 				this->DestoryFood();
 			}
-			//CHEATS ON
-			else if( this->TextOperation == "1cheatson" ){
-				this->Cheats = true;
-				this->Answer = text_cheats_on;
-				this->ToDeleteAnswer = true;
-				this->TextOperation.clear();
-			}
 			else{
 				this->Answer = text_dont_know;
 				this->ToDeleteAnswer = true;
@@ -1601,9 +1599,16 @@ void Map::Update(){
 				this->TextOperation.clear();
 			}
 		}
+		else if( this->TextOperation == "1su" ){
+			//CHEATS ON
+			this->Cheats = true;
+			this->Answer = text_cheats_on;
+			this->ToDeleteAnswer = true;
+			this->TextOperation.clear();
+		}
 		else if( this->Cheats ){
 			//CHEATS
-			if( this->TextOperation == "1allresources" ){
+			if( this->TextOperation == "1res" ){
 				this->Food = 9;
 				this->Wood = 9;
 				this->Stone = 9;
