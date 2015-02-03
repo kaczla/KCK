@@ -65,3 +65,6 @@
 > [SpiderMonkey](http://www.mozilla.org/js/spidermonkey/)
 
 **[Link do projektu](https://github.com/kaczla/KCK)**
+
+> Ostatnia aktualizacja:
+>> 03.02.2015
